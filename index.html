@@ -399,6 +399,12 @@
       border-radius:0;
       min-height:100vh;
     }
+    body.embed .flipbook-toolbar{
+      position:sticky;
+      top:0;
+      z-index:5;
+      margin-bottom:12px;
+    }
     body.embed .two-up{
       display:none;
     }
@@ -457,7 +463,7 @@
       <p>The PDF is the primary deliverable. Use the button above for the full packet, or scroll down to flip through the pages in facing spreads.</p>
     </section>
 
-    <section class="section">
+    <section class="section embed-keep">
       <h2>Page Preview</h2>
       <p>Page 1 is the cover. The preview below follows the document sequence so the website and PDF feel like one packet.</p>
 
@@ -612,6 +618,7 @@
             page.classList.toggle("active", index === current);
             page.classList.remove("turning-left", "turning-right");
             page.style.zIndex = index === current ? "2" : "";
+            page.style.opacity = index === current ? "1" : "0";
           });
           animating = false;
         }, 580);
