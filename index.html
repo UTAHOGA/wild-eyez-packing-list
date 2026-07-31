@@ -223,13 +223,17 @@
       text-transform:uppercase;
       color:#332710;
     }
-    .page-body{background:#fff}
-    iframe{
+    .page-body{
+      position:relative;
+      background:#fff;
+      overflow:hidden;
+    }
+    .page-art{
       display:block;
       width:100%;
-      height:min(78vh,1080px);
-      border:0;
-      background:#fff;
+      height:100%;
+      object-fit:cover;
+      object-position:center top;
     }
     .book-stage{
       position:relative;
@@ -338,14 +342,7 @@
       color:#fff7ef;
     }
     .book-page[data-page="1"] .sheet-side:first-child .page-body{
-      background:
-        radial-gradient(circle at 50% 20%, rgba(255,119,32,.28), transparent 55%),
-        linear-gradient(180deg, rgba(51,39,16,.10), rgba(255,250,244,.98));
-    }
-    .book-page[data-page="1"] .sheet-side:first-child iframe{
-      background:
-        linear-gradient(180deg, rgba(255,248,238,.02), rgba(255,248,238,.02)),
-        #fff;
+      background:linear-gradient(180deg, rgba(51,39,16,.10), rgba(255,250,244,.98));
     }
     .book-page[data-page="1"] .sheet-side:first-child .page-body::before{
       content:"";
@@ -434,7 +431,6 @@
       .hero-inner,
       .two-up{grid-template-columns:1fr}
       .book-stage{min-height:78vh}
-      iframe{height:78vh}
     }
     @media (max-width: 700px){
       .shell{padding:10px}
@@ -518,16 +514,16 @@
                 <span>Entry page</span>
               </div>
               <div class="page-body">
-                <iframe title="Wild Eyez PDF page 1" src="wild_eyez_packing_list.pdf#page=1&view=FitH"></iframe>
+                <img class="page-art" alt="Wild Eyez PDF page 1" src="assets/pages/Wild Eyez Client Prep and Packing List_Page_1.jpg">
               </div>
             </section>
             <section class="sheet-side">
               <div class="page-head">
                 <span>Page 2</span>
-                <span>Read this first</span>
+                <span>Welcome</span>
               </div>
               <div class="page-body">
-                <iframe title="Wild Eyez PDF page 2" src="wild_eyez_packing_list.pdf#page=2&view=FitH"></iframe>
+                <img class="page-art" alt="Wild Eyez PDF page 2" src="assets/pages/Wild Eyez Client Prep and Packing List_Page_2.jpg">
               </div>
             </section>
           </div>
@@ -535,19 +531,19 @@
             <section class="sheet-side">
               <div class="page-head">
                 <span>Page 3</span>
-                <span>Clothing checklist</span>
+                <span>What to expect</span>
               </div>
               <div class="page-body">
-                <iframe title="Wild Eyez PDF page 3" src="wild_eyez_packing_list.pdf#page=3&view=FitH"></iframe>
+                <img class="page-art" alt="Wild Eyez PDF page 3" src="assets/pages/Wild Eyez Client Prep and Packing List_Page_3.jpg">
               </div>
             </section>
             <section class="sheet-side">
               <div class="page-head">
                 <span>Page 4</span>
-                <span>Gear checklist</span>
+                <span>Clothing & footwear</span>
               </div>
               <div class="page-body">
-                <iframe title="Wild Eyez PDF page 4" src="wild_eyez_packing_list.pdf#page=4&view=FitH"></iframe>
+                <img class="page-art" alt="Wild Eyez PDF page 4" src="assets/pages/Wild Eyez Client Prep and Packing List_Page_4.jpg">
               </div>
             </section>
           </div>
@@ -555,19 +551,19 @@
             <section class="sheet-side">
               <div class="page-head">
                 <span>Page 5</span>
-                <span>Equipment recommendations</span>
+                <span>Field gear</span>
               </div>
               <div class="page-body">
-                <iframe title="Wild Eyez PDF page 5" src="wild_eyez_packing_list.pdf#page=5&view=FitH"></iframe>
+                <img class="page-art" alt="Wild Eyez PDF page 5" src="assets/pages/Wild Eyez Client Prep and Packing List_Page_5.jpg">
               </div>
             </section>
             <section class="sheet-side">
               <div class="page-head">
                 <span>Page 6</span>
-                <span>Guide tips</span>
+                <span>Firearms & ammunition</span>
               </div>
               <div class="page-body">
-                <iframe title="Wild Eyez PDF page 6" src="wild_eyez_packing_list.pdf#page=6&view=FitH"></iframe>
+                <img class="page-art" alt="Wild Eyez PDF page 6" src="assets/pages/Wild Eyez Client Prep and Packing List_Page_6.jpg">
               </div>
             </section>
           </div>
@@ -575,19 +571,19 @@
             <section class="sheet-side">
               <div class="page-head">
                 <span>Page 7</span>
-                <span>Field notes</span>
+                <span>Preseason prep</span>
               </div>
               <div class="page-body">
-                <iframe title="Wild Eyez PDF page 7" src="wild_eyez_packing_list.pdf#page=7&view=FitH"></iframe>
+                <img class="page-art" alt="Wild Eyez PDF page 7" src="assets/pages/Wild Eyez Client Prep and Packing List_Page_7.jpg">
               </div>
             </section>
             <section class="sheet-side">
               <div class="page-head">
                 <span>Page 8</span>
-                <span>Contact</span>
+                <span>Final page</span>
               </div>
               <div class="page-body">
-                <iframe title="Wild Eyez PDF page 8" src="wild_eyez_packing_list.pdf#page=8&view=FitH"></iframe>
+                <img class="page-art" alt="Wild Eyez PDF page 8" src="assets/pages/Wild Eyez Client Prep and Packing List_Page_8.jpg">
               </div>
             </section>
           </div>
