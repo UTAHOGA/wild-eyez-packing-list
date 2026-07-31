@@ -232,7 +232,7 @@
       display:block;
       width:100%;
       height:100%;
-      object-fit:cover;
+      object-fit:contain;
       object-position:center top;
     }
     .book-stage{
@@ -398,6 +398,8 @@
       border-top:0;
       border-radius:0;
       min-height:calc(100vh - 72px);
+      max-width:1280px;
+      margin:0 auto;
     }
     body.embed .flipbook-toolbar{
       position:sticky;
@@ -409,6 +411,11 @@
     body.embed .book-page .sheet-side,
     body.embed .book-page .page-body{
       min-height:calc(100vh - 72px);
+    }
+    body.embed .book-page{
+      width:min(1280px, 100%);
+      left:50%;
+      transform:translateX(-50%);
     }
     body.embed .book-page .page-body{
       min-height:calc(100vh - 130px);
