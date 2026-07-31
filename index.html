@@ -239,7 +239,6 @@
       position:relative;
       width:100%;
       min-height:min(78vh,1080px);
-      perspective:2400px;
       overflow:hidden;
       border-top:1px solid rgba(51,39,16,.30);
       border-radius:0 0 20px 20px;
@@ -257,41 +256,19 @@
       pointer-events:none;
       z-index:1;
     }
-    .book-stage::after{
-      content:"";
-      position:absolute;
-      top:0;
-      bottom:0;
-      left:50%;
-      width:72px;
-      transform:translateX(-50%);
-      background:
-        linear-gradient(90deg, rgba(27,18,10,.96), rgba(51,39,16,0) 24%, rgba(51,39,16,0) 76%, rgba(27,18,10,.96)),
-        linear-gradient(180deg, rgba(255,255,255,.10), rgba(0,0,0,.22));
-      box-shadow:
-        0 0 0 1px rgba(0,0,0,.12) inset,
-        -18px 0 36px rgba(18,11,7,.34),
-        18px 0 36px rgba(18,11,7,.34);
-      pointer-events:none;
-      z-index:2;
-      border-radius:999px;
-      opacity:.95;
-    }
     .book-page{
       position:absolute;
       inset:0;
       width:100%;
       display:grid;
       grid-template-columns:1fr 1fr;
-      transform-origin:center center;
-      transition:transform 680ms cubic-bezier(.16,1,.3,1), opacity 420ms ease, filter 420ms ease;
+      transition:opacity 240ms ease;
       background:#fff8f0;
       opacity:0;
       pointer-events:none;
-      filter:blur(.2px);
       backface-visibility:hidden;
       box-shadow:
-        0 36px 78px rgba(24,14,8,.28),
+        0 18px 40px rgba(24,14,8,.16),
         0 2px 0 rgba(255,255,255,.50) inset;
       z-index:2;
     }
@@ -303,12 +280,10 @@
     }
     .book-page.turning-left{
       opacity:1;
-      transform:translateX(-10%) rotateY(-82deg) scale(.98);
       z-index:3;
     }
     .book-page.turning-right{
       opacity:1;
-      transform:translateX(10%) rotateY(82deg) scale(.98);
       z-index:3;
     }
     .book-page .sheet-side{
@@ -321,9 +296,9 @@
         url("white-topo.jpg") center top / 820px auto repeat;
     }
     .book-page .sheet-side + .sheet-side{
-      border-left:1px solid rgba(51,39,16,.22);
+      border-left:1px solid rgba(51,39,16,.14);
       box-shadow:
-        -18px 0 34px rgba(24,14,8,.18),
+        -6px 0 14px rgba(24,14,8,.08),
         inset 0 1px 0 rgba(255,255,255,.8);
     }
     .book-page .page-head{
@@ -334,8 +309,8 @@
     .book-page .page-body{
       min-height:calc(min(78vh,1080px) - 58px);
       box-shadow:
-        inset 0 14px 22px rgba(255,255,255,.55),
-        inset 0 -18px 24px rgba(33,24,18,.04);
+        inset 0 10px 16px rgba(255,255,255,.42),
+        inset 0 -10px 16px rgba(33,24,18,.03);
     }
     .book-page[data-page="1"] .sheet-side:first-child .page-head{
       background:linear-gradient(180deg, rgba(255,119,32,.98), rgba(198,93,18,.98));
