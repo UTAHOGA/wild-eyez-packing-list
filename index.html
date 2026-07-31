@@ -397,13 +397,21 @@
     body.embed .book-stage{
       border-top:0;
       border-radius:0;
-      min-height:100vh;
+      min-height:calc(100vh - 72px);
     }
     body.embed .flipbook-toolbar{
       position:sticky;
       top:0;
       z-index:5;
       margin-bottom:12px;
+    }
+    body.embed .book-page,
+    body.embed .book-page .sheet-side,
+    body.embed .book-page .page-body{
+      min-height:calc(100vh - 72px);
+    }
+    body.embed .book-page .page-body{
+      min-height:calc(100vh - 130px);
     }
     body.embed .two-up{
       display:none;
