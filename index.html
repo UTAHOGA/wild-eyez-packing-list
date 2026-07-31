@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wild Eyez Client Prep and Packing List</title>
+  <meta name="description" content="Wild Eyez client prep and packing list with a polished, download-first preview layout.">
+  <style>
+    :root{
+      --paper:#f6f0e6;
+      --panel:rgba(255,252,247,.94);
+      --ink:#332710;
+      --muted:#6b5a50;
+      --line:#d9cab8;
+      --accent:#ff7720;
+      --accent-deep:#332710;
+      --accent-soft:#f4e5d4;
+      --accent-bright:#ff8a33;
+      --shadow:0 20px 54px rgba(33,24,18,.14);
+      --radius:22px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      color:var(--ink);
+      font-family:Georgia,"Times New Roman",serif;
+      background:
+        linear-gradient(rgba(51,39,16,.84), rgba(51,39,16,.84)),
+        url("white-topo.jpg") center top / 820px auto repeat;
+    }
+    a{color:inherit}
+    .shell{
+      width:100%;
+      margin:0 auto;
+      padding:16px;
+    }
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:20;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      margin-bottom:18px;
+      padding:14px 16px;
+      border:1px solid rgba(216,205,189,.92);
+      border-radius:var(--radius);
+      background:rgba(51,39,16,.92);
+      backdrop-filter:blur(12px);
+      box-shadow:var(--shadow);
+    }
+    .topbar strong{
+      font:800 13px/1 Arial,sans-serif;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:#fff0df;
+    }
+    .actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+    .button{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:42px;
+      padding:0 16px;
+      border-radius:999px;
+      border:1px solid transparent;
+      text-decoration:none;
+      font:800 12px/1 Arial,sans-serif;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      transition:transform 140ms ease, box-shadow 140ms ease, border-color 140ms ease;
+    }
+    .button:hover{transform:translateY(-1px)}
+    .button.primary{
+      background:linear-gradient(180deg,var(--accent-bright),var(--accent));
+      color:#fff8ee;
+      box-shadow:0 10px 22px rgba(33,24,18,.18);
+    }
+    .button.secondary{
+      border-color:rgba(255,255,255,.18);
+      background:rgba(255,255,255,.08);
+      color:#fff0df;
+    }
+    .hero{
+      width:100%;
+      border:1px solid rgba(216,205,189,.9);
+      border-radius:28px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      background:
+        linear-gradient(rgba(51,39,16,.86), rgba(51,39,16,.92)),
+        url("white-topo.jpg") center top / 820px auto repeat;
+      color:#f8f3ea;
+    }
+    .hero-inner{
+      display:grid;
+      grid-template-columns:minmax(0,1fr) minmax(280px,.52fr);
+      gap:18px;
+      padding:30px;
+    }
+    .eyebrow{
+      margin:0 0 12px;
+      color:#ffd7b5;
+      font:800 12px/1 Arial,sans-serif;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+    }
+    h1{
+      margin:0;
+      font:800 clamp(36px,5vw,64px)/.94 Arial,sans-serif;
+      text-transform:uppercase;
+      letter-spacing:.03em;
+    }
+    .hero p{
+      max-width:760px;
+      margin:16px 0 0;
+      font-size:18px;
+      line-height:1.6;
+      color:rgba(255,244,233,.9);
+    }
+    .hero-note{
+      display:grid;
+      gap:14px;
+      align-content:space-between;
+      min-height:320px;
+      padding:18px;
+      border:1px solid rgba(255,255,255,.16);
+      border-radius:20px;
+      background:rgba(255,255,255,.08);
+      backdrop-filter:blur(6px);
+    }
+    .hero-note .tag{
+      width:fit-content;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(255,119,32,.18);
+      color:#ffe8d4;
+      font:800 11px/1 Arial,sans-serif;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+    .hero-note .meta{
+      display:grid;
+      gap:8px;
+      font:700 12px/1.35 Arial,sans-serif;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      color:#f7e2d2;
+    }
+    .section{
+      width:100%;
+      margin-top:18px;
+      padding:22px;
+      border:1px solid rgba(216,205,189,.9);
+      border-radius:var(--radius);
+      background:rgba(255,250,244,.96);
+      box-shadow:var(--shadow);
+    }
+    .section h2{
+      margin:0 0 10px;
+      color:var(--accent-deep);
+      font:800 24px/1.05 Arial,sans-serif;
+      text-transform:uppercase;
+      letter-spacing:.03em;
+    }
+    .section p{
+      margin:0;
+      color:var(--muted);
+      font-size:16px;
+      line-height:1.55;
+    }
+    .preview-stack{
+      display:grid;
+      gap:16px;
+      margin-top:18px;
+    }
+    .flipbook-toolbar{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:space-between;
+      gap:12px;
+      padding:14px 16px;
+      border:1px solid rgba(216,205,189,.78);
+      border-radius:18px;
+      background:linear-gradient(180deg, rgba(51,39,16,.90), rgba(51,39,16,.96));
+      box-shadow:var(--shadow);
+    }
+    .flipbook-toolbar .cluster{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      align-items:center;
+    }
+    .flipbook-toolbar .pager{
+      font:800 12px/1 Arial,sans-serif;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:#fff0df;
+    }
+    .page-card{
+      border:1px solid rgba(216,205,189,.88);
+      border-radius:20px;
+      overflow:hidden;
+      background:rgba(255,247,239,.96);
+      box-shadow:var(--shadow);
+    }
+    .page-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:14px 16px;
+      border-bottom:1px solid rgba(216,205,189,.72);
+      background:rgba(255,119,32,.14);
+      font:800 12px/1 Arial,sans-serif;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color:#332710;
+    }
+    .page-body{background:#fff}
+    iframe{
+      display:block;
+      width:100%;
+      height:min(78vh,1080px);
+      border:0;
+      background:#fff;
+    }
+    .book-stage{
+      position:relative;
+      width:100%;
+      min-height:min(78vh,1080px);
+      perspective:2400px;
+      overflow:hidden;
+      border-top:1px solid rgba(51,39,16,.30);
+      border-radius:0 0 20px 20px;
+      background:
+        linear-gradient(180deg, rgba(255,247,239,.98), rgba(255,241,230,.92)),
+        linear-gradient(90deg, rgba(255,119,32,.10), rgba(0,0,0,0) 8%, rgba(0,0,0,0) 50%, rgba(255,119,32,.10) 92%, rgba(255,119,32,.04));
+    }
+    .book-stage::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(90deg, rgba(0,0,0,.05), rgba(0,0,0,0) 6%, rgba(0,0,0,0) 48%, rgba(0,0,0,.07) 50%, rgba(0,0,0,0) 52%, rgba(0,0,0,0) 94%, rgba(0,0,0,.05)),
+        linear-gradient(180deg, transparent, rgba(255,255,255,.08) 32%, transparent 68%);
+      pointer-events:none;
+      z-index:1;
+    }
+    .book-stage::after{
+      content:"";
+      position:absolute;
+      top:0;
+      bottom:0;
+      left:50%;
+      width:72px;
+      transform:translateX(-50%);
+      background:
+        linear-gradient(90deg, rgba(27,18,10,.96), rgba(51,39,16,0) 24%, rgba(51,39,16,0) 76%, rgba(27,18,10,.96)),
+        linear-gradient(180deg, rgba(255,255,255,.10), rgba(0,0,0,.22));
+      box-shadow:
+        0 0 0 1px rgba(0,0,0,.12) inset,
+        -18px 0 36px rgba(18,11,7,.34),
+        18px 0 36px rgba(18,11,7,.34);
+      pointer-events:none;
+      z-index:2;
+      border-radius:999px;
+      opacity:.95;
+    }
+    .book-page{
+      position:absolute;
+      inset:0;
+      width:100%;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      transform-origin:center center;
+      transition:transform 680ms cubic-bezier(.16,1,.3,1), opacity 420ms ease, filter 420ms ease;
+      background:#fff8f0;
+      opacity:0;
+      pointer-events:none;
+      filter:blur(.2px);
+      backface-visibility:hidden;
+      box-shadow:
+        0 36px 78px rgba(24,14,8,.28),
+        0 2px 0 rgba(255,255,255,.50) inset;
+      z-index:2;
+    }
+    .book-page.active{
+      opacity:1;
+      pointer-events:auto;
+      filter:none;
+      z-index:2;
+    }
+    .book-page.turning-left{
+      opacity:1;
+      transform:translateX(-10%) rotateY(-82deg) scale(.98);
+      z-index:3;
+    }
+    .book-page.turning-right{
+      opacity:1;
+      transform:translateX(10%) rotateY(82deg) scale(.98);
+      z-index:3;
+    }
+    .book-page .sheet-side{
+      width:100%;
+      display:grid;
+      grid-template-rows:auto 1fr;
+      min-height:min(78vh,1080px);
+      background:
+        linear-gradient(180deg, rgba(255,249,242,.98), rgba(255,243,234,.98)),
+        url("white-topo.jpg") center top / 820px auto repeat;
+    }
+    .book-page .sheet-side + .sheet-side{
+      border-left:1px solid rgba(51,39,16,.22);
+      box-shadow:
+        -18px 0 34px rgba(24,14,8,.18),
+        inset 0 1px 0 rgba(255,255,255,.8);
+    }
+    .book-page .page-head{
+      border-radius:0;
+      box-shadow:none;
+      background:rgba(255,119,32,.10);
+    }
+    .book-page .page-body{
+      min-height:calc(min(78vh,1080px) - 58px);
+      box-shadow:
+        inset 0 14px 22px rgba(255,255,255,.55),
+        inset 0 -18px 24px rgba(33,24,18,.04);
+    }
+    .book-page[data-page="1"] .sheet-side:first-child .page-head{
+      background:linear-gradient(180deg, rgba(255,119,32,.98), rgba(198,93,18,.98));
+      color:#fff7ef;
+    }
+    .book-page[data-page="1"] .sheet-side:first-child .page-body{
+      background:
+        radial-gradient(circle at 50% 20%, rgba(255,119,32,.28), transparent 55%),
+        linear-gradient(180deg, rgba(51,39,16,.10), rgba(255,250,244,.98));
+    }
+    .book-page[data-page="1"] .sheet-side:first-child iframe{
+      background:
+        linear-gradient(180deg, rgba(255,248,238,.02), rgba(255,248,238,.02)),
+        #fff;
+    }
+    .book-page[data-page="1"] .sheet-side:first-child .page-body::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background:
+        radial-gradient(circle at 50% 10%, rgba(255,255,255,.20), transparent 30%),
+        linear-gradient(180deg, rgba(51,39,16,.16), transparent 36%);
+      z-index:1;
+    }
+    .book-page[data-page="1"] .sheet-side:first-child .page-body{
+      position:relative;
+    }
+    .two-up{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:14px;
+    }
+    .book-shell{
+      width:100%;
+      overflow:hidden;
+      border:1px solid rgba(216,205,189,.88);
+      border-radius:20px;
+      background:#fffdf8;
+      box-shadow:var(--shadow);
+    }
+    .note-card{
+      padding:16px;
+      border:1px solid rgba(216,205,189,.72);
+      border-radius:18px;
+      background:rgba(255,253,248,.96);
+    }
+    .note-card h3{
+      margin:0 0 8px;
+      font:800 13px/1 Arial,sans-serif;
+      color:var(--accent-deep);
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+    .note-card p{
+      margin:0;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.55;
+    }
+    .footer{
+      width:100%;
+      margin:18px 0 8px;
+      color:var(--muted);
+      font:600 12px/1.45 Arial,sans-serif;
+    }
+    body.embed .topbar,
+    body.embed .hero,
+    body.embed .section:not(.embed-keep),
+    body.embed .footer{
+      display:none;
+    }
+    body.embed .shell{
+      padding:0;
+    }
+    body.embed{
+      background:rgba(51,39,16,.92);
+    }
+    body.embed .section.embed-keep{
+      margin:0;
+      padding:0;
+      border:0;
+      border-radius:0;
+      background:transparent;
+      box-shadow:none;
+    }
+    body.embed .preview-stack{
+      margin-top:0;
+      gap:12px;
+    }
+    body.embed .book-stage{
+      border-top:0;
+      border-radius:0;
+      min-height:100vh;
+    }
+    body.embed .two-up{
+      display:none;
+    }
+    @media (max-width: 860px){
+      .hero-inner,
+      .two-up{grid-template-columns:1fr}
+      .book-stage{min-height:78vh}
+      iframe{height:78vh}
+    }
+    @media (max-width: 700px){
+      .shell{padding:10px}
+      .topbar{border-radius:20px}
+      .hero-inner{padding:20px}
+      .section{padding:18px}
+      .book-page{grid-template-columns:1fr}
+      .book-page .sheet-side + .sheet-side{border-left:0;border-top:1px solid rgba(180,165,149,.42)}
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <strong>Wild Eyez Client Prep and Packing List</strong>
+      <div class="actions">
+        <a class="button primary" href="Wild Eyez Client Prep and Packing List.pdf" download>Download PDF</a>
+        <a class="button secondary" href="Wild Eyez Client Prep and Packing List.pdf" target="_blank" rel="noopener noreferrer">Open PDF</a>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-inner">
+        <div>
+          <p class="eyebrow">Wild Eyez Outfitters</p>
+          <h1>Prep for Success</h1>
+          <p>
+            This page is built to echo the manual while keeping the download as the main action.
+            The cover appears first, and the packet is shown below in a full-width open-book spread.
+          </p>
+        </div>
+        <div class="hero-note">
+          <div class="tag">Cover Page</div>
+          <div class="meta">
+            <span>Wild Eyez Outfitters</span>
+            <span>Client Hunt Prep Manual</span>
+            <span>Preparation, Safety, Ethics, Success</span>
+          </div>
+          <div class="meta" style="align-self:end;">
+            <span>Download first</span>
+            <span>Preview below</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Download</h2>
+      <p>The PDF is the primary deliverable. Use the button above for the full packet, or scroll down to flip through the pages in facing spreads.</p>
+    </section>
+
+    <section class="section">
+      <h2>Page Preview</h2>
+      <p>Page 1 is the cover. The preview below follows the document sequence so the website and PDF feel like one packet.</p>
+
+      <div class="preview-stack">
+        <div class="flipbook-toolbar">
+          <div class="cluster">
+            <button class="button secondary" id="prevPage" type="button">Previous</button>
+            <button class="button secondary" id="nextPage" type="button">Next</button>
+          </div>
+          <div class="pager" id="pageLabel">Page 1 of 8</div>
+        </div>
+
+        <div class="two-up">
+          <div class="note-card">
+            <h3>How it reads</h3>
+            <p>The site opens on the cover page, and download stays front and center. The preview is laid out like an open book so people can skim before opening the PDF.</p>
+          </div>
+          <div class="note-card">
+            <h3>Best use</h3>
+            <p>Embed this page in Wix and keep the PDF itself as the thing people download or open in a new tab.</p>
+          </div>
+        </div>
+
+        <div class="book-stage" aria-live="polite">
+          <div class="book-page active" data-page="1">
+            <section class="sheet-side">
+              <div class="page-head">
+                <span>Page 1 - Cover</span>
+                <span>Entry page</span>
+              </div>
+              <div class="page-body">
+                <iframe title="Wild Eyez PDF page 1" src="Wild Eyez Client Prep and Packing List.pdf#page=1&view=FitH"></iframe>
+              </div>
+            </section>
+            <section class="sheet-side">
+              <div class="page-head">
+                <span>Page 2</span>
+                <span>Read this first</span>
+              </div>
+              <div class="page-body">
+                <iframe title="Wild Eyez PDF page 2" src="Wild Eyez Client Prep and Packing List.pdf#page=2&view=FitH"></iframe>
+              </div>
+            </section>
+          </div>
+          <div class="book-page" data-page="3">
+            <section class="sheet-side">
+              <div class="page-head">
+                <span>Page 3</span>
+                <span>Clothing checklist</span>
+              </div>
+              <div class="page-body">
+                <iframe title="Wild Eyez PDF page 3" src="Wild Eyez Client Prep and Packing List.pdf#page=3&view=FitH"></iframe>
+              </div>
+            </section>
+            <section class="sheet-side">
+              <div class="page-head">
+                <span>Page 4</span>
+                <span>Gear checklist</span>
+              </div>
+              <div class="page-body">
+                <iframe title="Wild Eyez PDF page 4" src="Wild Eyez Client Prep and Packing List.pdf#page=4&view=FitH"></iframe>
+              </div>
+            </section>
+          </div>
+          <div class="book-page" data-page="5">
+            <section class="sheet-side">
+              <div class="page-head">
+                <span>Page 5</span>
+                <span>Equipment recommendations</span>
+              </div>
+              <div class="page-body">
+                <iframe title="Wild Eyez PDF page 5" src="Wild Eyez Client Prep and Packing List.pdf#page=5&view=FitH"></iframe>
+              </div>
+            </section>
+            <section class="sheet-side">
+              <div class="page-head">
+                <span>Page 6</span>
+                <span>Guide tips</span>
+              </div>
+              <div class="page-body">
+                <iframe title="Wild Eyez PDF page 6" src="Wild Eyez Client Prep and Packing List.pdf#page=6&view=FitH"></iframe>
+              </div>
+            </section>
+          </div>
+          <div class="book-page" data-page="7">
+            <section class="sheet-side">
+              <div class="page-head">
+                <span>Page 7</span>
+                <span>Field notes</span>
+              </div>
+              <div class="page-body">
+                <iframe title="Wild Eyez PDF page 7" src="Wild Eyez Client Prep and Packing List.pdf#page=7&view=FitH"></iframe>
+              </div>
+            </section>
+            <section class="sheet-side">
+              <div class="page-head">
+                <span>Page 8</span>
+                <span>Contact</span>
+              </div>
+              <div class="page-body">
+                <iframe title="Wild Eyez PDF page 8" src="Wild Eyez Client Prep and Packing List.pdf#page=8&view=FitH"></iframe>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer">
+      The current layout favors a clean open-book spread with the PDF as the main object, which should stay reliable inside Wix.
+    </div>
+  </main>
+  <script>
+    (() => {
+      const pages = Array.from(document.querySelectorAll(".book-page"));
+      const pageLabel = document.getElementById("pageLabel");
+      const prev = document.getElementById("prevPage");
+      const next = document.getElementById("nextPage");
+      const embedMode = new URLSearchParams(window.location.search).has("embed");
+      document.body.classList.toggle("embed", embedMode);
+      let current = 0;
+      let animating = false;
+
+      function render() {
+        pages.forEach((page, index) => {
+          page.classList.toggle("active", index === current);
+          page.classList.remove("turning-left", "turning-right");
+        });
+        pageLabel.textContent = `Page ${current + 1} of ${pages.length}`;
+        prev.disabled = current === 0;
+        next.disabled = current === pages.length - 1;
+      }
+
+      function move(direction) {
+        if (animating) return;
+        const nextIndex = current + direction;
+        if (nextIndex < 0 || nextIndex >= pages.length) return;
+        animating = true;
+        const outgoing = pages[current];
+        const incoming = pages[nextIndex];
+        outgoing.classList.add(direction > 0 ? "turning-left" : "turning-right");
+        incoming.classList.add("active");
+        incoming.style.opacity = "1";
+        incoming.style.pointerEvents = "auto";
+        incoming.style.zIndex = "4";
+        current = nextIndex;
+        pageLabel.textContent = `Page ${current + 1} of ${pages.length}`;
+        prev.disabled = current === 0;
+        next.disabled = current === pages.length - 1;
+        window.setTimeout(() => {
+          pages.forEach((page, index) => {
+            page.classList.toggle("active", index === current);
+            page.classList.remove("turning-left", "turning-right");
+            page.style.zIndex = index === current ? "2" : "";
+          });
+          animating = false;
+        }, 580);
+      }
+
+      prev.addEventListener("click", () => move(-1));
+      next.addEventListener("click", () => move(1));
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowLeft") move(-1);
+        if (event.key === "ArrowRight") move(1);
+      });
+      render();
+    })();
+  </script>
+</body>
+</html>
