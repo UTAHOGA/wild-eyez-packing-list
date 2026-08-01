@@ -191,6 +191,11 @@
       background:linear-gradient(180deg, rgba(51,39,16,.90), rgba(51,39,16,.96));
       box-shadow:var(--shadow);
     }
+    .flipbook-toolbar,
+    .flipbook-toolbar .cluster,
+    .flipbook-toolbar .pager{
+      display:none;
+    }
     .flipbook-toolbar .cluster{
       display:flex;
       flex-wrap:wrap;
@@ -351,17 +356,19 @@
       position:absolute;
       top:50%;
       transform:translateY(-50%);
-      width:56px;
-      height:56px;
+      width:64px;
+      height:64px;
       border-radius:999px;
-      border:1px solid rgba(255,255,255,.3);
-      background:rgba(27,18,10,.42);
-      color:#fff7ef;
+      border:1px solid rgba(255,119,32,.34);
+      background:linear-gradient(180deg, #3c2a19, #24180f);
+      color:#ff7720;
       display:grid;
       place-items:center;
-      font:900 30px/1 Arial,sans-serif;
+      font:900 34px/1 Arial,sans-serif;
       pointer-events:none;
-      box-shadow:0 12px 24px rgba(0,0,0,.24);
+      box-shadow:
+        0 12px 24px rgba(0,0,0,.28),
+        0 0 0 1px rgba(0,0,0,.18) inset;
       z-index:7;
     }
     .book-arrow.left{left:12px}
@@ -457,6 +464,13 @@
     body.embed .two-up{
       display:none;
     }
+    body.embed .section.embed-keep{
+      padding:0;
+      margin:0;
+      border:0;
+      box-shadow:none;
+      background:transparent;
+    }
     @media (max-width: 860px){
       .hero-inner,
       .two-up{grid-template-columns:1fr}
@@ -507,35 +521,8 @@
       </div>
     </section>
 
-    <section class="section">
-      <h2>Download</h2>
-      <p>The PDF is the primary deliverable. Use the button above for the full packet, or scroll down to flip through the pages in facing spreads.</p>
-    </section>
-
     <section class="section embed-keep">
-      <h2>Page Preview</h2>
-      <p>Page 1 is the cover. The preview below follows the document sequence so the website and PDF feel like one packet.</p>
-
       <div class="preview-stack">
-        <div class="flipbook-toolbar">
-          <div class="cluster">
-            <button class="button secondary" id="prevPage" type="button">Previous</button>
-            <button class="button secondary" id="nextPage" type="button">Next</button>
-          </div>
-          <div class="pager" id="pageLabel">Page 1 of 8</div>
-        </div>
-
-        <div class="two-up">
-          <div class="note-card">
-            <h3>How it reads</h3>
-            <p>The site opens on the cover page, and download stays front and center. The preview is laid out like an open book so people can skim before opening the PDF.</p>
-          </div>
-          <div class="note-card">
-            <h3>Best use</h3>
-            <p>Embed this page in Wix and keep the PDF itself as the thing people download or open in a new tab.</p>
-          </div>
-        </div>
-
         <div class="book-stage" aria-live="polite">
           <button class="book-hotspot prev" id="prevHotspot" type="button" aria-label="Previous pages"></button>
           <button class="book-hotspot next" id="nextHotspot" type="button" aria-label="Next pages"></button>
@@ -632,7 +619,6 @@
   <script>
     (() => {
       const pages = Array.from(document.querySelectorAll(".book-page"));
-      const pageLabel = document.getElementById("pageLabel");
       const prev = document.getElementById("prevPage");
       const next = document.getElementById("nextPage");
       const prevHotspot = document.getElementById("prevHotspot");
@@ -646,7 +632,6 @@
         pages.forEach((page, index) => {
           page.classList.toggle("active", index === current);
         });
-        pageLabel.textContent = `Page ${current + 1} of ${pages.length}`;
         prev.disabled = current === 0;
         next.disabled = current === pages.length - 1;
       }
@@ -665,7 +650,6 @@
         incoming.style.pointerEvents = "auto";
         incoming.style.zIndex = "4";
         current = nextIndex;
-        pageLabel.textContent = `Page ${current + 1} of ${pages.length}`;
         prev.disabled = current === 0;
         next.disabled = current === pages.length - 1;
         window.setTimeout(() => {
