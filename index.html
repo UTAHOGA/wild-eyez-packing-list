@@ -239,7 +239,6 @@
       position:relative;
       width:100%;
       min-height:min(78vh,1080px);
-      perspective:2200px;
       overflow:hidden;
       border-top:1px solid rgba(51,39,16,.30);
       border-radius:0 0 20px 20px;
@@ -263,12 +262,10 @@
       width:100%;
       display:grid;
       grid-template-columns:1fr 1fr;
-      transform-origin:center center;
-      transition:transform 620ms cubic-bezier(.16,1,.3,1), opacity 320ms ease, filter 320ms ease;
+      transition:opacity 240ms ease;
       background:#fff8f0;
       opacity:0;
       pointer-events:none;
-      filter:blur(.2px);
       backface-visibility:hidden;
       box-shadow:
         0 18px 40px rgba(24,14,8,.16),
@@ -278,17 +275,14 @@
     .book-page.active{
       opacity:1;
       pointer-events:auto;
-      filter:none;
       z-index:2;
     }
     .book-page.turning-left{
       opacity:1;
-      transform:translateX(-8%) rotateY(-76deg) scale(.985);
       z-index:3;
     }
     .book-page.turning-right{
       opacity:1;
-      transform:translateX(8%) rotateY(76deg) scale(.985);
       z-index:3;
     }
     .book-page .sheet-side{
@@ -316,6 +310,7 @@
       box-shadow:
         inset 0 10px 16px rgba(255,255,255,.42),
         inset 0 -10px 16px rgba(33,24,18,.03);
+      cursor:pointer;
     }
     .book-page[data-page="1"] .sheet-side:first-child .page-head{
       background:linear-gradient(180deg, rgba(255,119,32,.98), rgba(198,93,18,.98));
@@ -337,6 +332,40 @@
     .book-page[data-page="1"] .sheet-side:first-child .page-body{
       position:relative;
     }
+    .book-hotspot{
+      position:absolute;
+      top:0;
+      bottom:0;
+      width:50%;
+      z-index:6;
+      border:0;
+      background:transparent;
+      cursor:pointer;
+    }
+    .book-hotspot.prev{left:0}
+    .book-hotspot.next{right:0}
+    .book-hotspot:hover{
+      background:linear-gradient(90deg, rgba(255,255,255,.08), rgba(255,255,255,0));
+    }
+    .book-arrow{
+      position:absolute;
+      top:50%;
+      transform:translateY(-50%);
+      width:56px;
+      height:56px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.3);
+      background:rgba(27,18,10,.42);
+      color:#fff7ef;
+      display:grid;
+      place-items:center;
+      font:900 30px/1 Arial,sans-serif;
+      pointer-events:none;
+      box-shadow:0 12px 24px rgba(0,0,0,.24);
+      z-index:7;
+    }
+    .book-arrow.left{left:12px}
+    .book-arrow.right{right:12px}
     .two-up{
       display:grid;
       grid-template-columns:repeat(2,minmax(0,1fr));
@@ -508,6 +537,10 @@
         </div>
 
         <div class="book-stage" aria-live="polite">
+          <button class="book-hotspot prev" id="prevHotspot" type="button" aria-label="Previous pages"></button>
+          <button class="book-hotspot next" id="nextHotspot" type="button" aria-label="Next pages"></button>
+          <div class="book-arrow left" aria-hidden="true">‹</div>
+          <div class="book-arrow right" aria-hidden="true">›</div>
           <div class="book-page active" data-page="1">
             <section class="sheet-side">
               <div class="page-head">
@@ -602,6 +635,8 @@
       const pageLabel = document.getElementById("pageLabel");
       const prev = document.getElementById("prevPage");
       const next = document.getElementById("nextPage");
+      const prevHotspot = document.getElementById("prevHotspot");
+      const nextHotspot = document.getElementById("nextHotspot");
       const embedMode = new URLSearchParams(window.location.search).has("embed");
       document.body.classList.toggle("embed", embedMode);
       let current = 0;
@@ -610,7 +645,6 @@
       function render() {
         pages.forEach((page, index) => {
           page.classList.toggle("active", index === current);
-          page.classList.remove("turning-left", "turning-right");
         });
         pageLabel.textContent = `Page ${current + 1} of ${pages.length}`;
         prev.disabled = current === 0;
@@ -624,15 +658,12 @@
         animating = true;
         const outgoing = pages[current];
         const incoming = pages[nextIndex];
-        outgoing.classList.add(direction > 0 ? "turning-left" : "turning-right");
+        outgoing.style.opacity = "0";
+        outgoing.style.pointerEvents = "none";
         incoming.classList.add("active");
         incoming.style.opacity = "1";
         incoming.style.pointerEvents = "auto";
         incoming.style.zIndex = "4";
-        incoming.style.transform = direction > 0 ? "translateX(8%) rotateY(76deg) scale(.985)" : "translateX(-8%) rotateY(-76deg) scale(.985)";
-        window.requestAnimationFrame(() => {
-          incoming.style.transform = "translateX(0) rotateY(0deg) scale(1)";
-        });
         current = nextIndex;
         pageLabel.textContent = `Page ${current + 1} of ${pages.length}`;
         prev.disabled = current === 0;
@@ -640,11 +671,8 @@
         window.setTimeout(() => {
           pages.forEach((page, index) => {
             page.classList.toggle("active", index === current);
-            page.classList.remove("turning-left", "turning-right");
             page.style.zIndex = index === current ? "2" : "";
             page.style.opacity = index === current ? "1" : "0";
-            page.style.transform = "";
-            page.style.filter = index === current ? "none" : "blur(.2px)";
           });
           animating = false;
         }, 580);
@@ -652,6 +680,8 @@
 
       prev.addEventListener("click", () => move(-1));
       next.addEventListener("click", () => move(1));
+      prevHotspot?.addEventListener("click", () => move(-1));
+      nextHotspot?.addEventListener("click", () => move(1));
       document.addEventListener("keydown", (event) => {
         if (event.key === "ArrowLeft") move(-1);
         if (event.key === "ArrowRight") move(1);
