@@ -657,9 +657,8 @@
     }
     .chapter-row{
       display:flex;
-      flex-wrap:nowrap;
+      flex-wrap:wrap;
       gap:4px;
-      overflow-x:auto;
       padding-bottom:2px;
     }
     .chapter-button{
@@ -673,7 +672,7 @@
       text-transform:uppercase;
       cursor:pointer;
       white-space:nowrap;
-      flex:1 1 0;
+      flex:1 1 calc(25% - 4px);
       min-width:0;
     }
     .chapter-button.active{
@@ -708,7 +707,10 @@
       }
       .chapter-button{
         font-size:8px;
-        padding:5px 7px;
+        padding:5px 6px;
+        flex-basis:calc(50% - 4px);
+        white-space:normal;
+        line-height:1.05;
       }
     }
   </style>
@@ -859,17 +861,17 @@
       let followAudio = true;
       let followTimer = null;
 
-      function scrollToSheet(index) {
+      function scrollToSheet(index, smooth = true) {
         const sheet = sheets[index];
         if (!sheet) return;
         const headerHeight = header?.getBoundingClientRect().height || 0;
         const audioHeight = audioGuide?.getBoundingClientRect().height || 0;
         const offset = Math.max(120, headerHeight + audioHeight + 18);
         const top = Math.max(0, window.scrollY + sheet.getBoundingClientRect().top - offset);
-        window.scrollTo({ top, behavior: "smooth" });
+        window.scrollTo({ top, behavior: smooth ? "smooth" : "auto" });
       }
 
-      function setActiveChapter(index, shouldScroll) {
+      function setActiveChapter(index, shouldScroll, smooth = true) {
         if (index < 0 || index >= chapters.length) return;
         activeIndex = index;
         const chapter = chapters[index];
@@ -881,7 +883,7 @@
           sheet.classList.toggle("audio-active", sheetIndex === chapter.page);
         });
         if (shouldScroll && followAudio) {
-          scrollToSheet(chapter.page);
+          scrollToSheet(chapter.page, smooth);
         }
       }
 
@@ -903,7 +905,7 @@
             audio.currentTime = chapter.time;
             audio.pause();
           }
-          setActiveChapter(index, true);
+          setActiveChapter(index, true, true);
         });
         chapterRow?.appendChild(button);
       });
@@ -913,21 +915,21 @@
         followToggle.setAttribute("aria-pressed", String(followAudio));
         followToggle.textContent = `Follow Audio: ${followAudio ? "On" : "Off"}`;
         if (followAudio && audio) {
-          setActiveChapter(chapterForTime(audio.currentTime), true);
+          setActiveChapter(chapterForTime(audio.currentTime), true, false);
         }
       });
 
       function syncFromAudio() {
         if (!audio) return;
         const nextIndex = chapterForTime(audio.currentTime);
-        if (nextIndex !== activeIndex) setActiveChapter(nextIndex, true);
+        if (nextIndex !== activeIndex) setActiveChapter(nextIndex, true, false);
       }
 
       function jumpToCurrentChapter() {
         if (!audio) return;
         const nextIndex = chapterForTime(audio.currentTime);
-        setActiveChapter(nextIndex, true);
-        window.requestAnimationFrame(() => scrollToSheet(chapters[nextIndex]?.page ?? 0));
+        setActiveChapter(nextIndex, true, false);
+        window.requestAnimationFrame(() => scrollToSheet(chapters[nextIndex]?.page ?? 0, false));
       }
 
       audio?.addEventListener("timeupdate", syncFromAudio);
