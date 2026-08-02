@@ -1,0 +1,27 @@
+﻿#42 Page=4 Type=6 Child=2 L=42.0 T=132.0 W=528.0 H=82.0 Fill=-2147483648 Line=16777215 LW=-2.147484E+09 Vis=0 Text=
+  .1 Type=5 L=2.1 T=9.0 W=523.8 H=77.8 Fill=2760555 Line=16777215 LW=-2.147484E+09 Vis=0 Text=
+  .2 Type=13 L=2.1 T=8.9 W=528.0 H=82.0 Fill=16777215 Line=16777215 LW=-2.147484E+09 Vis=0 Text=
+#48 Page=6 Type=13 Child=0 L=50.3 T=11.6 W=526.8 H=112.0 Fill=16777215 Line=16777215 LW=-2.147484E+09 Vis=0 Text=
+#49 Page=2 Type=13 Child=0 L=44.3 T=14.0 W=523.0 H=91.0 Fill=16777215 Line=16777215 LW=-2.147484E+09 Vis=0 Text=
+#50 Page=6 Type=17 Child=0 L=51.0 T=78.3 W=523.5 H=74.9 Fill=16777215 Line=5540532 LW=0.75 Vis=-1 Text=AMMUNITION STANDARD Lead ammunition is preferred. Copper ammunition is not preferred. I highly suggest .30 caliber or eq
+#52 Page=2 Type=17 Child=0 L=47.5 T=7.4 W=517.3 H=83.2 Fill=16777215 Line=5540532 LW=0.75 Vis=-1 Text=HOW TO USE THIS GUIDE Read the explanations first so you understand how the hunt operates and why each category matters.
+#53 Page=3 Type=6 Child=2 L=49.3 T=8.2 W=512.6 H=102.8 Fill=16777215 Line=16777215 LW=-2.147484E+09 Vis=0 Text=
+  .1 Type=13 L=2.5 T=2.1 W=512.6 H=102.7 Fill=16777215 Line=16777215 LW=-2.147484E+09 Vis=0 Text=
+  .2 Type=13 L=3.1 T=2.7 W=87.2 H=76.5 Fill=16777215 Line=16777215 LW=-2.147484E+09 Vis=0 Text=
+#58 Page=3 Type=6 Child=4 L=41.3 T=5.0 W=518.2 H=70.2 Fill=-2147483648 Line=5540532 LW=0.75 Vis=-1 Text=
+  .1 Type=5 L=2.1 T=22.6 W=513.2 H=69.2 Fill=14675447 Line=5540532 LW=0.75 Vis=-1 Text=
+  .2 Type=5 L=2.1 T=22.6 W=517.2 H=6.4 Fill=3904195 Line=5540532 LW=0.75 Vis=-1 Text=
+  .3 Type=5 L=2.1 T=22.9 W=517.2 H=63.9 Fill=3904195 Line=5540532 LW=0.75 Vis=-1 Text=
+  .4 Type=17 L=2.1 T=22.6 W=516.2 H=69.7 Fill=16777215 Line=5540532 LW=0.75 Vis=-1 Text=PROFESSIONAL POINTER When conditions allow, plan to sleep or fully rest during the middle of the day
+#59 Page=4 Type=6 Child=2 L=54.5 T=9.4 W=512.6 H=102.8 Fill=16777215 Line=16777215 LW=-2.147484E+09 Vis=0 Text=
+  .1 Type=13 L=2.7 T=3.4 W=512.6 H=102.7 Fill=16777215 Line=16777215 LW=-2.147484E+09 Vis=0 Text=
+  .2 Type=13 L=3.3 T=4.0 W=87.2 H=76.5 Fill=16777215 Line=16777215 LW=-2.147484E+09 Vis=0 Text=
+#60 Page=4 Type=6 Child=2 L=47.5 T=122.9 W=517.3 H=75.8 Fill=-2147483648 Line=3157330 LW=0.75 Vis=-1 Text=
+  .1 Type=5 L=2.4 T=9.1 W=517.1 H=75.6 Fill=15399167 Line=3157330 LW=0.75 Vis=-1 Text=
+  .2 Type=17 L=2.4 T=9.1 W=517.3 H=75.8 Fill=16777215 Line=3157330 LW=0.75 Vis=-1 Text=BE READY WHEN THE OPPORTUNITY CHANGES A careful stalk may give us time to study the animal, build a 
+#63 Page=4 Type=6 Child=3 L=47.5 T=1.7 W=517.3 H=76.7 Fill=-2147483648 Line=5540532 LW=0.75 Vis=-1 Text=
+  .1 Type=5 L=2.6 T=30.4 W=511.7 H=74.6 Fill=14806260 Line=5540532 LW=0.75 Vis=-1 Text=
+  .2 Type=5 L=2.4 T=30.4 W=517.3 H=76.7 Fill=3904195 Line=5540532 LW=0.75 Vis=-1 Text=
+  .3 Type=17 L=2.6 T=30.4 W=511.9 H=74.8 Fill=16777215 Line=5540532 LW=0.75 Vis=-1 Text=PRO TIP - PROTECT YOUR FEET Protect your feet before the hunt starts. Break in your boots before ope
+#77 Page=7 Type=13 Child=0 L=49.7 T=8.2 W=515.4 H=95.8 Fill=16777215 Line=16777215 LW=-2.147484E+09 Vis=0 Text=
+#84 Page=7 Type=17 Child=0 L=47.5 T=12.3 W=517.3 H=20.3 Fill=14806260 Line=16777215 LW=-2.147484E+09 Vis=0 Text=PRIORITY ITEMS

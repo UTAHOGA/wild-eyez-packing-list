@@ -1,0 +1,315 @@
+﻿--- #50 W=512.2 H=73.7
+AMMUNITION STANDARD<CR>Lead ammunition is preferred. Copper ammunition is not preferred. I highly suggest .30 caliber or equivalent and a rifle system that you know well. It is your responsibility to understand your rifle's capabilities and ballistics. I will coach you through the actual shot, provide ranges, and operate as your spotter for follow-up shots.<CR>
+1 'A' 65
+2 'M' 77
+3 'M' 77
+4 'U' 85
+5 'N' 78
+6 'I' 73
+7 'T' 84
+8 'I' 73
+9 'O' 79
+10 'N' 78
+11 ' ' 32
+12 'S' 83
+13 'T' 84
+14 'A' 65
+15 'N' 78
+16 'D' 68
+17 'A' 65
+18 'R' 82
+19 'D' 68
+20 '
+' 13
+21 'L' 76
+22 'e' 101
+23 'a' 97
+24 'd' 100
+25 ' ' 32
+26 'a' 97
+27 'm' 109
+28 'm' 109
+29 'u' 117
+30 'n' 110
+31 'i' 105
+32 't' 116
+33 'i' 105
+34 'o' 111
+35 'n' 110
+36 ' ' 32
+37 'i' 105
+38 's' 115
+39 ' ' 32
+40 'p' 112
+41 'r' 114
+42 'e' 101
+43 'f' 102
+44 'e' 101
+45 'r' 114
+46 'r' 114
+47 'e' 101
+48 'd' 100
+49 '.' 46
+50 ' ' 32
+51 'C' 67
+52 'o' 111
+53 'p' 112
+54 'p' 112
+55 'e' 101
+56 'r' 114
+57 ' ' 32
+58 'a' 97
+59 'm' 109
+60 'm' 109
+--- #52 W=515.6 H=83.15
+HOW TO USE THIS GUIDE<CR>Read the explanations first so you understand how the hunt operates and why each category matters. Then use the checklists twice: once while gathering and testing your equipment, and again immediately before departure. The goal is not to own every possible item. The goal is to arrive with a complete system that you have already worn, carried, and practiced with.<CR>
+1 'H' 72
+2 'O' 79
+3 'W' 87
+4 ' ' 32
+5 'T' 84
+6 'O' 79
+7 ' ' 32
+8 'U' 85
+9 'S' 83
+10 'E' 69
+11 ' ' 32
+12 'T' 84
+13 'H' 72
+14 'I' 73
+15 'S' 83
+16 ' ' 32
+17 'G' 71
+18 'U' 85
+19 'I' 73
+20 'D' 68
+21 'E' 69
+22 '
+' 13
+23 'R' 82
+24 'e' 101
+25 'a' 97
+26 'd' 100
+27 ' ' 32
+28 't' 116
+29 'h' 104
+30 'e' 101
+31 ' ' 32
+32 'e' 101
+33 'x' 120
+34 'p' 112
+35 'l' 108
+36 'a' 97
+37 'n' 110
+38 'a' 97
+39 't' 116
+40 'i' 105
+41 'o' 111
+42 'n' 110
+43 's' 115
+44 ' ' 32
+45 'f' 102
+46 'i' 105
+47 'r' 114
+48 's' 115
+49 't' 116
+50 ' ' 32
+51 's' 115
+52 'o' 111
+53 ' ' 32
+54 'y' 121
+55 'o' 111
+56 'u' 117
+57 ' ' 32
+58 'u' 117
+59 'n' 110
+60 'd' 100
+--- #58.5 W=521.5499 H=87.3
+PROFESSIONAL POINTER<CR>When conditions allow, plan to sleep or fully rest during the middle of the day. If midday hunting is productive, we may remain active, continue glassing, reposition, or continue the pursuit. When downtime is available, use it to reset your mind. The goal is to remain mentally sharp when the evening opportunity arrives.<CR>
+1 'P' 80
+2 'R' 82
+3 'O' 79
+4 'F' 70
+5 'E' 69
+6 'S' 83
+7 'S' 83
+8 'I' 73
+9 'O' 79
+10 'N' 78
+11 'A' 65
+12 'L' 76
+13 ' ' 32
+14 'P' 80
+15 'O' 79
+16 'I' 73
+17 'N' 78
+18 'T' 84
+19 'E' 69
+20 'R' 82
+21 '
+' 13
+22 'W' 87
+23 'h' 104
+24 'e' 101
+25 'n' 110
+26 ' ' 32
+27 'c' 99
+28 'o' 111
+29 'n' 110
+30 'd' 100
+31 'i' 105
+32 't' 116
+33 'i' 105
+34 'o' 111
+35 'n' 110
+36 's' 115
+37 ' ' 32
+38 'a' 97
+39 'l' 108
+40 'l' 108
+41 'o' 111
+42 'w' 119
+43 ',' 44
+44 ' ' 32
+45 'p' 112
+46 'l' 108
+47 'a' 97
+48 'n' 110
+49 ' ' 32
+50 't' 116
+51 'o' 111
+52 ' ' 32
+53 's' 115
+54 'l' 108
+55 'e' 101
+56 'e' 101
+57 'p' 112
+58 ' ' 32
+59 'o' 111
+60 'r' 114
+--- #60.2 W=518.4 H=75.8
+BE READY WHEN THE OPPORTUNITY CHANGES<CR>A careful stalk may give us time to study the animal, build a rest, and set up video equipment. Just as often, the opportunity develops in seconds. You must be able to deploy your rifle, establish a stable rest, and prepare for the shot without learning your equipment in the moment. I will provide the range, but you must know your rifle well enough to make the proper distance and wind adjustment.<CR>
+1 'B' 66
+2 'E' 69
+3 ' ' 32
+4 'R' 82
+5 'E' 69
+6 'A' 65
+7 'D' 68
+8 'Y' 89
+9 ' ' 32
+10 'W' 87
+11 'H' 72
+12 'E' 69
+13 'N' 78
+14 ' ' 32
+15 'T' 84
+16 'H' 72
+17 'E' 69
+18 ' ' 32
+19 'O' 79
+20 'P' 80
+21 'P' 80
+22 'O' 79
+23 'R' 82
+24 'T' 84
+25 'U' 85
+26 'N' 78
+27 'I' 73
+28 'T' 84
+29 'Y' 89
+30 ' ' 32
+31 'C' 67
+32 'H' 72
+33 'A' 65
+34 'N' 78
+35 'G' 71
+36 'E' 69
+37 'S' 83
+38 '
+' 13
+39 'A' 65
+40 ' ' 32
+41 'c' 99
+42 'a' 97
+43 'r' 114
+44 'e' 101
+45 'f' 102
+46 'u' 117
+47 'l' 108
+48 ' ' 32
+49 's' 115
+50 't' 116
+51 'a' 97
+52 'l' 108
+53 'k' 107
+54 ' ' 32
+55 'm' 109
+56 'a' 97
+57 'y' 121
+58 ' ' 32
+59 'g' 103
+60 'i' 105
+--- #63.3 W=514 H=74.8
+PRO TIP - PROTECT YOUR FEET<CR>Protect your feet before the hunt starts. Break in your boots before opening day, test your sock system on real walks or hikes, and address hot spots immediately. A small blister on day one can become the reason you cannot hunt hard on day three. Your feet are part of your weapon system because they determine whether you can still get into position when the opportunity comes.<CR>
+1 'P' 80
+2 'R' 82
+3 'O' 79
+4 ' ' 32
+5 'T' 84
+6 'I' 73
+7 'P' 80
+8 ' ' 32
+9 '-' 45
+10 ' ' 32
+11 'P' 80
+12 'R' 82
+13 'O' 79
+14 'T' 84
+15 'E' 69
+16 'C' 67
+17 'T' 84
+18 ' ' 32
+19 'Y' 89
+20 'O' 79
+21 'U' 85
+22 'R' 82
+23 ' ' 32
+24 'F' 70
+25 'E' 69
+26 'E' 69
+27 'T' 84
+28 '
+' 13
+29 'P' 80
+30 'r' 114
+31 'o' 111
+32 't' 116
+33 'e' 101
+34 'c' 99
+35 't' 116
+36 ' ' 32
+37 'y' 121
+38 'o' 111
+39 'u' 117
+40 'r' 114
+41 ' ' 32
+42 'f' 102
+43 'e' 101
+44 'e' 101
+45 't' 116
+46 ' ' 32
+47 'b' 98
+48 'e' 101
+49 'f' 102
+50 'o' 111
+51 'r' 114
+52 'e' 101
+53 ' ' 32
+54 't' 116
+55 'h' 104
+56 'e' 101
+57 ' ' 32
+58 'h' 104
+59 'u' 117
+60 'n' 110
