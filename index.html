@@ -544,10 +544,13 @@
       pointer-events:auto;
     }
     .single-page-stage .sheet-side{
-      display:grid;
+      display:none;
       width:100%;
       min-height:0;
       background:#fffaf4;
+    }
+    .single-page-stage .sheet-side.active-sheet{
+      display:grid;
     }
     .single-page-stage .sheet-side + .sheet-side{
       border-left:0;
@@ -639,7 +642,7 @@
             <a class="button secondary" href="wild_eyez_packing_list.pdf" target="_blank" rel="noopener noreferrer">Open PDF</a>
           </div>
         </div>
-        <div class="book-stage" aria-live="polite">
+        <div class="book-stage single-page-stage" aria-live="polite">
           <button class="book-hotspot prev" id="prevHotspot" type="button" aria-label="Previous pages"></button>
           <button class="book-hotspot next" id="nextHotspot" type="button" aria-label="Next pages"></button>
           <div class="book-arrow left" aria-hidden="true">‹</div>
@@ -734,65 +737,40 @@
   </main>
   <script>
     (() => {
-      const pages = Array.from(document.querySelectorAll(".book-page"));
+      const spreads = Array.from(document.querySelectorAll(".book-page"));
+      const pages = Array.from(document.querySelectorAll(".sheet-side"));
+      const stage = document.querySelector(".single-page-stage");
       const prev = document.getElementById("prevPage");
       const next = document.getElementById("nextPage");
-      const prevHotspot = document.getElementById("prevHotspot");
-      const nextHotspot = document.getElementById("nextHotspot");
       const pageStatus = document.getElementById("pageStatus");
       const embedMode = new URLSearchParams(window.location.search).has("embed");
       document.body.classList.toggle("embed", embedMode);
       let current = 0;
-      let animating = false;
 
       function render() {
-        pages.forEach((page, index) => {
-          page.classList.toggle("active", index === current);
+        pages.forEach((sheet, index) => {
+          sheet.classList.toggle("active-sheet", index === current);
+        });
+        spreads.forEach((spread) => {
+          spread.classList.toggle("active", spread.querySelector(".active-sheet") !== null);
         });
         if (prev) prev.disabled = current === 0;
         if (next) next.disabled = current === pages.length - 1;
         if (pageStatus) {
-          const start = current * 2 + 1;
-          const end = Math.min(start + 1, pages.length * 2);
-          pageStatus.textContent = `Pages ${start}-${end} of ${pages.length * 2}`;
+          pageStatus.textContent = `Page ${current + 1} of ${pages.length}`;
         }
       }
 
       function move(direction) {
-        if (animating) return;
         const nextIndex = current + direction;
         if (nextIndex < 0 || nextIndex >= pages.length) return;
-        animating = true;
-        const outgoing = pages[current];
-        const incoming = pages[nextIndex];
-        outgoing.style.opacity = "0";
-        outgoing.style.pointerEvents = "none";
-        incoming.classList.add("active");
-        incoming.style.opacity = "1";
-        incoming.style.pointerEvents = "auto";
-        incoming.style.zIndex = "4";
         current = nextIndex;
-        if (prev) prev.disabled = current === 0;
-        if (next) next.disabled = current === pages.length - 1;
-        if (pageStatus) {
-          const start = current * 2 + 1;
-          const end = Math.min(start + 1, pages.length * 2);
-          pageStatus.textContent = `Pages ${start}-${end} of ${pages.length * 2}`;
-        }
-        window.setTimeout(() => {
-          pages.forEach((page, index) => {
-            page.classList.toggle("active", index === current);
-            page.style.zIndex = index === current ? "2" : "";
-            page.style.opacity = index === current ? "1" : "0";
-          });
-          animating = false;
-        }, 580);
+        render();
+        stage?.scrollTo({ top: 0, behavior: "smooth" });
       }
 
       prev?.addEventListener("click", () => move(-1));
       next?.addEventListener("click", () => move(1));
-      prevHotspot?.addEventListener("click", () => move(-1));
-      nextHotspot?.addEventListener("click", () => move(1));
       document.addEventListener("keydown", (event) => {
         if (event.key === "ArrowLeft") move(-1);
         if (event.key === "ArrowRight") move(1);
