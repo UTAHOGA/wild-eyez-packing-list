@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Wild Eyez Client Prep and Packing List</title>
-  <meta name="description" content="Wild Eyez client prep and packing list with a polished, download-first preview layout.">
+  <title>Wild Eyez Western Big Game Packing List & Preparation Guide</title>
+  <meta name="description" content="Wild Eyez western big game packing list and preparation guide with a polished, download-first preview layout.">
   <style>
     :root{
       --paper:#f6f0e6;
@@ -513,7 +513,7 @@
 <body>
   <main class="shell">
     <header class="topbar">
-      <strong>Wild Eyez Client Prep and Packing List</strong>
+      <strong>Wild Eyez Western Big Game Packing List</strong>
       <div class="actions">
         <a class="button primary" href="wild_eyez_packing_list.pdf" download>Download PDF</a>
         <a class="button secondary" href="wild_eyez_packing_list.pdf" target="_blank" rel="noopener noreferrer">Open PDF</a>
@@ -534,7 +534,7 @@
           <div class="tag">Cover Page</div>
           <div class="meta">
             <span>Wild Eyez Outfitters</span>
-            <span>Client Hunt Prep Manual</span>
+            <span>Client Western Big Game Packing List & Preparation Guide</span>
             <span>Preparation, Safety, Ethics, Success</span>
           </div>
           <div class="meta" style="align-self:end;">
@@ -559,13 +559,6 @@
                 <span>Entry page</span>
               </div>
               <div class="page-body">
-                <div class="cover-agencies" aria-hidden="true">
-                  <img src="assets/logos/usfs.png" alt="">
-                  <img src="assets/logos/blm.png" alt="">
-                  <img src="assets/logos/WILDLIFE-LOGO.png" alt="">
-                  <img src="assets/logos/utah-dwr-law-enforcement.jpg" alt="">
-                  <img src="assets/logos/uoga-logo-2a.png" alt="">
-                </div>
                 <img class="page-art" alt="Wild Eyez PDF page 1" src="assets/pages/Wild Eyez Client Prep and Packing List_Page_1.jpg">
               </div>
             </section>
@@ -663,8 +656,8 @@
         pages.forEach((page, index) => {
           page.classList.toggle("active", index === current);
         });
-        prev.disabled = current === 0;
-        next.disabled = current === pages.length - 1;
+        if (prev) prev.disabled = current === 0;
+        if (next) next.disabled = current === pages.length - 1;
       }
 
       function move(direction) {
@@ -681,8 +674,8 @@
         incoming.style.pointerEvents = "auto";
         incoming.style.zIndex = "4";
         current = nextIndex;
-        prev.disabled = current === 0;
-        next.disabled = current === pages.length - 1;
+        if (prev) prev.disabled = current === 0;
+        if (next) next.disabled = current === pages.length - 1;
         window.setTimeout(() => {
           pages.forEach((page, index) => {
             page.classList.toggle("active", index === current);
@@ -693,8 +686,8 @@
         }, 580);
       }
 
-      prev.addEventListener("click", () => move(-1));
-      next.addEventListener("click", () => move(1));
+      prev?.addEventListener("click", () => move(-1));
+      next?.addEventListener("click", () => move(1));
       prevHotspot?.addEventListener("click", () => move(-1));
       nextHotspot?.addEventListener("click", () => move(1));
       document.addEventListener("keydown", (event) => {
