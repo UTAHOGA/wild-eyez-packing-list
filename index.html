@@ -960,9 +960,7 @@
       function scrollToSheet(index) {
         const sheet = sheets[index];
         if (!sheet) return;
-        const headerHeight = (header?.getBoundingClientRect().height || 0) + (audioGuide?.getBoundingClientRect().height || 0) + 24;
-        const targetTop = Math.max(0, window.scrollY + sheet.getBoundingClientRect().top - headerHeight);
-        window.scrollTo({ top: targetTop, behavior: "smooth" });
+        sheet.scrollIntoView({ behavior: "smooth", block: "start" });
       }
 
       function setActiveChapter(index, shouldScroll) {
@@ -1019,12 +1017,20 @@
         if (nextIndex !== activeIndex) setActiveChapter(nextIndex, true);
       }
 
+      function jumpToCurrentChapter() {
+        if (!audio) return;
+        const nextIndex = chapterForTime(audio.currentTime);
+        setActiveChapter(nextIndex, true);
+        requestAnimationFrame(() => scrollToSheet(chapters[nextIndex]?.page ?? 0));
+      }
+
       audio?.addEventListener("timeupdate", syncFromAudio);
       audio?.addEventListener("play", () => {
-        syncFromAudio();
+        jumpToCurrentChapter();
         if (followTimer) window.clearInterval(followTimer);
         followTimer = window.setInterval(syncFromAudio, 700);
       });
+      audio?.addEventListener("playing", jumpToCurrentChapter);
       audio?.addEventListener("pause", () => {
         if (followTimer) window.clearInterval(followTimer);
         followTimer = null;
