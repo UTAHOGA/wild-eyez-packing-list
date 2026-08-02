@@ -829,45 +829,8 @@
   </main>
   <script>
     (() => {
-      const spreads = Array.from(document.querySelectorAll(".book-page"));
-      const pages = Array.from(document.querySelectorAll(".sheet-side"));
-      const stage = document.querySelector(".single-page-stage");
-      const prev = document.getElementById("prevPage");
-      const next = document.getElementById("nextPage");
-      const pageStatus = document.getElementById("pageStatus");
       const embedMode = new URLSearchParams(window.location.search).has("embed");
       document.body.classList.toggle("embed", embedMode);
-      let current = 0;
-
-      function render() {
-        pages.forEach((sheet, index) => {
-          sheet.classList.toggle("active-sheet", index === current);
-        });
-        spreads.forEach((spread) => {
-          spread.classList.toggle("active", spread.querySelector(".active-sheet") !== null);
-        });
-        if (prev) prev.disabled = current === 0;
-        if (next) next.disabled = current === pages.length - 1;
-        if (pageStatus) {
-          pageStatus.textContent = `Page ${current + 1} of ${pages.length}`;
-        }
-      }
-
-      function move(direction) {
-        const nextIndex = current + direction;
-        if (nextIndex < 0 || nextIndex >= pages.length) return;
-        current = nextIndex;
-        render();
-        stage?.scrollTo({ top: 0, behavior: "smooth" });
-      }
-
-      prev?.addEventListener("click", () => move(-1));
-      next?.addEventListener("click", () => move(1));
-      document.addEventListener("keydown", (event) => {
-        if (event.key === "ArrowLeft") move(-1);
-        if (event.key === "ArrowRight") move(1);
-      });
-      render();
     })();
   </script>
 </body>
