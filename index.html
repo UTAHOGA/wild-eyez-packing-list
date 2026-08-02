@@ -27,7 +27,7 @@
       font-family:Georgia,"Times New Roman",serif;
       background:
         linear-gradient(rgba(51,39,16,.84), rgba(51,39,16,.84)),
-        url("white-topo.jpg") center top / 820px auto repeat;
+        url("assets/logos/white-topo.jpg") center top / 820px auto repeat;
     }
     a{color:inherit}
     .shell{
@@ -87,6 +87,12 @@
       background:rgba(255,255,255,.08);
       color:#fff0df;
     }
+    .button:disabled{
+      cursor:not-allowed;
+      opacity:.45;
+      transform:none;
+      box-shadow:none;
+    }
     .hero{
       width:100%;
       border:1px solid rgba(216,205,189,.9);
@@ -95,7 +101,7 @@
       overflow:hidden;
       background:
         linear-gradient(rgba(51,39,16,.86), rgba(51,39,16,.92)),
-        url("white-topo.jpg") center top / 820px auto repeat;
+        url("assets/logos/white-topo.jpg") center top / 820px auto repeat;
       color:#f8f3ea;
     }
     .hero-inner{
@@ -190,11 +196,6 @@
       border-radius:18px;
       background:linear-gradient(180deg, rgba(51,39,16,.90), rgba(51,39,16,.96));
       box-shadow:var(--shadow);
-    }
-    .flipbook-toolbar,
-    .flipbook-toolbar .cluster,
-    .flipbook-toolbar .pager{
-      display:none;
     }
     .flipbook-toolbar .cluster{
       display:flex;
@@ -297,7 +298,7 @@
       min-height:min(78vh,1080px);
       background:
         linear-gradient(180deg, rgba(255,249,242,.98), rgba(255,243,234,.98)),
-        url("white-topo.jpg") center top / 820px auto repeat;
+        url("assets/logos/white-topo.jpg") center top / 820px auto repeat;
     }
     .book-page .sheet-side + .sheet-side{
       border-left:1px solid rgba(51,39,16,.14);
@@ -526,8 +527,8 @@
           <p class="eyebrow">Wild Eyez Outfitters</p>
           <h1>Prep for Success</h1>
           <p>
-            This page is built to echo the manual while keeping the download as the main action.
-            The cover appears first, and the packet is shown below in a full-width open-book spread.
+            View the current Wild Eyez Outfitters client packing list below, or download the print-ready PDF.
+            The downloadable file is the source document clients should use for packing and preparation.
           </p>
         </div>
         <div class="hero-note">
@@ -538,8 +539,8 @@
             <span>Preparation, Safety, Ethics, Success</span>
           </div>
           <div class="meta" style="align-self:end;">
-            <span>Download first</span>
-            <span>Preview below</span>
+            <span>Download PDF</span>
+            <span>Preview the packet</span>
           </div>
         </div>
       </div>
@@ -547,6 +548,17 @@
 
     <section class="section embed-keep">
       <div class="preview-stack">
+        <div class="flipbook-toolbar">
+          <div class="cluster">
+            <button class="button secondary" id="prevPage" type="button">Previous Pages</button>
+            <button class="button primary" id="nextPage" type="button">Next Pages</button>
+          </div>
+          <div class="pager" id="pageStatus">Pages 1-2 of 8</div>
+          <div class="cluster">
+            <a class="button primary" href="wild_eyez_packing_list.pdf" download>Download PDF</a>
+            <a class="button secondary" href="wild_eyez_packing_list.pdf" target="_blank" rel="noopener noreferrer">Open PDF</a>
+          </div>
+        </div>
         <div class="book-stage" aria-live="polite">
           <button class="book-hotspot prev" id="prevHotspot" type="button" aria-label="Previous pages"></button>
           <button class="book-hotspot next" id="nextHotspot" type="button" aria-label="Next pages"></button>
@@ -647,6 +659,7 @@
       const next = document.getElementById("nextPage");
       const prevHotspot = document.getElementById("prevHotspot");
       const nextHotspot = document.getElementById("nextHotspot");
+      const pageStatus = document.getElementById("pageStatus");
       const embedMode = new URLSearchParams(window.location.search).has("embed");
       document.body.classList.toggle("embed", embedMode);
       let current = 0;
@@ -658,6 +671,11 @@
         });
         if (prev) prev.disabled = current === 0;
         if (next) next.disabled = current === pages.length - 1;
+        if (pageStatus) {
+          const start = current * 2 + 1;
+          const end = Math.min(start + 1, pages.length * 2);
+          pageStatus.textContent = `Pages ${start}-${end} of ${pages.length * 2}`;
+        }
       }
 
       function move(direction) {
@@ -676,6 +694,11 @@
         current = nextIndex;
         if (prev) prev.disabled = current === 0;
         if (next) next.disabled = current === pages.length - 1;
+        if (pageStatus) {
+          const start = current * 2 + 1;
+          const end = Math.min(start + 1, pages.length * 2);
+          pageStatus.textContent = `Pages ${start}-${end} of ${pages.length * 2}`;
+        }
         window.setTimeout(() => {
           pages.forEach((page, index) => {
             page.classList.toggle("active", index === current);
