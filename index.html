@@ -27,15 +27,15 @@
       font-family:Georgia,"Times New Roman",serif;
       background:
         linear-gradient(rgba(31,19,10,.90), rgba(41,25,13,.94)),
-        url("assets/logos/white-topo.jpg") center top / 820px auto repeat;
+        url("assets/logos/dark-brown-topo.jpg") center top / 820px auto repeat;
       background-blend-mode:multiply;
       background-attachment:fixed;
     }
     a{color:inherit}
     .shell{
-      width:100%;
+      width:min(100%, 960px);
       margin:0 auto;
-      padding:16px;
+      padding:16px 12px 24px;
     }
     .topbar{
       position:sticky;
@@ -51,7 +51,7 @@
       border-radius:var(--radius);
       background:
         linear-gradient(180deg, rgba(42,25,13,.96), rgba(25,15,8,.97)),
-        url("assets/logos/white-topo.jpg") center top / 760px auto repeat;
+        url("assets/logos/dark-brown-topo.jpg") center top / 760px auto repeat;
       background-blend-mode:multiply;
       backdrop-filter:blur(12px);
       box-shadow:var(--shadow);
@@ -237,7 +237,7 @@
       min-height:min(78vh,1080px);
       background:
         linear-gradient(180deg, rgba(255,249,242,.98), rgba(255,243,234,.98)),
-        url("assets/logos/white-topo.jpg") center top / 820px auto repeat;
+        url("assets/logos/dark-brown-topo.jpg") center top / 820px auto repeat;
     }
     .book-page .sheet-side + .sheet-side{
       border-left:1px solid rgba(51,39,16,.14);
@@ -388,7 +388,7 @@
     }
     body.embed .section.embed-keep{
       margin:0;
-      padding:0;
+      padding:10px 6px 14px;
       border:0;
       border-radius:0;
       background:transparent;
@@ -402,7 +402,7 @@
       border-top:0;
       border-radius:0;
       min-height:calc(100vh - 72px);
-      max-width:1280px;
+      max-width:960px;
       margin:0 auto;
     }
     body.embed .flipbook-toolbar{
@@ -410,6 +410,7 @@
       top:0;
       z-index:5;
       margin-bottom:12px;
+      padding:10px 12px;
     }
     body.embed .book-page,
     body.embed .book-page .sheet-side,
@@ -417,7 +418,7 @@
       min-height:calc(100vh - 72px);
     }
     body.embed .book-page{
-      width:min(1280px, 100%);
+      width:min(960px, 100%);
       left:50%;
       transform:translateX(-50%);
     }
@@ -426,13 +427,6 @@
     }
     body.embed .two-up{
       display:none;
-    }
-    body.embed .section.embed-keep{
-      padding:0;
-      margin:0;
-      border:0;
-      box-shadow:none;
-      background:transparent;
     }
     @media (max-width: 860px){
       .two-up{grid-template-columns:1fr}
@@ -663,19 +657,24 @@
     }
     .chapter-row{
       display:flex;
-      flex-wrap:wrap;
-      gap:8px;
+      flex-wrap:nowrap;
+      gap:4px;
+      overflow-x:auto;
+      padding-bottom:2px;
     }
     .chapter-button{
       border:1px solid rgba(255,226,194,.24);
       border-radius:999px;
-      padding:9px 11px;
+      padding:6px 8px;
       background:rgba(255,255,255,.07);
       color:#fff0df;
-      font:800 11px/1 Arial,sans-serif;
-      letter-spacing:.06em;
+      font:800 9px/1 Arial,sans-serif;
+      letter-spacing:.04em;
       text-transform:uppercase;
       cursor:pointer;
+      white-space:nowrap;
+      flex:1 1 0;
+      min-width:0;
     }
     .chapter-button.active{
       background:linear-gradient(180deg,var(--accent-bright),var(--accent));
@@ -684,8 +683,9 @@
       box-shadow:0 8px 18px rgba(0,0,0,.22);
     }
     .follow-toggle{
-      min-height:36px;
-      padding:0 13px;
+      min-height:34px;
+      padding:0 10px;
+      font-size:11px;
     }
     .document-scroll .sheet-side.audio-active{
       outline:4px solid rgba(255,119,32,.78);
@@ -707,7 +707,8 @@
         padding:12px;
       }
       .chapter-button{
-        font-size:10px;
+        font-size:8px;
+        padding:5px 7px;
       }
     }
   </style>
@@ -716,6 +717,7 @@
   <main class="shell">
     <header class="topbar">
       <div class="actions">
+        <a class="button secondary" href="assets/logos/dark-brown-topo.jpg" download>Download Background</a>
         <a class="button primary" href="wild_eyez_packing_list.pdf" download>Download PDF</a>
         <a class="button secondary" href="wild_eyez_packing_list.pdf" target="_blank" rel="noopener noreferrer">Open PDF</a>
       </div>
@@ -860,7 +862,11 @@
       function scrollToSheet(index) {
         const sheet = sheets[index];
         if (!sheet) return;
-        sheet.scrollIntoView({ behavior: "smooth", block: "start" });
+        const headerHeight = header?.getBoundingClientRect().height || 0;
+        const audioHeight = audioGuide?.getBoundingClientRect().height || 0;
+        const offset = Math.max(120, headerHeight + audioHeight + 18);
+        const top = Math.max(0, window.scrollY + sheet.getBoundingClientRect().top - offset);
+        window.scrollTo({ top, behavior: "smooth" });
       }
 
       function setActiveChapter(index, shouldScroll) {
@@ -921,7 +927,7 @@
         if (!audio) return;
         const nextIndex = chapterForTime(audio.currentTime);
         setActiveChapter(nextIndex, true);
-        requestAnimationFrame(() => scrollToSheet(chapters[nextIndex]?.page ?? 0));
+        window.requestAnimationFrame(() => scrollToSheet(chapters[nextIndex]?.page ?? 0));
       }
 
       audio?.addEventListener("timeupdate", syncFromAudio);
