@@ -26,8 +26,9 @@
       color:var(--ink);
       font-family:Georgia,"Times New Roman",serif;
       background:
-        linear-gradient(rgba(51,39,16,.84), rgba(51,39,16,.84)),
+        linear-gradient(rgba(31,19,10,.90), rgba(41,25,13,.94)),
         url("assets/logos/white-topo.jpg") center top / 820px auto repeat;
+      background-blend-mode:multiply;
     }
     a{color:inherit}
     .shell{
@@ -47,7 +48,10 @@
       padding:14px 16px;
       border:1px solid rgba(216,205,189,.92);
       border-radius:var(--radius);
-      background:rgba(51,39,16,.92);
+      background:
+        linear-gradient(180deg, rgba(42,25,13,.96), rgba(25,15,8,.97)),
+        url("assets/logos/white-topo.jpg") center top / 760px auto repeat;
+      background-blend-mode:multiply;
       backdrop-filter:blur(12px);
       box-shadow:var(--shadow);
     }
@@ -100,8 +104,9 @@
       box-shadow:var(--shadow);
       overflow:hidden;
       background:
-        linear-gradient(rgba(51,39,16,.86), rgba(51,39,16,.92)),
+        linear-gradient(rgba(42,25,13,.88), rgba(25,15,8,.94)),
         url("assets/logos/white-topo.jpg") center top / 820px auto repeat;
+      background-blend-mode:multiply;
       color:#f8f3ea;
     }
     .hero-inner{
@@ -592,6 +597,95 @@
         padding:10px;
       }
     }
+    .document-scroll{
+      display:grid;
+      gap:24px;
+      min-height:0;
+      overflow:visible;
+      padding:22px;
+      border-top:1px solid rgba(255,218,176,.22);
+      background:
+        linear-gradient(180deg, rgba(42,25,13,.94), rgba(24,14,8,.96)),
+        url("assets/logos/white-topo.jpg") center top / 820px auto repeat;
+      background-blend-mode:multiply;
+    }
+    .document-scroll::before,
+    .document-scroll .book-hotspot,
+    .document-scroll .book-arrow{
+      display:none;
+    }
+    .document-scroll .book-page{
+      position:static;
+      display:grid;
+      grid-template-columns:1fr;
+      width:min(100%, 900px);
+      margin:0 auto;
+      opacity:1;
+      pointer-events:auto;
+      transform:none;
+      transition:none;
+      background:transparent;
+      box-shadow:none;
+    }
+    .document-scroll .sheet-side{
+      display:grid;
+      width:100%;
+      min-height:0;
+      overflow:hidden;
+      border:1px solid rgba(255,230,202,.36);
+      border-radius:16px;
+      background:#fffaf4;
+      box-shadow:0 20px 46px rgba(0,0,0,.34);
+    }
+    .document-scroll .sheet-side + .sheet-side{
+      margin-top:24px;
+      border-left:1px solid rgba(255,230,202,.36);
+      border-top:1px solid rgba(255,230,202,.36);
+      box-shadow:0 20px 46px rgba(0,0,0,.34);
+    }
+    .document-scroll .page-head{
+      background:linear-gradient(180deg, rgba(112,67,31,.98), rgba(74,42,21,.98));
+      color:#fff0df;
+    }
+    .document-scroll .page-body{
+      min-height:0;
+      overflow:visible;
+      cursor:default;
+      background:#fff;
+    }
+    .document-scroll .page-art{
+      display:block;
+      width:100%;
+      height:auto;
+      object-fit:contain;
+    }
+    body.embed{
+      background:
+        linear-gradient(rgba(31,19,10,.92), rgba(31,19,10,.96)),
+        url("assets/logos/white-topo.jpg") center top / 820px auto repeat;
+      background-blend-mode:multiply;
+    }
+    body.embed .document-scroll{
+      border-radius:0;
+      padding:18px;
+    }
+    body.embed .document-scroll .book-page,
+    body.embed .document-scroll .sheet-side,
+    body.embed .document-scroll .page-body{
+      min-height:0;
+      width:min(100%, 900px);
+      left:auto;
+      transform:none;
+    }
+    @media (max-width: 700px){
+      .document-scroll{
+        gap:16px;
+        padding:12px;
+      }
+      .document-scroll .sheet-side + .sheet-side{
+        margin-top:16px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -633,16 +727,14 @@
       <div class="preview-stack">
         <div class="flipbook-toolbar">
           <div class="cluster">
-            <button class="button secondary" id="prevPage" type="button">Previous Page</button>
-            <button class="button primary" id="nextPage" type="button">Next Page</button>
+            <div class="pager" id="pageStatus">Scroll the full 8-page guide</div>
           </div>
-          <div class="pager" id="pageStatus">Page 1 of 8</div>
           <div class="cluster">
             <a class="button primary" href="wild_eyez_packing_list.pdf" download>Download PDF</a>
             <a class="button secondary" href="wild_eyez_packing_list.pdf" target="_blank" rel="noopener noreferrer">Open PDF</a>
           </div>
         </div>
-        <div class="book-stage single-page-stage" aria-live="polite">
+        <div class="book-stage document-scroll" aria-label="Scrollable packing list preview">
           <button class="book-hotspot prev" id="prevHotspot" type="button" aria-label="Previous pages"></button>
           <button class="book-hotspot next" id="nextHotspot" type="button" aria-label="Next pages"></button>
           <div class="book-arrow left" aria-hidden="true">‹</div>
