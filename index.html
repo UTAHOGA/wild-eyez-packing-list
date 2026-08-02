@@ -29,6 +29,7 @@
         linear-gradient(rgba(31,19,10,.90), rgba(41,25,13,.94)),
         url("assets/logos/white-topo.jpg") center top / 820px auto repeat;
       background-blend-mode:multiply;
+      background-attachment:fixed;
     }
     a{color:inherit}
     .shell{
@@ -608,6 +609,7 @@
         linear-gradient(180deg, rgba(42,25,13,.94), rgba(24,14,8,.96)),
         url("assets/logos/white-topo.jpg") center top / 820px auto repeat;
       background-blend-mode:multiply;
+      background-attachment:fixed;
     }
     .document-scroll::before,
     .document-scroll .book-hotspot,
@@ -618,7 +620,7 @@
       position:static;
       display:grid;
       grid-template-columns:1fr;
-      width:min(100%, 760px);
+      width:min(100%, 960px);
       margin:0 auto;
       opacity:1;
       pointer-events:auto;
@@ -674,7 +676,7 @@
     body.embed .document-scroll .sheet-side,
     body.embed .document-scroll .page-body{
       min-height:0;
-      width:min(100%, 760px);
+      width:min(100%, 960px);
       left:auto;
       transform:none;
     }
