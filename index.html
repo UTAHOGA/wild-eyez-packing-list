@@ -634,7 +634,7 @@
       width:100%;
       min-height:0;
       overflow:hidden;
-      scroll-margin-top:178px;
+      scroll-margin-top:220px;
       border:1px solid rgba(255,230,202,.36);
       border-radius:16px;
       background:#fffaf4;
@@ -767,6 +767,9 @@
       top:0;
       border-radius:0;
       margin-bottom:0;
+    }
+    body.embed .audio-guide + .preview-stack{
+      margin-top:0;
     }
     @media (max-width: 700px){
       .audio-guide{
@@ -938,6 +941,8 @@
       const chapterRow = document.getElementById("chapterRow");
       const currentChapter = document.getElementById("currentChapter");
       const followToggle = document.getElementById("followToggle");
+      const header = document.querySelector(".topbar");
+      const audioGuide = document.querySelector(".audio-guide");
       const sheets = Array.from(document.querySelectorAll(".document-scroll .sheet-side"));
       const chapters = [
         { title: "Welcome & Safety", time: 0, page: 0 },
@@ -950,6 +955,15 @@
       ];
       let activeIndex = -1;
       let followAudio = true;
+      let followTimer = null;
+
+      function scrollToSheet(index) {
+        const sheet = sheets[index];
+        if (!sheet) return;
+        const headerHeight = (header?.getBoundingClientRect().height || 0) + (audioGuide?.getBoundingClientRect().height || 0) + 24;
+        const targetTop = Math.max(0, window.scrollY + sheet.getBoundingClientRect().top - headerHeight);
+        window.scrollTo({ top: targetTop, behavior: "smooth" });
+      }
 
       function setActiveChapter(index, shouldScroll) {
         if (index < 0 || index >= chapters.length) return;
@@ -963,7 +977,7 @@
           sheet.classList.toggle("audio-active", sheetIndex === chapter.page);
         });
         if (shouldScroll && followAudio) {
-          sheets[chapter.page]?.scrollIntoView({ behavior: "smooth", block: "start" });
+          scrollToSheet(chapter.page);
         }
       }
 
@@ -981,7 +995,10 @@
         button.className = "chapter-button";
         button.textContent = chapter.title;
         button.addEventListener("click", () => {
-          if (audio) audio.currentTime = chapter.time;
+          if (audio) {
+            audio.currentTime = chapter.time;
+            audio.pause();
+          }
           setActiveChapter(index, true);
         });
         chapterRow?.appendChild(button);
@@ -991,11 +1008,32 @@
         followAudio = !followAudio;
         followToggle.setAttribute("aria-pressed", String(followAudio));
         followToggle.textContent = `Follow Audio: ${followAudio ? "On" : "Off"}`;
+        if (followAudio && audio) {
+          setActiveChapter(chapterForTime(audio.currentTime), true);
+        }
       });
 
-      audio?.addEventListener("timeupdate", () => {
+      function syncFromAudio() {
+        if (!audio) return;
         const nextIndex = chapterForTime(audio.currentTime);
         if (nextIndex !== activeIndex) setActiveChapter(nextIndex, true);
+      }
+
+      audio?.addEventListener("timeupdate", syncFromAudio);
+      audio?.addEventListener("play", () => {
+        syncFromAudio();
+        if (followTimer) window.clearInterval(followTimer);
+        followTimer = window.setInterval(syncFromAudio, 700);
+      });
+      audio?.addEventListener("pause", () => {
+        if (followTimer) window.clearInterval(followTimer);
+        followTimer = null;
+      });
+      audio?.addEventListener("loadedmetadata", syncFromAudio);
+      audio?.addEventListener("seeked", syncFromAudio);
+      audio?.addEventListener("ended", () => {
+        if (followTimer) window.clearInterval(followTimer);
+        followTimer = null;
       });
 
       setActiveChapter(0, false);
