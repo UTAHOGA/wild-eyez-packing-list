@@ -743,7 +743,9 @@
         { title: "Firearms & Ammunition", time: 917, page: 5 },
         { title: "Chambering Standard", time: 1027, page: 5 },
         { title: "Preseason Preparation", time: 1122, page: 6 },
-        { title: "Final Reminders", time: 1275, page: 7 }
+        { title: "Wounded Game", time: 1290, page: 7 },
+        { title: "Final Reminders", time: 1348, page: 7 },
+        { title: "Closing", time: 1408, page: 7 }
       ];
       let activeIndex = -1;
       let followAudio = true;
@@ -793,7 +795,7 @@
         const nextIndex = chapterForTime(audio.currentTime);
         if (nextIndex !== activeIndex) {
           setActiveChapter(nextIndex, true, false);
-        } else if (followAudio) {
+        } else if (followAudio && currentChapter) {
           currentChapter.textContent = chapters[nextIndex].title;
         }
       }
