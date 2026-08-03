@@ -692,7 +692,7 @@
         <div class="audio-top">
           <div class="audio-title">
             <strong>Guided Audio Reading</strong>
-            <span id="currentChapter">Welcome & Safety</span>
+            <span id="currentChapter" aria-live="polite">Welcome & Safety</span>
           </div>
           <button class="button secondary follow-toggle" id="followToggle" type="button" aria-pressed="true">Follow Audio: On</button>
         </div>
@@ -801,16 +801,17 @@
       const sheets = Array.from(document.querySelectorAll(".document-scroll .sheet-side"));
       const chapters = [
         { title: "Welcome & Safety", time: 0, page: 0 },
-        { title: "What To Expect", time: 229, page: 2 },
-        { title: "Clothing & Footwear", time: 491, page: 3 },
-        { title: "Field Gear", time: 694, page: 4 },
-        { title: "Firearms & Ammunition", time: 915, page: 5 },
+        { title: "What To Expect", time: 231, page: 2 },
+        { title: "Weather & Terrain", time: 356, page: 2 },
+        { title: "Clothing & Footwear", time: 493, page: 3 },
+        { title: "Field Gear", time: 695, page: 4 },
+        { title: "Firearms & Ammunition", time: 917, page: 5 },
+        { title: "Chambering Standard", time: 1027, page: 5 },
         { title: "Preseason Preparation", time: 1122, page: 6 },
         { title: "Final Reminders", time: 1275, page: 7 }
       ];
       let activeIndex = -1;
       let followAudio = true;
-      let followTimer = null;
 
       function scrollToSheet(index, smooth = true) {
         const sheet = sheets[index];
@@ -855,33 +856,18 @@
       function syncFromAudio() {
         if (!audio) return;
         const nextIndex = chapterForTime(audio.currentTime);
-        if (nextIndex !== activeIndex) setActiveChapter(nextIndex, true, false);
-      }
-
-      function jumpToCurrentChapter() {
-        if (!audio) return;
-        const nextIndex = chapterForTime(audio.currentTime);
-        setActiveChapter(nextIndex, true, false);
-        window.requestAnimationFrame(() => scrollToSheet(chapters[nextIndex]?.page ?? 0, false));
+        if (nextIndex !== activeIndex) {
+          setActiveChapter(nextIndex, true, false);
+        } else if (followAudio) {
+          currentChapter.textContent = chapters[nextIndex].title;
+        }
       }
 
       audio?.addEventListener("timeupdate", syncFromAudio);
-      audio?.addEventListener("play", () => {
-        jumpToCurrentChapter();
-        if (followTimer) window.clearInterval(followTimer);
-        followTimer = window.setInterval(syncFromAudio, 700);
-      });
-      audio?.addEventListener("playing", jumpToCurrentChapter);
-      audio?.addEventListener("pause", () => {
-        if (followTimer) window.clearInterval(followTimer);
-        followTimer = null;
-      });
       audio?.addEventListener("loadedmetadata", syncFromAudio);
       audio?.addEventListener("seeked", syncFromAudio);
-      audio?.addEventListener("ended", () => {
-        if (followTimer) window.clearInterval(followTimer);
-        followTimer = null;
-      });
+      audio?.addEventListener("play", syncFromAudio);
+      audio?.addEventListener("ended", syncFromAudio);
 
       setActiveChapter(0, false);
     })();
