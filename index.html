@@ -616,6 +616,17 @@
       display:grid;
       gap:4px;
     }
+    .sr-only{
+      position:absolute;
+      width:1px;
+      height:1px;
+      padding:0;
+      margin:-1px;
+      overflow:hidden;
+      clip:rect(0, 0, 0, 0);
+      white-space:nowrap;
+      border:0;
+    }
     .audio-title strong{
       font:900 13px/1 Arial,sans-serif;
       letter-spacing:.12em;
@@ -692,7 +703,7 @@
         <div class="audio-top">
           <div class="audio-title">
             <strong>Guided Audio Reading</strong>
-            <span id="currentChapter" aria-live="polite">Welcome & Safety</span>
+            <span id="currentChapter" class="sr-only" aria-live="polite">Welcome & Safety</span>
           </div>
           <button class="button secondary follow-toggle" id="followToggle" type="button" aria-pressed="true">Follow Audio: On</button>
         </div>
