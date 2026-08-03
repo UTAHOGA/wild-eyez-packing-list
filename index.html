@@ -125,29 +125,6 @@
       gap:16px;
       margin-top:18px;
     }
-    .flipbook-toolbar{
-      display:flex;
-      flex-wrap:wrap;
-      justify-content:space-between;
-      gap:12px;
-      padding:14px 16px;
-      border:1px solid rgba(216,205,189,.78);
-      border-radius:18px;
-      background:linear-gradient(180deg, rgba(51,39,16,.90), rgba(51,39,16,.96));
-      box-shadow:var(--shadow);
-    }
-    .flipbook-toolbar .cluster{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      align-items:center;
-    }
-    .flipbook-toolbar .pager{
-      font:800 12px/1 Arial,sans-serif;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-      color:#fff0df;
-    }
     .page-card{
       border:1px solid rgba(216,205,189,.88);
       border-radius:20px;
@@ -405,13 +382,6 @@
       max-width:960px;
       margin:0 auto;
     }
-    body.embed .flipbook-toolbar{
-      position:sticky;
-      top:0;
-      z-index:5;
-      margin-bottom:12px;
-      padding:10px 12px;
-    }
     body.embed .book-page,
     body.embed .book-page .sheet-side,
     body.embed .book-page .page-body{
@@ -435,6 +405,12 @@
     @media (max-width: 700px){
       .shell{padding:10px}
       .topbar{border-radius:20px}
+      .actions{
+        width:100%;
+      }
+      .actions .button.secondary{
+        display:none;
+      }
       .section{padding:18px}
       .book-page{grid-template-columns:1fr}
       .book-page .sheet-side + .sheet-side{border-left:0;border-top:1px solid rgba(180,165,149,.42)}
@@ -685,9 +661,6 @@
       .follow-toggle{
         width:100%;
       }
-      .flipbook-toolbar{
-        display:none;
-      }
       .book-stage{
         min-height:auto;
         border-radius:16px;
@@ -710,6 +683,7 @@
     <header class="topbar">
       <div class="actions">
         <a class="button primary" href="wild_eyez_packing_list.pdf" download>Download PDF</a>
+        <a class="button secondary" href="wild_eyez_packing_list.pdf" target="_blank" rel="noopener noreferrer">View PDF</a>
       </div>
     </header>
 
@@ -725,11 +699,6 @@
         <audio id="guideAudio" controls preload="metadata" src="assets/audio/wild-eyez-packing-list-audio.mp3"></audio>
       </div>
       <div class="preview-stack">
-        <div class="flipbook-toolbar">
-          <div class="cluster">
-            <div class="pager" id="pageStatus">Scroll the full 8-page guide</div>
-          </div>
-        </div>
         <div class="book-stage document-scroll" aria-label="Scrollable packing list preview">
           <button class="book-hotspot prev" id="prevHotspot" type="button" aria-label="Previous pages"></button>
           <button class="book-hotspot next" id="nextHotspot" type="button" aria-label="Next pages"></button>
