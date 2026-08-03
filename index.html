@@ -655,32 +655,6 @@
       height:42px;
       color-scheme:dark;
     }
-    .chapter-row{
-      display:flex;
-      flex-wrap:wrap;
-      gap:4px;
-      padding-bottom:2px;
-    }
-    .chapter-button{
-      border:1px solid rgba(255,226,194,.24);
-      border-radius:999px;
-      padding:6px 8px;
-      background:rgba(255,255,255,.07);
-      color:#fff0df;
-      font:800 9px/1 Arial,sans-serif;
-      letter-spacing:.04em;
-      text-transform:uppercase;
-      cursor:pointer;
-      white-space:nowrap;
-      flex:1 1 calc(25% - 4px);
-      min-width:0;
-    }
-    .chapter-button.active{
-      background:linear-gradient(180deg,var(--accent-bright),var(--accent));
-      border-color:rgba(255,255,255,.22);
-      color:#fff8ee;
-      box-shadow:0 8px 18px rgba(0,0,0,.22);
-    }
     .follow-toggle{
       min-height:34px;
       padding:0 10px;
@@ -705,12 +679,28 @@
         top:76px;
         padding:12px;
       }
-      .chapter-button{
-        font-size:8px;
-        padding:5px 6px;
-        flex-basis:calc(50% - 4px);
-        white-space:normal;
-        line-height:1.05;
+      .audio-top{
+        align-items:flex-start;
+      }
+      .follow-toggle{
+        width:100%;
+      }
+      .flipbook-toolbar{
+        display:none;
+      }
+      .book-stage{
+        min-height:auto;
+        border-radius:16px;
+      }
+      .book-page{
+        grid-template-columns:1fr;
+      }
+      .sheet-side + .sheet-side{
+        display:none;
+      }
+      .book-arrow,
+      .book-hotspot{
+        display:none;
       }
     }
   </style>
@@ -719,9 +709,7 @@
   <main class="shell">
     <header class="topbar">
       <div class="actions">
-        <a class="button secondary" href="assets/logos/dark-brown-topo.jpg" download>Download Background</a>
         <a class="button primary" href="wild_eyez_packing_list.pdf" download>Download PDF</a>
-        <a class="button secondary" href="wild_eyez_packing_list.pdf" target="_blank" rel="noopener noreferrer">Open PDF</a>
       </div>
     </header>
 
@@ -735,16 +723,11 @@
           <button class="button secondary follow-toggle" id="followToggle" type="button" aria-pressed="true">Follow Audio: On</button>
         </div>
         <audio id="guideAudio" controls preload="metadata" src="assets/audio/wild-eyez-packing-list-audio.mp3"></audio>
-        <div class="chapter-row" id="chapterRow" aria-label="Audio chapters"></div>
       </div>
       <div class="preview-stack">
         <div class="flipbook-toolbar">
           <div class="cluster">
             <div class="pager" id="pageStatus">Scroll the full 8-page guide</div>
-          </div>
-          <div class="cluster">
-            <a class="button primary" href="wild_eyez_packing_list.pdf" download>Download PDF</a>
-            <a class="button secondary" href="wild_eyez_packing_list.pdf" target="_blank" rel="noopener noreferrer">Open PDF</a>
           </div>
         </div>
         <div class="book-stage document-scroll" aria-label="Scrollable packing list preview">
@@ -842,7 +825,6 @@
       document.body.classList.toggle("embed", embedMode);
 
       const audio = document.getElementById("guideAudio");
-      const chapterRow = document.getElementById("chapterRow");
       const currentChapter = document.getElementById("currentChapter");
       const followToggle = document.getElementById("followToggle");
       const header = document.querySelector(".topbar");
@@ -876,9 +858,6 @@
         activeIndex = index;
         const chapter = chapters[index];
         if (currentChapter) currentChapter.textContent = chapter.title;
-        chapterRow?.querySelectorAll(".chapter-button").forEach((button, buttonIndex) => {
-          button.classList.toggle("active", buttonIndex === index);
-        });
         sheets.forEach((sheet, sheetIndex) => {
           sheet.classList.toggle("audio-active", sheetIndex === chapter.page);
         });
@@ -894,21 +873,6 @@
         });
         return index;
       }
-
-      chapters.forEach((chapter, index) => {
-        const button = document.createElement("button");
-        button.type = "button";
-        button.className = "chapter-button";
-        button.textContent = chapter.title;
-        button.addEventListener("click", () => {
-          if (audio) {
-            audio.currentTime = chapter.time;
-            audio.pause();
-          }
-          setActiveChapter(index, true, true);
-        });
-        chapterRow?.appendChild(button);
-      });
 
       followToggle?.addEventListener("click", () => {
         followAudio = !followAudio;

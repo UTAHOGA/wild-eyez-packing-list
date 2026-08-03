@@ -20,8 +20,9 @@ The easiest option is GitHub Pages:
 Embed the hosted `index.html` page in an iframe. The page already includes:
 
 - a PDF preview
-- a download button
-- a direct open button
+- a download button in the desktop top bar
+- a simplified mobile view that prioritizes the PDF preview
+- audio synced to the page sections for guided reading
 
 Recommended Wix page setup:
 
