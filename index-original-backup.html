@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wild Eyez Western Big Game Packing List & Preparation Guide</title>
+  <meta name="description" content="Wild Eyez western big game packing list and preparation guide with a polished, download-first preview layout.">
+  <style>
+    :root{
+      --paper:#f6f0e6;
+      --panel:rgba(255,252,247,.94);
+      --ink:#332710;
+      --muted:#6b5a50;
+      --line:#d9cab8;
+      --accent:#ff7720;
+      --accent-deep:#332710;
+      --accent-soft:#f4e5d4;
+      --accent-bright:#ff8a33;
+      --shadow:0 20px 54px rgba(33,24,18,.14);
+      --radius:22px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      color:var(--ink);
+      font-family:Georgia,"Times New Roman",serif;
+      background:
+        linear-gradient(rgba(31,19,10,.90), rgba(41,25,13,.94)),
+        url("assets/logos/dark-brown-topo.jpg") center top / 820px auto repeat;
+      background-blend-mode:multiply;
+      background-attachment:fixed;
+    }
+    a{color:inherit}
+    .shell{
+      width:min(100%, 960px);
+      margin:0 auto;
+      padding:16px 12px 24px;
+    }
+    .topbar{
+      display:none;
+    }
+    .topbar strong{
+      font:800 13px/1 Arial,sans-serif;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:#fff0df;
+    }
+    .actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+    .button{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:42px;
+      padding:0 16px;
+      border-radius:999px;
+      border:1px solid transparent;
+      text-decoration:none;
+      font:800 12px/1 Arial,sans-serif;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      transition:transform 140ms ease, box-shadow 140ms ease, border-color 140ms ease;
+    }
+    .button:hover{transform:translateY(-1px)}
+    .button:hover,
+    .button:focus-visible{
+      transform:translateY(-3px) scale(1.01);
+      box-shadow:0 14px 24px rgba(33,24,18,.18);
+    }
+    .button.primary{
+      background:linear-gradient(180deg,var(--accent-bright),var(--accent));
+      color:#fff8ee;
+      box-shadow:0 10px 22px rgba(33,24,18,.18);
+    }
+    .button.secondary{
+      border-color:rgba(255,255,255,.18);
+      background:rgba(255,255,255,.08);
+      color:#fff0df;
+    }
+    .button:disabled{
+      cursor:not-allowed;
+      opacity:.45;
+      transform:none;
+      box-shadow:none;
+    }
+    .section{
+      width:100%;
+      margin-top:18px;
+      padding:22px;
+      border:1px solid rgba(216,205,189,.9);
+      border-radius:var(--radius);
+      background:rgba(255,250,244,.96);
+      box-shadow:var(--shadow);
+    }
+    .section h2{
+      margin:0 0 10px;
+      color:var(--accent-deep);
+      font:800 24px/1.05 Arial,sans-serif;
+      text-transform:uppercase;
+      letter-spacing:.03em;
+    }
+    .section p{
+      margin:0;
+      color:var(--muted);
+      font-size:16px;
+      line-height:1.55;
+    }
+    .preview-stack{
+      display:grid;
+      gap:16px;
+      margin-top:18px;
+    }
+    .page-card{
+      border:1px solid rgba(216,205,189,.88);
+      border-radius:20px;
+      overflow:hidden;
+      background:rgba(255,247,239,.96);
+      box-shadow:var(--shadow);
+    }
+    .page-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:14px 16px;
+      border-bottom:1px solid rgba(216,205,189,.72);
+      background:rgba(255,119,32,.14);
+      font:800 12px/1 Arial,sans-serif;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color:#332710;
+    }
+    .page-body{
+      position:relative;
+      background:#fff;
+      overflow:hidden;
+    }
+    .page-art{
+      display:block;
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      object-position:center top;
+    }
+    .book-stage{
+      position:relative;
+      width:100%;
+      min-height:min(78vh,1080px);
+      overflow:hidden;
+      border-top:1px solid rgba(51,39,16,.30);
+      border-radius:0 0 20px 20px;
+      background:
+        linear-gradient(180deg, rgba(255,247,239,.98), rgba(255,241,230,.92)),
+        linear-gradient(90deg, rgba(255,119,32,.10), rgba(0,0,0,0) 8%, rgba(0,0,0,0) 50%, rgba(255,119,32,.10) 92%, rgba(255,119,32,.04));
+    }
+    .book-stage::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(90deg, rgba(0,0,0,.05), rgba(0,0,0,0) 6%, rgba(0,0,0,0) 48%, rgba(0,0,0,.07) 50%, rgba(0,0,0,0) 52%, rgba(0,0,0,0) 94%, rgba(0,0,0,.05)),
+        linear-gradient(180deg, transparent, rgba(255,255,255,.08) 32%, transparent 68%);
+      pointer-events:none;
+      z-index:1;
+    }
+    .book-page{
+      position:absolute;
+      inset:0;
+      width:100%;
+      display:grid;
+      grid-template-columns:1fr;
+      transition:opacity 240ms ease;
+      background:#fff8f0;
+      opacity:0;
+      pointer-events:none;
+      backface-visibility:hidden;
+      box-shadow:
+        0 18px 40px rgba(24,14,8,.16),
+        0 2px 0 rgba(255,255,255,.50) inset;
+      z-index:2;
+    }
+    .book-page.active{
+      opacity:1;
+      pointer-events:auto;
+      z-index:2;
+    }
+    .book-page.turning-left{
+      opacity:1;
+      z-index:3;
+    }
+    .book-page.turning-right{
+      opacity:1;
+      z-index:3;
+    }
+    .book-page .sheet-side{
+      width:100%;
+      display:grid;
+      grid-template-rows:auto 1fr;
+      min-height:min(78vh,1080px);
+      background:
+        linear-gradient(180deg, rgba(255,249,242,.98), rgba(255,243,234,.98)),
+        url("assets/logos/dark-brown-topo.jpg") center top / 820px auto repeat;
+    }
+    .book-page .page-head{
+      border-radius:0;
+      box-shadow:none;
+      background:rgba(255,119,32,.10);
+    }
+    .book-page .page-body{
+      min-height:calc(min(78vh,1080px) - 58px);
+      box-shadow:
+        inset 0 10px 16px rgba(255,255,255,.42),
+        inset 0 -10px 16px rgba(33,24,18,.03);
+      cursor:pointer;
+    }
+    .book-page[data-page="1"] .sheet-side:first-child .page-head{
+      background:linear-gradient(180deg, rgba(255,119,32,.98), rgba(198,93,18,.98));
+      color:#fff7ef;
+    }
+    .book-page[data-page="1"] .sheet-side:first-child .page-body{
+      background:linear-gradient(180deg, rgba(51,39,16,.10), rgba(255,250,244,.98));
+    }
+    .cover-agencies{
+      position:absolute;
+      left:50%;
+      top:30px;
+      transform:translateX(-50%);
+      width:min(1200px, calc(100% - 80px));
+      display:grid;
+      grid-template-columns:repeat(5, minmax(0,1fr));
+      gap:10px;
+      padding:10px 14px;
+      background:rgba(255,255,255,.76);
+      border:1px solid rgba(51,39,16,.14);
+      border-radius:16px;
+      box-shadow:0 10px 22px rgba(24,14,8,.10);
+      z-index:3;
+      pointer-events:none;
+    }
+    .cover-agencies img{
+      width:100%;
+      height:60px;
+      object-fit:contain;
+      object-position:center center;
+      filter:saturate(.95) contrast(.96);
+    }
+    .book-page[data-page="1"] .sheet-side:first-child .page-body::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background:
+        radial-gradient(circle at 50% 10%, rgba(255,255,255,.20), transparent 30%),
+        linear-gradient(180deg, rgba(51,39,16,.16), transparent 36%);
+      z-index:1;
+    }
+    .book-page[data-page="1"] .sheet-side:first-child .page-body{
+      position:relative;
+    }
+    .book-hotspot{
+      position:absolute;
+      top:0;
+      bottom:0;
+      width:50%;
+      z-index:6;
+      border:0;
+      background:transparent;
+      cursor:pointer;
+    }
+    .book-hotspot.prev{left:0}
+    .book-hotspot.next{right:0}
+    .book-hotspot:hover{
+      background:linear-gradient(90deg, rgba(255,255,255,.08), rgba(255,255,255,0));
+    }
+    .book-arrow{
+      position:absolute;
+      top:50%;
+      transform:translateY(-50%);
+      width:64px;
+      height:64px;
+      border-radius:999px;
+      border:1px solid rgba(255,119,32,.34);
+      background:linear-gradient(180deg, #3c2a19, #24180f);
+      color:#ff7720;
+      display:grid;
+      place-items:center;
+      font:900 34px/1 Arial,sans-serif;
+      pointer-events:none;
+      box-shadow:
+        0 12px 24px rgba(0,0,0,.28),
+        0 0 0 1px rgba(0,0,0,.18) inset;
+      z-index:7;
+    }
+    .book-arrow.left{left:12px}
+    .book-arrow.right{right:12px}
+    .two-up{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:14px;
+    }
+    .book-shell{
+      width:100%;
+      overflow:hidden;
+      border:1px solid rgba(216,205,189,.88);
+      border-radius:20px;
+      background:#fffdf8;
+      box-shadow:var(--shadow);
+    }
+    .note-card{
+      padding:16px;
+      border:1px solid rgba(216,205,189,.72);
+      border-radius:18px;
+      background:rgba(255,253,248,.96);
+    }
+    .note-card h3{
+      margin:0 0 8px;
+      font:800 13px/1 Arial,sans-serif;
+      color:var(--accent-deep);
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+    .note-card p{
+      margin:0;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.55;
+    }
+    .footer{
+      width:100%;
+      margin:18px 0 8px;
+      color:var(--muted);
+      font:600 12px/1.45 Arial,sans-serif;
+    }
+    body.embed .topbar,
+    body.embed .section:not(.embed-keep),
+    body.embed .footer{
+      display:none;
+    }
+    body.embed .shell{
+      padding:0;
+    }
+    body.embed{
+      background:rgba(51,39,16,.92);
+    }
+    body.embed .section.embed-keep{
+      margin:0;
+      padding:10px 6px 14px;
+      border:0;
+      border-radius:0;
+      background:transparent;
+      box-shadow:none;
+    }
+    body.embed .preview-stack{
+      margin-top:0;
+      gap:12px;
+    }
+    body.embed .book-stage{
+      border-top:0;
+      border-radius:0;
+      min-height:calc(100vh - 72px);
+      max-width:960px;
+      margin:0 auto;
+    }
+    body.embed .book-page,
+    body.embed .book-page .sheet-side,
+    body.embed .book-page .page-body{
+      min-height:calc(100vh - 72px);
+    }
+    body.embed .book-page{
+      width:min(960px, 100%);
+      left:50%;
+      transform:translateX(-50%);
+    }
+    body.embed .book-page .page-body{
+      min-height:calc(100vh - 130px);
+    }
+    body.embed .two-up{
+      display:none;
+    }
+    @media (max-width: 860px){
+      .two-up{grid-template-columns:1fr}
+      .book-stage{min-height:78vh}
+    }
+    @media (max-width: 700px){
+      .shell{padding:10px}
+      .topbar{border-radius:20px}
+      .actions{
+        width:100%;
+      }
+      .actions .button.secondary{
+        display:none;
+      }
+      .section{padding:18px}
+    }
+    .document-scroll{
+      display:grid;
+      gap:24px;
+      min-height:0;
+      overflow:visible;
+      padding:22px;
+      border-top:1px solid rgba(255,218,176,.22);
+      background:
+        linear-gradient(180deg, rgba(42,25,13,.94), rgba(24,14,8,.96)),
+        url("assets/logos/white-topo.jpg") center top / 820px auto repeat;
+      background-blend-mode:multiply;
+      background-attachment:fixed;
+    }
+    .document-scroll::before,
+    .document-scroll .book-hotspot,
+    .document-scroll .book-arrow{
+      display:none;
+    }
+    .document-scroll .book-page{
+      position:static;
+      display:grid;
+      grid-template-columns:1fr;
+      width:min(100%, 960px);
+      margin:0 auto;
+      opacity:1 !important;
+      pointer-events:auto;
+      transform:none;
+      transition:none;
+      background:transparent;
+      box-shadow:none;
+    }
+    .document-scroll .book-page.active,
+    .document-scroll .book-page.turning-left,
+    .document-scroll .book-page.turning-right{
+      opacity:1 !important;
+      z-index:2;
+    }
+    .document-scroll .sheet-side{
+      display:grid;
+      width:100%;
+      min-height:0;
+      overflow:hidden;
+      scroll-margin-top:220px;
+      border:1px solid rgba(255,230,202,.36);
+      border-radius:16px;
+      background:#fffaf4;
+      box-shadow:0 20px 46px rgba(0,0,0,.34);
+    }
+    .document-scroll .sheet-side + .sheet-side{
+      margin-top:24px;
+      border-left:1px solid rgba(255,230,202,.36);
+      border-top:1px solid rgba(255,230,202,.36);
+      box-shadow:0 20px 46px rgba(0,0,0,.34);
+    }
+    .document-scroll .page-head{
+      background:linear-gradient(180deg, rgba(112,67,31,.98), rgba(74,42,21,.98));
+      color:#fff0df;
+    }
+    .document-scroll .page-body{
+      min-height:0;
+      overflow:visible;
+      cursor:default;
+      background:#fff;
+    }
+    .document-scroll .page-art{
+      display:block;
+      width:100%;
+      height:auto;
+      object-fit:contain;
+    }
+    body.embed{
+      background:
+        linear-gradient(rgba(31,19,10,.92), rgba(31,19,10,.96)),
+        url("assets/logos/white-topo.jpg") center top / 820px auto repeat;
+      background-blend-mode:multiply;
+    }
+    body.embed .document-scroll{
+      border-radius:0;
+      padding:18px;
+    }
+    body.embed .document-scroll .book-page,
+    body.embed .document-scroll .sheet-side,
+    body.embed .document-scroll .page-body{
+      min-height:0;
+      width:min(100%, 960px);
+      left:auto;
+      transform:none;
+    }
+    @media (max-width: 700px){
+      .document-scroll{
+        gap:16px;
+        padding:12px;
+      }
+      .document-scroll .book-page{
+        grid-template-columns:1fr 1fr;
+      }
+      .document-scroll .sheet-side + .sheet-side{
+        margin-top:16px;
+      }
+    }
+    .audio-guide{
+      position:sticky;
+      top:0;
+      z-index:12;
+      display:grid;
+      gap:12px;
+      padding:16px;
+      border:1px solid rgba(255,218,176,.34);
+      border-radius:18px;
+      background:
+        linear-gradient(180deg, rgba(55,32,16,.96), rgba(29,18,10,.97)),
+        url("assets/logos/white-topo.jpg") center top / 760px auto repeat;
+      background-blend-mode:multiply;
+      box-shadow:0 18px 36px rgba(0,0,0,.30);
+      color:#fff0df;
+    }
+    .audio-top{
+      display:flex;
+      gap:10px;
+      justify-content:space-between;
+      align-items:center;
+    }
+    .audio-title{
+      display:grid;
+      gap:4px;
+    }
+    .sr-only{
+      position:absolute;
+      width:1px;
+      height:1px;
+      padding:0;
+      margin:-1px;
+      overflow:hidden;
+      clip:rect(0, 0, 0, 0);
+      white-space:nowrap;
+      border:0;
+    }
+    .audio-title strong{
+      font:900 13px/1 Arial,sans-serif;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color:#ffe2c2;
+    }
+    .audio-title span{
+      font:700 12px/1.35 Arial,sans-serif;
+      color:rgba(255,240,223,.82);
+    }
+    .audio-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      align-items:center;
+    }
+    .audio-actions .button{
+      min-height:34px;
+      padding:0 12px;
+      font-size:12px;
+    }
+    .home-link{
+      padding:0;
+      min-height:auto;
+      border:0;
+      background:transparent;
+      box-shadow:none;
+      padding-inline:4px;
+    }
+    .home-link:hover,
+    .home-link:focus-visible{
+      transform:translateY(-3px) scale(1.02);
+      box-shadow:
+        0 0 0 3px rgba(63,34,13,.72) inset,
+        0 14px 24px rgba(0,0,0,.24);
+    }
+    .home-link img{
+      display:block;
+      height:54px;
+      width:auto;
+      max-width:100%;
+    }
+    .audio-guide audio{
+      width:100%;
+      height:42px;
+      color-scheme:dark;
+    }
+    .follow-toggle{
+      min-height:34px;
+      padding:0 10px;
+      font-size:11px;
+    }
+    .document-scroll .sheet-side.audio-active{
+      outline:4px solid rgba(255,119,32,.78);
+      box-shadow:
+        0 0 0 7px rgba(255,196,132,.16),
+        0 24px 54px rgba(0,0,0,.42);
+    }
+    body.embed .audio-guide{
+      top:0;
+      border-radius:0;
+      margin-bottom:0;
+    }
+    body.embed .audio-guide + .preview-stack{
+      margin-top:0;
+    }
+    @media (max-width: 700px){
+      .audio-guide{
+        padding:12px;
+      }
+      .audio-top{
+        justify-items:stretch;
+      }
+      .audio-actions{
+        width:100%;
+      }
+      .follow-toggle{
+        width:100%;
+      }
+      .book-stage{
+        min-height:auto;
+        border-radius:16px;
+      }
+      .book-page{
+        grid-template-columns:1fr;
+      }
+      .sheet-side + .sheet-side{
+        display:none;
+      }
+      .book-arrow,
+      .book-hotspot{
+        display:none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="section embed-keep">
+      <div class="audio-guide" aria-label="Audio guided reading">
+        <div class="audio-top">
+          <div class="audio-title">
+            <strong>Guided Audio Reading</strong>
+            <span id="currentChapter" class="sr-only" aria-live="polite">Page 1 - Introduction</span>
+          </div>
+          <div class="audio-actions">
+            <a class="button primary" href="https://drive.google.com/uc?export=download&id=18fHtcDO4hu5IMwyJX3eJC5rAJrJm6dc6" target="_blank" rel="noopener noreferrer">Download PDF</a>
+            <a class="button secondary" href="https://drive.google.com/file/d/18fHtcDO4hu5IMwyJX3eJC5rAJrJm6dc6/view?usp=sharing" target="_blank" rel="noopener noreferrer">View PDF</a>
+            <a class="button secondary home-link" href="https://www.wildeyez.net" target="_blank" rel="noopener noreferrer" aria-label="Wild Eyez Home">
+              <img src="assets/logos/WILD EYEZ HOME BUTTON.png" alt="" aria-hidden="true">
+            </a>
+          </div>
+        </div>
+        <audio id="guideAudio" controls preload="metadata" src="assets/audio/WILD EYEZ PACKING AND PREPARATION GUIDE AUDIO.mp3"></audio>
+      </div>
+      <div class="preview-stack">
+        <div class="book-stage document-scroll" aria-label="Scrollable packing list preview">
+          <button class="book-hotspot prev" id="prevHotspot" type="button" aria-label="Previous pages"></button>
+          <button class="book-hotspot next" id="nextHotspot" type="button" aria-label="Next pages"></button>
+          <div class="book-arrow left" aria-hidden="true">‹</div>
+          <div class="book-arrow right" aria-hidden="true">›</div>
+          <div class="book-page active" data-page="1">
+            <section class="sheet-side">
+              <div class="page-head">
+                <span>Page 1</span>
+                <span>Introduction</span>
+              </div>
+              <div class="page-body">
+                <img class="page-art" alt="Wild Eyez PDF page 1" src="assets/pages/WILD EYEZ PACKING AND PREPARATION GUIDE_Page_1.jpg">
+              </div>
+            </section>
+          </div>
+          <div class="book-page" data-page="2">
+            <section class="sheet-side">
+              <div class="page-head">
+                <span>Page 2</span>
+                <span>Welcome</span>
+              </div>
+              <div class="page-body">
+                <img class="page-art" alt="Wild Eyez PDF page 2" src="assets/pages/WILD EYEZ PACKING AND PREPARATION GUIDE_Page_2.jpg">
+              </div>
+            </section>
+          </div>
+          <div class="book-page" data-page="3">
+            <section class="sheet-side">
+              <div class="page-head">
+                <span>Page 3</span>
+                <span>What to expect and how to use this guide</span>
+              </div>
+              <div class="page-body">
+                <img class="page-art" alt="Wild Eyez PDF page 3" src="assets/pages/WILD EYEZ PACKING AND PREPARATION GUIDE_Page_3.jpg">
+              </div>
+            </section>
+          </div>
+          <div class="book-page" data-page="4">
+            <section class="sheet-side">
+              <div class="page-head">
+                <span>Page 4</span>
+                <span>Clothing and footwear</span>
+              </div>
+              <div class="page-body">
+                <img class="page-art" alt="Wild Eyez PDF page 4" src="assets/pages/WILD EYEZ PACKING AND PREPARATION GUIDE_Page_4.jpg">
+              </div>
+            </section>
+          </div>
+          <div class="book-page" data-page="5">
+            <section class="sheet-side">
+              <div class="page-head">
+                <span>Page 5</span>
+                <span>Field gear and preparation checklist</span>
+              </div>
+              <div class="page-body">
+                <img class="page-art" alt="Wild Eyez PDF page 5" src="assets/pages/WILD EYEZ PACKING AND PREPARATION GUIDE_Page_5.jpg">
+              </div>
+            </section>
+          </div>
+          <div class="book-page" data-page="6">
+            <section class="sheet-side">
+              <div class="page-head">
+                <span>Page 6</span>
+                <span>Firearms, ammunition, and safety</span>
+              </div>
+              <div class="page-body">
+                <img class="page-art" alt="Wild Eyez PDF page 6" src="assets/pages/WILD EYEZ PACKING AND PREPARATION GUIDE_Page_6.jpg">
+              </div>
+            </section>
+          </div>
+          <div class="book-page" data-page="7">
+            <section class="sheet-side">
+              <div class="page-head">
+                <span>Page 7</span>
+                <span>Preseason preparation and wounded game</span>
+              </div>
+              <div class="page-body">
+                <img class="page-art" alt="Wild Eyez PDF page 7" src="assets/pages/WILD EYEZ PACKING AND PREPARATION GUIDE_Page_7.jpg">
+              </div>
+            </section>
+          </div>
+          <div class="book-page" data-page="8">
+            <section class="sheet-side">
+              <div class="page-head">
+                <span>Page 8</span>
+                <span>Closing notes</span>
+              </div>
+              <div class="page-body">
+                <img class="page-art" alt="Wild Eyez PDF page 8" src="assets/pages/WILD EYEZ PACKING AND PREPARATION GUIDE_Page_8.jpg">
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script>
+    (() => {
+      const embedMode = new URLSearchParams(window.location.search).has("embed");
+      document.body.classList.toggle("embed", embedMode);
+
+      const audio = document.getElementById("guideAudio");
+      const currentChapter = document.getElementById("currentChapter");
+      const header = document.querySelector(".topbar");
+      const audioGuide = document.querySelector(".audio-guide");
+      const sheets = Array.from(document.querySelectorAll(".document-scroll .sheet-side"));
+      const chapters = [
+        { title: "Page 1 - Introduction", time: 0, page: 0 },
+        { title: "Page 1 - Mid Page", time: 5, page: 0 },
+        { title: "Page 1 - How To Use This Guide", time: 12, page: 0 },
+        { title: "Page 2 - Welcome", time: 62, page: 1 },
+        { title: "Page 2 - Safety First", time: 128, page: 1 },
+        { title: "Page 3 - What To Expect", time: 168, page: 2 },
+        { title: "Page 3 - Mid Page", time: 228, page: 2 },
+        { title: "Page 4 - Clothing & Footwear", time: 250, page: 3 },
+        { title: "Page 4 - Foot Care", time: 310, page: 3 },
+        { title: "Page 5 - Field Gear", time: 330, page: 4 },
+        { title: "Page 5 - Preparation Checklist", time: 360, page: 4 },
+        { title: "Page 6 - Firearms & Ammunition", time: 380, page: 5 },
+        { title: "Page 6 - Ammunition Preference", time: 435, page: 5 },
+        { title: "Page 6 - Chambering Standard", time: 455, page: 5 },
+        { title: "Page 7 - Preseason Preparation", time: 480, page: 6 },
+        { title: "Page 7 - Preparation Checklist", time: 520, page: 6 },
+        { title: "Page 8 - Final Reminders", time: 615, page: 7 },
+        { title: "Page 8 - Closing Notes", time: 678, page: 7 }
+      ];
+      let activeIndex = -1;
+      const followAudio = true;
+      let desiredScrollTop = 0;
+      let scrollLoopActive = false;
+      let scrollFrame = 0;
+
+      function pageTop(pageIndex) {
+        const sheet = sheets[pageIndex];
+        if (!sheet) return window.scrollY;
+        const headerHeight = header?.getBoundingClientRect().height || 0;
+        const audioHeight = audioGuide?.getBoundingClientRect().height || 0;
+        const offset = Math.max(120, headerHeight + audioHeight + 18);
+        return Math.max(0, window.scrollY + sheet.getBoundingClientRect().top - offset);
+      }
+
+      function scrollToSheet(index, immediate = false) {
+        const sheet = sheets[index];
+        if (!sheet) return;
+        desiredScrollTop = pageTop(index);
+        if (immediate) {
+          window.scrollTo({ top: desiredScrollTop, behavior: "auto" });
+        }
+      }
+
+      function setActiveChapter(index, shouldScroll, smooth = true) {
+        if (index < 0 || index >= chapters.length) return;
+        activeIndex = index;
+        const chapter = chapters[index];
+        if (currentChapter) currentChapter.textContent = chapter.title;
+        sheets.forEach((sheet, sheetIndex) => {
+          sheet.classList.toggle("audio-active", sheetIndex === chapter.page);
+        });
+        if (shouldScroll && followAudio) {
+          scrollToSheet(chapter.page, !smooth);
+        }
+      }
+
+      function chapterForTime(time) {
+        let index = 0;
+        chapters.forEach((chapter, chapterIndex) => {
+          if (time >= chapter.time) index = chapterIndex;
+        });
+        return index;
+      }
+
+      function targetForTime(time) {
+        if (!audio || !audio.duration || !chapters.length) return pageTop(0);
+        if (time <= chapters[0].time) return pageTop(chapters[0].page);
+        for (let i = 0; i < chapters.length - 1; i += 1) {
+          const a = chapters[i];
+          const b = chapters[i + 1];
+          if (time >= a.time && time < b.time) {
+            const span = Math.max(0.001, b.time - a.time);
+            const t = (time - a.time) / span;
+            const aTop = pageTop(a.page);
+            const bTop = pageTop(b.page);
+            return aTop + (bTop - aTop) * t;
+          }
+        }
+        return pageTop(chapters[chapters.length - 1].page);
+      }
+
+      function startScrollLoop() {
+        if (scrollLoopActive) return;
+        scrollLoopActive = true;
+        const tick = () => {
+          if (!followAudio || !audio || audio.paused) {
+            scrollLoopActive = false;
+            return;
+          }
+          const target = targetForTime(audio.currentTime);
+          desiredScrollTop = target;
+          const current = window.scrollY;
+          const delta = desiredScrollTop - current;
+          const next = current + delta * 0.12;
+          window.scrollTo({ top: next, behavior: "auto" });
+          scrollFrame = requestAnimationFrame(tick);
+        };
+        scrollFrame = requestAnimationFrame(tick);
+      }
+
+      function syncFromAudio() {
+        if (!audio) return;
+        if (audio.currentTime <= 0.15) {
+          scrollToSheet(0, true);
+        }
+        const nextIndex = chapterForTime(audio.currentTime);
+        if (nextIndex !== activeIndex) {
+          setActiveChapter(nextIndex, false, true);
+        } else if (followAudio && currentChapter) {
+          currentChapter.textContent = chapters[nextIndex].title;
+        }
+        startScrollLoop();
+      }
+
+      audio?.addEventListener("timeupdate", syncFromAudio);
+      audio?.addEventListener("loadedmetadata", syncFromAudio);
+      audio?.addEventListener("seeked", syncFromAudio);
+      audio?.addEventListener("play", syncFromAudio);
+      audio?.addEventListener("pause", () => {
+        if (scrollFrame) cancelAnimationFrame(scrollFrame);
+        scrollLoopActive = false;
+      });
+      audio?.addEventListener("ended", syncFromAudio);
+
+      setActiveChapter(0, false);
+    })();
+  </script>
+</body>
+</html>
