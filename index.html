@@ -758,12 +758,13 @@
       const sheets = Array.from(document.querySelectorAll(".document-scroll .sheet-side"));
       const chapters = [
         { title: "Page 1 - Introduction", time: 0, page: 0 },
-        { title: "Page 1 - How To Use This Guide", time: 7, page: 0 },
-        { title: "Page 2 - Welcome", time: 50, page: 1 },
-        { title: "Page 2 - Safety First", time: 115, page: 1 },
-        { title: "Page 3 - What To Expect", time: 155, page: 2 },
-        { title: "Page 3 - Mid Page", time: 215, page: 2 },
-        { title: "Page 4 - Clothing & Footwear", time: 235, page: 3 },
+        { title: "Page 1 - Mid Page", time: 5, page: 0 },
+        { title: "Page 1 - How To Use This Guide", time: 12, page: 0 },
+        { title: "Page 2 - Welcome", time: 62, page: 1 },
+        { title: "Page 2 - Safety First", time: 128, page: 1 },
+        { title: "Page 3 - What To Expect", time: 168, page: 2 },
+        { title: "Page 3 - Mid Page", time: 228, page: 2 },
+        { title: "Page 4 - Clothing & Footwear", time: 250, page: 3 },
         { title: "Page 4 - Foot Care", time: 310, page: 3 },
         { title: "Page 5 - Field Gear", time: 330, page: 4 },
         { title: "Page 5 - Preparation Checklist", time: 360, page: 4 },
@@ -781,11 +782,23 @@
       function scrollToSheet(index, smooth = true) {
         const sheet = sheets[index];
         if (!sheet) return;
-        const headerHeight = header?.getBoundingClientRect().height || 0;
-        const audioHeight = audioGuide?.getBoundingClientRect().height || 0;
-        const offset = Math.max(120, headerHeight + audioHeight + 18);
-        const top = Math.max(0, window.scrollY + sheet.getBoundingClientRect().top - offset);
-        window.scrollTo({ top, behavior: smooth ? "smooth" : "auto" });
+        const targetTop = Math.max(0, window.scrollY + sheet.getBoundingClientRect().top - 220);
+        if (!smooth) {
+          window.scrollTo({ top: targetTop, behavior: "auto" });
+          return;
+        }
+        const startTop = window.scrollY;
+        const distance = targetTop - startTop;
+        const duration = Math.min(1200, Math.max(650, Math.abs(distance) * 0.65));
+        const start = performance.now();
+        const easeInOutCubic = (t) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+        const step = (now) => {
+          const progress = Math.min(1, (now - start) / duration);
+          const eased = easeInOutCubic(progress);
+          window.scrollTo({ top: startTop + distance * eased, behavior: "auto" });
+          if (progress < 1) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
       }
 
       function setActiveChapter(index, shouldScroll, smooth = true) {
@@ -813,7 +826,7 @@
         if (!audio) return;
         const nextIndex = chapterForTime(audio.currentTime);
         if (nextIndex !== activeIndex) {
-          setActiveChapter(nextIndex, true, false);
+          setActiveChapter(nextIndex, true, true);
         } else if (followAudio && currentChapter) {
           currentChapter.textContent = chapters[nextIndex].title;
         }
