@@ -66,6 +66,11 @@
       transition:transform 140ms ease, box-shadow 140ms ease, border-color 140ms ease;
     }
     .button:hover{transform:translateY(-1px)}
+    .button:hover,
+    .button:focus-visible{
+      transform:translateY(-3px) scale(1.01);
+      box-shadow:0 14px 24px rgba(33,24,18,.18);
+    }
     .button.primary{
       background:linear-gradient(180deg,var(--accent-bright),var(--accent));
       color:#fff8ee;
@@ -555,15 +560,18 @@
       border:0;
       background:transparent;
       box-shadow:none;
+      padding-inline:4px;
     }
     .home-link:hover,
     .home-link:focus-visible{
-      transform:translateY(-1px);
-      box-shadow:none;
+      transform:translateY(-3px) scale(1.02);
+      box-shadow:
+        0 0 0 3px rgba(63,34,13,.72) inset,
+        0 14px 24px rgba(0,0,0,.24);
     }
     .home-link img{
       display:block;
-      height:44px;
+      height:54px;
       width:auto;
       max-width:100%;
     }
