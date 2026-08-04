@@ -239,8 +239,9 @@
       let following = false;
       let raf = 0;
       let introHoldTimer = 0;
-      let introHoldDone = false;
-      let startScrollTop = 0;
+      let phase = "intro";
+      let introTargetTop = 0;
+      let slowStartTop = 0;
       let endScrollTop = 0;
 
       function pageTop(page){
@@ -250,11 +251,11 @@
 
       function measureScrollRange(){
         const first = pages[0];
-        const second = pages[1] || first;
         const firstTop = pageTop(first);
-        const secondTop = pageTop(second);
+        const firstHeight = first?.getBoundingClientRect().height || 0;
         const docMax = Math.max(0, document.documentElement.scrollHeight - window.innerHeight - 20);
-        startScrollTop = Math.min(docMax, firstTop + (secondTop - firstTop) * 0.55);
+        introTargetTop = Math.max(0, firstTop + firstHeight - window.innerHeight - 10);
+        slowStartTop = introTargetTop;
         endScrollTop = docMax;
       }
 
@@ -280,17 +281,27 @@
           following = false;
           return;
         }
-        const idx = pageForTime(audio.currentTime);
-        updateActive(idx);
-        const desired = Math.min(endScrollTop, startScrollTop + (audio.currentTime * 7.5));
         const current = window.scrollY;
-        const next = current + (desired - current) * 0.025;
-        window.scrollTo({ top: next, behavior: "auto" });
+        if (phase === "intro") {
+          const next = current + (introTargetTop - current) * 0.12;
+          window.scrollTo({ top: next, behavior: "auto" });
+          if (Math.abs(introTargetTop - next) < 3) {
+            phase = "wait";
+            following = false;
+            return;
+          }
+        } else if (phase === "slow") {
+          const idx = pageForTime(audio.currentTime);
+          updateActive(idx);
+          const desired = Math.min(endScrollTop, slowStartTop + ((audio.currentTime - 45) * 7.5));
+          const next = current + (desired - current) * 0.025;
+          window.scrollTo({ top: next, behavior: "auto" });
+        }
         raf = requestAnimationFrame(scrollLoop);
       }
 
       function kickstart(){
-        if (following || !introHoldDone) return;
+        if (following) return;
         following = true;
         raf = requestAnimationFrame(scrollLoop);
       }
@@ -309,30 +320,39 @@
         updateActive(0);
         window.scrollTo({ top: pageTop(pages[0]), behavior: "auto" });
         if (introHoldTimer) clearTimeout(introHoldTimer);
-        introHoldDone = false;
+        phase = "intro";
         introHoldTimer = window.setTimeout(() => {
-          introHoldDone = true;
-          window.scrollTo({ top: startScrollTop, behavior: "auto" });
-          kickstart();
           attemptAutoplay();
+          kickstart();
         }, 5000);
       });
       audio.addEventListener("play", () => {
         measureScrollRange();
         updateActive(pageForTime(audio.currentTime));
         if (introHoldTimer) clearTimeout(introHoldTimer);
-        introHoldDone = true;
-        window.scrollTo({ top: startScrollTop, behavior: "auto" });
+        phase = audio.currentTime >= 45 ? "slow" : "intro";
+        if (phase === "slow") {
+          window.scrollTo({ top: slowStartTop, behavior: "auto" });
+        }
         kickstart();
       });
       audio.addEventListener("timeupdate", () => {
         updateActive(pageForTime(audio.currentTime));
+        if (phase === "wait" && audio.currentTime >= 45) {
+          phase = "slow";
+          window.scrollTo({ top: slowStartTop, behavior: "auto" });
+          kickstart();
+        }
         kickstart();
       });
       audio.addEventListener("seeked", () => {
         measureScrollRange();
         updateActive(pageForTime(audio.currentTime));
-        window.scrollTo({ top: startScrollTop, behavior: "auto" });
+        phase = audio.currentTime >= 45 ? "slow" : (audio.currentTime > 0 ? "wait" : "intro");
+        window.scrollTo({
+          top: phase === "slow" ? slowStartTop : (phase === "wait" ? introTargetTop : pageTop(pages[0])),
+          behavior: "auto"
+        });
       });
       audio.addEventListener("pause", () => {
         if (raf) cancelAnimationFrame(raf);
