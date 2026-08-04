@@ -778,27 +778,26 @@
       ];
       let activeIndex = -1;
       const followAudio = true;
+      let desiredScrollTop = 0;
+      let scrollLoopActive = false;
+      let scrollFrame = 0;
 
-      function scrollToSheet(index, smooth = true) {
+      function pageTop(pageIndex) {
+        const sheet = sheets[pageIndex];
+        if (!sheet) return window.scrollY;
+        const headerHeight = header?.getBoundingClientRect().height || 0;
+        const audioHeight = audioGuide?.getBoundingClientRect().height || 0;
+        const offset = Math.max(120, headerHeight + audioHeight + 18);
+        return Math.max(0, window.scrollY + sheet.getBoundingClientRect().top - offset);
+      }
+
+      function scrollToSheet(index, immediate = false) {
         const sheet = sheets[index];
         if (!sheet) return;
-        const targetTop = Math.max(0, window.scrollY + sheet.getBoundingClientRect().top - 220);
-        if (!smooth) {
-          window.scrollTo({ top: targetTop, behavior: "auto" });
-          return;
+        desiredScrollTop = pageTop(index);
+        if (immediate) {
+          window.scrollTo({ top: desiredScrollTop, behavior: "auto" });
         }
-        const startTop = window.scrollY;
-        const distance = targetTop - startTop;
-        const duration = Math.min(1200, Math.max(650, Math.abs(distance) * 0.65));
-        const start = performance.now();
-        const easeInOutCubic = (t) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-        const step = (now) => {
-          const progress = Math.min(1, (now - start) / duration);
-          const eased = easeInOutCubic(progress);
-          window.scrollTo({ top: startTop + distance * eased, behavior: "auto" });
-          if (progress < 1) requestAnimationFrame(step);
-        };
-        requestAnimationFrame(step);
       }
 
       function setActiveChapter(index, shouldScroll, smooth = true) {
@@ -810,7 +809,7 @@
           sheet.classList.toggle("audio-active", sheetIndex === chapter.page);
         });
         if (shouldScroll && followAudio) {
-          scrollToSheet(chapter.page, smooth);
+          scrollToSheet(chapter.page, !smooth);
         }
       }
 
@@ -822,20 +821,64 @@
         return index;
       }
 
+      function targetForTime(time) {
+        if (!audio || !audio.duration || !chapters.length) return pageTop(0);
+        if (time <= chapters[0].time) return pageTop(chapters[0].page);
+        for (let i = 0; i < chapters.length - 1; i += 1) {
+          const a = chapters[i];
+          const b = chapters[i + 1];
+          if (time >= a.time && time < b.time) {
+            const span = Math.max(0.001, b.time - a.time);
+            const t = (time - a.time) / span;
+            const aTop = pageTop(a.page);
+            const bTop = pageTop(b.page);
+            return aTop + (bTop - aTop) * t;
+          }
+        }
+        return pageTop(chapters[chapters.length - 1].page);
+      }
+
+      function startScrollLoop() {
+        if (scrollLoopActive) return;
+        scrollLoopActive = true;
+        const tick = () => {
+          if (!followAudio || !audio || audio.paused) {
+            scrollLoopActive = false;
+            return;
+          }
+          const target = targetForTime(audio.currentTime);
+          desiredScrollTop = target;
+          const current = window.scrollY;
+          const delta = desiredScrollTop - current;
+          const next = current + delta * 0.12;
+          window.scrollTo({ top: next, behavior: "auto" });
+          scrollFrame = requestAnimationFrame(tick);
+        };
+        scrollFrame = requestAnimationFrame(tick);
+      }
+
       function syncFromAudio() {
         if (!audio) return;
+        if (audio.currentTime <= 0.15) {
+          scrollToSheet(0, true);
+        }
         const nextIndex = chapterForTime(audio.currentTime);
         if (nextIndex !== activeIndex) {
-          setActiveChapter(nextIndex, true, true);
+          setActiveChapter(nextIndex, false, true);
         } else if (followAudio && currentChapter) {
           currentChapter.textContent = chapters[nextIndex].title;
         }
+        startScrollLoop();
       }
 
       audio?.addEventListener("timeupdate", syncFromAudio);
       audio?.addEventListener("loadedmetadata", syncFromAudio);
       audio?.addEventListener("seeked", syncFromAudio);
       audio?.addEventListener("play", syncFromAudio);
+      audio?.addEventListener("pause", () => {
+        if (scrollFrame) cancelAnimationFrame(scrollFrame);
+        scrollLoopActive = false;
+      });
       audio?.addEventListener("ended", syncFromAudio);
 
       setActiveChapter(0, false);
