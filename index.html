@@ -67,6 +67,18 @@
       height:42px;
       color-scheme:dark;
     }
+    .prompt{
+      display:none;
+      margin-top:8px;
+      padding:10px 12px;
+      border-radius:14px;
+      background:rgba(255,255,255,.1);
+      border:1px solid rgba(255,255,255,.16);
+      color:#fff4e6;
+      font:700 12px/1.35 Arial,sans-serif;
+      letter-spacing:.04em;
+    }
+    .prompt.show{display:block}
     .btn{
       display:inline-flex;
       align-items:center;
@@ -174,6 +186,7 @@
     <div class="player">
       <audio id="guideAudio" controls preload="metadata" src="assets/audio/WILD EYEZ PACKING AND PREPARATION GUIDE AUDIO.mp3"></audio>
     </div>
+    <div class="prompt" id="audioPrompt">Press play or wait for autoplay.</div>
   </header>
 
   <main class="wrap" id="pages">
@@ -235,6 +248,7 @@
       const pages = Array.from(document.querySelectorAll(".page"));
       const title = document.querySelector(".title");
       const bar = document.querySelector(".bar");
+      const prompt = document.getElementById("audioPrompt");
       let active = -1;
       let following = false;
       let raf = 0;
@@ -318,10 +332,19 @@
         }
       }
 
+      function showPrompt(){
+        prompt?.classList.add("show");
+      }
+
+      function hidePrompt(){
+        prompt?.classList.remove("show");
+      }
+
       audio.addEventListener("loadedmetadata", () => {
         measureScrollRange();
         updateActive(0);
         window.scrollTo({ top: pageTop(pages[0]), behavior: "auto" });
+        showPrompt();
         if (introHoldTimer) clearTimeout(introHoldTimer);
         phase = "intro";
         introHoldTimer = window.setTimeout(() => {
@@ -333,6 +356,7 @@
         measureScrollRange();
         updateActive(pageForTime(audio.currentTime));
         if (introHoldTimer) clearTimeout(introHoldTimer);
+        hidePrompt();
         phase = audio.currentTime > 0 ? "wait" : "intro";
         window.scrollTo({ top: introTargetTop, behavior: "auto" });
         kickstart();
