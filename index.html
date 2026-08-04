@@ -271,7 +271,7 @@
         const firstHeight = first?.getBoundingClientRect().height || 0;
         const docMax = Math.max(0, document.documentElement.scrollHeight - window.innerHeight - 20);
         initialHoldTop = Math.max(0, firstTop);
-        introTargetTop = Math.max(0, firstTop + 96);
+        introTargetTop = Math.max(0, firstTop + firstHeight - window.innerHeight - 10);
         slowStartTop = introTargetTop;
         endScrollTop = docMax;
         const crawlSeconds = Math.max(1, (Number.isFinite(audio.duration) ? audio.duration : 0) - 20);
