@@ -333,10 +333,8 @@
         measureScrollRange();
         updateActive(pageForTime(audio.currentTime));
         if (introHoldTimer) clearTimeout(introHoldTimer);
-        phase = audio.currentTime >= 20 ? "slow" : "intro";
-        if (phase === "slow") {
-          window.scrollTo({ top: slowStartTop, behavior: "auto" });
-        }
+        phase = audio.currentTime > 0 ? "wait" : "intro";
+        window.scrollTo({ top: introTargetTop, behavior: "auto" });
         kickstart();
       });
       audio.addEventListener("timeupdate", () => {
@@ -351,9 +349,9 @@
       audio.addEventListener("seeked", () => {
         measureScrollRange();
         updateActive(pageForTime(audio.currentTime));
-        phase = audio.currentTime >= 20 ? "slow" : (audio.currentTime > 0 ? "wait" : "intro");
+        phase = audio.currentTime > 0 ? "wait" : "intro";
         window.scrollTo({
-          top: phase === "slow" ? slowStartTop : (phase === "wait" ? introTargetTop : pageTop(pages[0])),
+          top: phase === "wait" ? introTargetTop : pageTop(pages[0]),
           behavior: "auto"
         });
       });
