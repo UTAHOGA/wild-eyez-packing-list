@@ -38,23 +38,7 @@
       padding:16px 12px 24px;
     }
     .topbar{
-      position:sticky;
-      top:0;
-      z-index:20;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:14px;
-      margin-bottom:18px;
-      padding:14px 16px;
-      border:1px solid rgba(216,205,189,.92);
-      border-radius:var(--radius);
-      background:
-        linear-gradient(180deg, rgba(42,25,13,.96), rgba(25,15,8,.97)),
-        url("assets/logos/dark-brown-topo.jpg") center top / 760px auto repeat;
-      background-blend-mode:multiply;
-      backdrop-filter:blur(12px);
-      box-shadow:var(--shadow);
+      display:none;
     }
     .topbar strong{
       font:800 13px/1 Arial,sans-serif;
@@ -183,7 +167,7 @@
       inset:0;
       width:100%;
       display:grid;
-      grid-template-columns:1fr 1fr;
+      grid-template-columns:1fr;
       transition:opacity 240ms ease;
       background:#fff8f0;
       opacity:0;
@@ -215,12 +199,6 @@
       background:
         linear-gradient(180deg, rgba(255,249,242,.98), rgba(255,243,234,.98)),
         url("assets/logos/dark-brown-topo.jpg") center top / 820px auto repeat;
-    }
-    .book-page .sheet-side + .sheet-side{
-      border-left:1px solid rgba(51,39,16,.14);
-      box-shadow:
-        -6px 0 14px rgba(24,14,8,.08),
-        inset 0 1px 0 rgba(255,255,255,.8);
     }
     .book-page .page-head{
       border-radius:0;
@@ -515,7 +493,7 @@
     }
     .audio-guide{
       position:sticky;
-      top:82px;
+      top:0;
       z-index:12;
       display:grid;
       gap:12px;
@@ -572,21 +550,22 @@
       font-size:12px;
     }
     .home-link{
-      background:
-        linear-gradient(180deg, rgba(255,126,33,.98), rgba(219,93,14,.98));
-      border-color:rgba(255,190,126,.92);
-      color:#fff7ef;
-      text-transform:uppercase;
-      letter-spacing:.12em;
-      font-weight:900;
-      box-shadow:
-        0 0 0 3px rgba(63,34,13,.72) inset,
-        0 10px 18px rgba(0,0,0,.22);
+      padding:0;
+      min-height:auto;
+      border:0;
+      background:transparent;
+      box-shadow:none;
     }
     .home-link:hover,
     .home-link:focus-visible{
-      color:#fffdf8;
       transform:translateY(-1px);
+      box-shadow:none;
+    }
+    .home-link img{
+      display:block;
+      height:44px;
+      width:auto;
+      max-width:100%;
     }
     .audio-guide audio{
       width:100%;
@@ -614,7 +593,6 @@
     }
     @media (max-width: 700px){
       .audio-guide{
-        top:76px;
         padding:12px;
       }
       .audio-top{
@@ -655,7 +633,9 @@
           <div class="audio-actions">
             <a class="button primary" href="https://drive.google.com/uc?export=download&id=18fHtcDO4hu5IMwyJX3eJC5rAJrJm6dc6" target="_blank" rel="noopener noreferrer">Download PDF</a>
             <a class="button secondary" href="https://drive.google.com/file/d/18fHtcDO4hu5IMwyJX3eJC5rAJrJm6dc6/view?usp=sharing" target="_blank" rel="noopener noreferrer">View PDF</a>
-            <a class="button secondary home-link" href="https://www.wildeyez.net" target="_blank" rel="noopener noreferrer">Wild Eyez Home</a>
+            <a class="button secondary home-link" href="https://www.wildeyez.net" target="_blank" rel="noopener noreferrer" aria-label="Wild Eyez Home">
+              <img src="assets/logos/WILD EYEZ HOME BUTTON.png" alt="" aria-hidden="true">
+            </a>
           </div>
         </div>
         <audio id="guideAudio" controls preload="metadata" src="assets/audio/WILD EYEZ PACKING AND PREPARATION GUIDE AUDIO.mp3"></audio>
@@ -676,6 +656,8 @@
                 <img class="page-art" alt="Wild Eyez PDF page 1" src="assets/pages/WILD EYEZ PACKING AND PREPARATION GUIDE_Page_1.jpg">
               </div>
             </section>
+          </div>
+          <div class="book-page" data-page="2">
             <section class="sheet-side">
               <div class="page-head">
                 <span>Page 2</span>
@@ -696,6 +678,8 @@
                 <img class="page-art" alt="Wild Eyez PDF page 3" src="assets/pages/WILD EYEZ PACKING AND PREPARATION GUIDE_Page_3.jpg">
               </div>
             </section>
+          </div>
+          <div class="book-page" data-page="4">
             <section class="sheet-side">
               <div class="page-head">
                 <span>Page 4</span>
@@ -716,6 +700,8 @@
                 <img class="page-art" alt="Wild Eyez PDF page 5" src="assets/pages/WILD EYEZ PACKING AND PREPARATION GUIDE_Page_5.jpg">
               </div>
             </section>
+          </div>
+          <div class="book-page" data-page="6">
             <section class="sheet-side">
               <div class="page-head">
                 <span>Page 6</span>
@@ -736,6 +722,8 @@
                 <img class="page-art" alt="Wild Eyez PDF page 7" src="assets/pages/WILD EYEZ PACKING AND PREPARATION GUIDE_Page_7.jpg">
               </div>
             </section>
+          </div>
+          <div class="book-page" data-page="8">
             <section class="sheet-side">
               <div class="page-head">
                 <span>Page 8</span>
@@ -762,22 +750,22 @@
       const sheets = Array.from(document.querySelectorAll(".document-scroll .sheet-side"));
       const chapters = [
         { title: "Page 1 - Introduction", time: 0, page: 0 },
-        { title: "Page 1 - How To Use This Guide", time: 42, page: 0 },
-        { title: "Page 2 - Welcome", time: 140, page: 1 },
-        { title: "Page 2 - Safety First", time: 205, page: 1 },
-        { title: "Page 3 - What To Expect", time: 285, page: 2 },
-        { title: "Page 3 - Weather & Terrain", time: 360, page: 2 },
-        { title: "Page 4 - Clothing & Footwear", time: 460, page: 3 },
-        { title: "Page 4 - Foot Care", time: 545, page: 3 },
-        { title: "Page 5 - Field Gear", time: 625, page: 4 },
-        { title: "Page 5 - Preparation Checklist", time: 705, page: 4 },
-        { title: "Page 6 - Firearms & Ammunition", time: 840, page: 5 },
-        { title: "Page 6 - Ammunition Preference", time: 945, page: 5 },
-        { title: "Page 6 - Chambering Standard", time: 1005, page: 5 },
-        { title: "Page 7 - Preseason Preparation", time: 1085, page: 6 },
-        { title: "Page 7 - Wounded Game", time: 1245, page: 6 },
-        { title: "Page 8 - Final Reminders", time: 1315, page: 7 },
-        { title: "Page 8 - Closing Notes", time: 1375, page: 7 }
+        { title: "Page 1 - How To Use This Guide", time: 60, page: 0 },
+        { title: "Page 2 - Welcome", time: 160, page: 1 },
+        { title: "Page 2 - Safety First", time: 235, page: 1 },
+        { title: "Page 3 - What To Expect", time: 320, page: 2 },
+        { title: "Page 3 - Weather & Terrain", time: 400, page: 2 },
+        { title: "Page 4 - Clothing & Footwear", time: 500, page: 3 },
+        { title: "Page 4 - Foot Care", time: 585, page: 3 },
+        { title: "Page 5 - Field Gear", time: 665, page: 4 },
+        { title: "Page 5 - Preparation Checklist", time: 745, page: 4 },
+        { title: "Page 6 - Firearms & Ammunition", time: 875, page: 5 },
+        { title: "Page 6 - Ammunition Preference", time: 970, page: 5 },
+        { title: "Page 6 - Chambering Standard", time: 1030, page: 5 },
+        { title: "Page 7 - Preseason Preparation", time: 1120, page: 6 },
+        { title: "Page 7 - Wounded Game", time: 1270, page: 6 },
+        { title: "Page 8 - Final Reminders", time: 1340, page: 7 },
+        { title: "Page 8 - Closing Notes", time: 1400, page: 7 }
       ];
       let activeIndex = -1;
       const followAudio = true;
