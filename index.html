@@ -234,12 +234,13 @@
       let following = false;
       let raf = 0;
       let introHoldTimer = 0;
-      let introTargetTop = 0;
       let initialHoldTop = 0;
+      let introTargetTop = 0;
       let endScrollTop = 0;
       let scrollPixelsPerSecond = 0;
       let scrollStartTime = 0;
       let scrollStartTop = 0;
+      let phase = "intro";
 
       function pageTop(page){
         const barH = bar?.getBoundingClientRect().height || 0;
@@ -254,8 +255,8 @@
         initialHoldTop = Math.max(0, firstTop);
         introTargetTop = Math.max(0, firstTop + firstHeight - window.innerHeight - 10);
         endScrollTop = docMax;
-        const crawlSeconds = Math.max(1, Number.isFinite(audio.duration) ? audio.duration : 678);
-        scrollPixelsPerSecond = Math.max(0.1, (endScrollTop - introTargetTop) / crawlSeconds);
+        const crawlSeconds = Math.max(1, (Number.isFinite(audio.duration) ? audio.duration : 678) - 10);
+        scrollPixelsPerSecond = Math.max(0.1, (endScrollTop - introTargetTop) / crawlSeconds * 0.8);
       }
 
       function pageForTime(t){
@@ -280,10 +281,18 @@
           following = false;
           return;
         }
-        const elapsed = Math.max(0, audio.currentTime - scrollStartTime);
-        const desired = Math.min(endScrollTop, scrollStartTop + (elapsed * scrollPixelsPerSecond));
-        window.scrollTo({ top: desired, behavior: "auto" });
-        updateActive(pageForTime(audio.currentTime));
+        if (phase === "intro") {
+          window.scrollTo({ top: introTargetTop, behavior: "auto" });
+          if (Math.abs(window.scrollY - introTargetTop) < 3) {
+            phase = "wait";
+            following = false;
+            return;
+          }
+        } else if (phase === "slow") {
+          const elapsed = Math.max(0, audio.currentTime - scrollStartTime);
+          const desired = Math.min(endScrollTop, scrollStartTop + (elapsed * scrollPixelsPerSecond));
+          window.scrollTo({ top: desired, behavior: "auto" });
+        }
         raf = requestAnimationFrame(scrollLoop);
       }
 
@@ -296,9 +305,16 @@
       function syncScrollToAudio(){
         measureScrollRange();
         const t = audio.currentTime || 0;
-        updateActive(pageForTime(t));
-        if (t <= 0) window.scrollTo({ top: initialHoldTop, behavior: "auto" });
-        else window.scrollTo({ top: Math.min(endScrollTop, introTargetTop + (Math.max(0, t - scrollStartTime) * scrollPixelsPerSecond)), behavior: "auto" });
+        if (t >= 10) {
+          phase = "slow";
+          window.scrollTo({ top: Math.min(endScrollTop, scrollStartTop + (Math.max(0, t - scrollStartTime) * scrollPixelsPerSecond)), behavior: "auto" });
+        } else if (t > 0) {
+          phase = "wait";
+          window.scrollTo({ top: introTargetTop, behavior: "auto" });
+        } else {
+          phase = "intro";
+          window.scrollTo({ top: initialHoldTop, behavior: "auto" });
+        }
       }
 
       async function attemptAutoplay(){
@@ -320,14 +336,17 @@
 
       audio.addEventListener("loadedmetadata", () => {
         measureScrollRange();
-        updateActive(0);
         window.scrollTo({ top: initialHoldTop, behavior: "auto" });
         showPrompt();
         if (introHoldTimer) clearTimeout(introHoldTimer);
+        scrollStartTime = 0;
+        scrollStartTop = introTargetTop;
+        phase = "intro";
         introHoldTimer = window.setTimeout(() => {
           attemptAutoplay();
           scrollStartTime = audio.currentTime || 0;
-          scrollStartTop = window.scrollY;
+          scrollStartTop = introTargetTop;
+          phase = "intro";
           kickstart();
         }, 5000);
       });
@@ -336,18 +355,24 @@
         hidePrompt();
         if (!following) {
           scrollStartTime = audio.currentTime || 0;
-          scrollStartTop = window.scrollY;
+          scrollStartTop = introTargetTop;
         }
         syncScrollToAudio();
         kickstart();
       });
       audio.addEventListener("timeupdate", () => {
-        updateActive(pageForTime(audio.currentTime));
+        if (phase === "wait" && audio.currentTime >= 10) {
+          phase = "slow";
+          scrollStartTime = 10;
+          scrollStartTop = introTargetTop;
+          window.scrollTo({ top: introTargetTop, behavior: "auto" });
+          kickstart();
+        }
         if (following) kickstart();
       });
       audio.addEventListener("seeked", () => {
         scrollStartTime = audio.currentTime || 0;
-        scrollStartTop = window.scrollY;
+        scrollStartTop = introTargetTop;
         syncScrollToAudio();
         kickstart();
       });
@@ -357,7 +382,6 @@
         if (introHoldTimer) clearTimeout(introHoldTimer);
       });
 
-      updateActive(0);
       measureScrollRange();
       window.scrollTo({ top: initialHoldTop, behavior: "auto" });
     })();
