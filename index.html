@@ -234,12 +234,12 @@
       let following = false;
       let raf = 0;
       let introHoldTimer = 0;
-      let phase = "intro";
       let introTargetTop = 0;
       let initialHoldTop = 0;
-      let slowStartTop = 0;
       let endScrollTop = 0;
-      let slowPixelsPerSecond = 7.5;
+      let scrollPixelsPerSecond = 0;
+      let scrollStartTime = 0;
+      let scrollStartTop = 0;
 
       function pageTop(page){
         const barH = bar?.getBoundingClientRect().height || 0;
@@ -253,10 +253,9 @@
         const docMax = Math.max(0, document.documentElement.scrollHeight - window.innerHeight - 20);
         initialHoldTop = Math.max(0, firstTop);
         introTargetTop = Math.max(0, firstTop + firstHeight - window.innerHeight - 10);
-        slowStartTop = introTargetTop;
         endScrollTop = docMax;
-        const crawlSeconds = Math.max(1, (Number.isFinite(audio.duration) ? audio.duration : 0) - 10);
-        slowPixelsPerSecond = Math.max(0.1, (endScrollTop - slowStartTop) / crawlSeconds);
+        const crawlSeconds = Math.max(1, Number.isFinite(audio.duration) ? audio.duration : 678);
+        scrollPixelsPerSecond = Math.max(0.1, (endScrollTop - introTargetTop) / crawlSeconds);
       }
 
       function pageForTime(t){
@@ -281,21 +280,10 @@
           following = false;
           return;
         }
-        const current = window.scrollY;
-        if (phase === "intro") {
-          window.scrollTo({ top: introTargetTop, behavior: "auto" });
-          if (Math.abs(window.scrollY - introTargetTop) < 3) {
-            phase = "wait";
-            following = false;
-            return;
-          }
-        } else if (phase === "slow") {
-          const idx = pageForTime(audio.currentTime);
-          updateActive(idx);
-          const desired = Math.min(endScrollTop, slowStartTop + ((audio.currentTime - 10) * slowPixelsPerSecond));
-          const next = current + (desired - current) * 0.06;
-          window.scrollTo({ top: next, behavior: "auto" });
-        }
+        const elapsed = Math.max(0, audio.currentTime - scrollStartTime);
+        const desired = Math.min(endScrollTop, scrollStartTop + (elapsed * scrollPixelsPerSecond));
+        window.scrollTo({ top: desired, behavior: "auto" });
+        updateActive(pageForTime(audio.currentTime));
         raf = requestAnimationFrame(scrollLoop);
       }
 
@@ -309,17 +297,8 @@
         measureScrollRange();
         const t = audio.currentTime || 0;
         updateActive(pageForTime(t));
-        if (t >= 10) {
-          phase = "slow";
-          const desired = Math.min(endScrollTop, slowStartTop + ((t - 10) * slowPixelsPerSecond));
-          window.scrollTo({ top: desired, behavior: "auto" });
-        } else if (t > 0) {
-          phase = "wait";
-          window.scrollTo({ top: introTargetTop, behavior: "auto" });
-        } else {
-          phase = "intro";
-          window.scrollTo({ top: initialHoldTop, behavior: "auto" });
-        }
+        if (t <= 0) window.scrollTo({ top: initialHoldTop, behavior: "auto" });
+        else window.scrollTo({ top: Math.min(endScrollTop, introTargetTop + (Math.max(0, t - scrollStartTime) * scrollPixelsPerSecond)), behavior: "auto" });
       }
 
       async function attemptAutoplay(){
@@ -345,27 +324,30 @@
         window.scrollTo({ top: initialHoldTop, behavior: "auto" });
         showPrompt();
         if (introHoldTimer) clearTimeout(introHoldTimer);
-        phase = "intro";
         introHoldTimer = window.setTimeout(() => {
           attemptAutoplay();
+          scrollStartTime = audio.currentTime || 0;
+          scrollStartTop = window.scrollY;
           kickstart();
         }, 5000);
       });
       audio.addEventListener("play", () => {
         if (introHoldTimer) clearTimeout(introHoldTimer);
         hidePrompt();
+        if (!following) {
+          scrollStartTime = audio.currentTime || 0;
+          scrollStartTop = window.scrollY;
+        }
         syncScrollToAudio();
         kickstart();
       });
       audio.addEventListener("timeupdate", () => {
         updateActive(pageForTime(audio.currentTime));
-        if (phase === "wait" && audio.currentTime >= 10) {
-          syncScrollToAudio();
-          kickstart();
-        }
-        kickstart();
+        if (following) kickstart();
       });
       audio.addEventListener("seeked", () => {
+        scrollStartTime = audio.currentTime || 0;
+        scrollStartTop = window.scrollY;
         syncScrollToAudio();
         kickstart();
       });
