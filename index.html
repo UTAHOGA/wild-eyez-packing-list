@@ -531,9 +531,8 @@
     }
     .audio-top{
       display:flex;
-      flex-wrap:wrap;
+      gap:10px;
       justify-content:space-between;
-      gap:12px;
       align-items:center;
     }
     .audio-title{
@@ -560,6 +559,34 @@
     .audio-title span{
       font:700 12px/1.35 Arial,sans-serif;
       color:rgba(255,240,223,.82);
+    }
+    .audio-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      align-items:center;
+    }
+    .audio-actions .button{
+      min-height:34px;
+      padding:0 12px;
+      font-size:12px;
+    }
+    .home-link{
+      background:
+        linear-gradient(180deg, rgba(255,126,33,.98), rgba(219,93,14,.98));
+      border-color:rgba(255,190,126,.92);
+      color:#fff7ef;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      font-weight:900;
+      box-shadow:
+        0 0 0 3px rgba(63,34,13,.72) inset,
+        0 10px 18px rgba(0,0,0,.22);
+    }
+    .home-link:hover,
+    .home-link:focus-visible{
+      color:#fffdf8;
+      transform:translateY(-1px);
     }
     .audio-guide audio{
       width:100%;
@@ -591,7 +618,10 @@
         padding:12px;
       }
       .audio-top{
-        align-items:flex-start;
+        justify-items:stretch;
+      }
+      .audio-actions{
+        width:100%;
       }
       .follow-toggle{
         width:100%;
@@ -615,21 +645,18 @@
 </head>
 <body>
   <main class="shell">
-    <header class="topbar">
-      <div class="actions">
-        <a class="button primary" href="https://drive.google.com/uc?export=download&id=18fHtcDO4hu5IMwyJX3eJC5rAJrJm6dc6" target="_blank" rel="noopener noreferrer">Download PDF</a>
-        <a class="button secondary" href="https://drive.google.com/file/d/18fHtcDO4hu5IMwyJX3eJC5rAJrJm6dc6/view?usp=sharing" target="_blank" rel="noopener noreferrer">View PDF</a>
-      </div>
-    </header>
-
     <section class="section embed-keep">
       <div class="audio-guide" aria-label="Audio guided reading">
         <div class="audio-top">
           <div class="audio-title">
             <strong>Guided Audio Reading</strong>
-            <span id="currentChapter" class="sr-only" aria-live="polite">Welcome & Safety</span>
+            <span id="currentChapter" class="sr-only" aria-live="polite">Page 1 - Introduction</span>
           </div>
-          <button class="button secondary follow-toggle" id="followToggle" type="button" aria-pressed="true">Follow Audio: On</button>
+          <div class="audio-actions">
+            <a class="button primary" href="https://drive.google.com/uc?export=download&id=18fHtcDO4hu5IMwyJX3eJC5rAJrJm6dc6" target="_blank" rel="noopener noreferrer">Download PDF</a>
+            <a class="button secondary" href="https://drive.google.com/file/d/18fHtcDO4hu5IMwyJX3eJC5rAJrJm6dc6/view?usp=sharing" target="_blank" rel="noopener noreferrer">View PDF</a>
+            <a class="button secondary home-link" href="https://www.wildeyez.net" target="_blank" rel="noopener noreferrer">Wild Eyez Home</a>
+          </div>
         </div>
         <audio id="guideAudio" controls preload="metadata" src="assets/audio/WILD EYEZ PACKING AND PREPARATION GUIDE AUDIO.mp3"></audio>
       </div>
@@ -730,30 +757,30 @@
 
       const audio = document.getElementById("guideAudio");
       const currentChapter = document.getElementById("currentChapter");
-      const followToggle = document.getElementById("followToggle");
       const header = document.querySelector(".topbar");
       const audioGuide = document.querySelector(".audio-guide");
       const sheets = Array.from(document.querySelectorAll(".document-scroll .sheet-side"));
       const chapters = [
         { title: "Page 1 - Introduction", time: 0, page: 0 },
-        { title: "Page 1 - How To Use This Guide", time: 22, page: 0 },
-        { title: "Page 2 - Welcome", time: 170, page: 1 },
-        { title: "Page 2 - What To Expect", time: 225, page: 1 },
-        { title: "Page 3 - Weather & Terrain", time: 320, page: 2 },
-        { title: "Page 3 - Clothing & Footwear", time: 455, page: 2 },
+        { title: "Page 1 - How To Use This Guide", time: 42, page: 0 },
+        { title: "Page 2 - Welcome", time: 140, page: 1 },
+        { title: "Page 2 - Safety First", time: 205, page: 1 },
+        { title: "Page 3 - What To Expect", time: 285, page: 2 },
+        { title: "Page 3 - Weather & Terrain", time: 360, page: 2 },
+        { title: "Page 4 - Clothing & Footwear", time: 460, page: 3 },
         { title: "Page 4 - Foot Care", time: 545, page: 3 },
-        { title: "Page 4 - Field Gear", time: 625, page: 3 },
+        { title: "Page 5 - Field Gear", time: 625, page: 4 },
         { title: "Page 5 - Preparation Checklist", time: 705, page: 4 },
-        { title: "Page 5 - Firearms & Ammunition", time: 820, page: 4 },
+        { title: "Page 6 - Firearms & Ammunition", time: 840, page: 5 },
         { title: "Page 6 - Ammunition Preference", time: 945, page: 5 },
         { title: "Page 6 - Chambering Standard", time: 1005, page: 5 },
-        { title: "Page 7 - Preseason Preparation", time: 1075, page: 6 },
+        { title: "Page 7 - Preseason Preparation", time: 1085, page: 6 },
         { title: "Page 7 - Wounded Game", time: 1245, page: 6 },
         { title: "Page 8 - Final Reminders", time: 1315, page: 7 },
         { title: "Page 8 - Closing Notes", time: 1375, page: 7 }
       ];
       let activeIndex = -1;
-      let followAudio = true;
+      const followAudio = true;
 
       function scrollToSheet(index, smooth = true) {
         const sheet = sheets[index];
@@ -785,15 +812,6 @@
         });
         return index;
       }
-
-      followToggle?.addEventListener("click", () => {
-        followAudio = !followAudio;
-        followToggle.setAttribute("aria-pressed", String(followAudio));
-        followToggle.textContent = `Follow Audio: ${followAudio ? "On" : "Off"}`;
-        if (followAudio && audio) {
-          setActiveChapter(chapterForTime(audio.currentTime), true, false);
-        }
-      });
 
       function syncFromAudio() {
         if (!audio) return;
