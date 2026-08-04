@@ -55,6 +55,16 @@
       gap:8px;
       align-items:center;
     }
+    .player{
+      width:100%;
+      margin-top:10px;
+    }
+    .player audio{
+      width:100%;
+      display:block;
+      height:42px;
+      color-scheme:dark;
+    }
     .btn{
       display:inline-flex;
       align-items:center;
@@ -153,6 +163,9 @@
         <img src="assets/logos/WILD EYEZ HOME BUTTON.png" alt="">
       </a>
     </div>
+    <div class="player">
+      <audio id="guideAudio" controls preload="metadata" src="assets/audio/WILD EYEZ PACKING AND PREPARATION GUIDE AUDIO.mp3"></audio>
+    </div>
   </header>
 
   <main class="wrap" id="pages">
@@ -210,9 +223,7 @@
 
   <script>
     (() => {
-      const audio = new Audio("assets/audio/WILD EYEZ PACKING AND PREPARATION GUIDE AUDIO.mp3");
-      audio.controls = true;
-      audio.preload = "metadata";
+      const audio = document.getElementById("guideAudio");
       const pages = Array.from(document.querySelectorAll(".page"));
       const title = document.querySelector(".title");
       const bar = document.querySelector(".bar");
@@ -278,6 +289,15 @@
         raf = requestAnimationFrame(scrollLoop);
       }
 
+      async function attemptAutoplay(){
+        if (!audio) return;
+        try{
+          await audio.play();
+        }catch{
+          // Browser blocked autoplay; the visible play button remains available.
+        }
+      }
+
       audio.addEventListener("loadedmetadata", () => {
         measureScrollRange();
         updateActive(0);
@@ -288,6 +308,7 @@
           introHoldDone = true;
           window.scrollTo({ top: startScrollTop, behavior: "auto" });
           kickstart();
+          attemptAutoplay();
         }, 5000);
       });
       audio.addEventListener("play", () => {
@@ -313,7 +334,6 @@
         if (introHoldTimer) clearTimeout(introHoldTimer);
       });
 
-      document.body.prepend(audio);
       updateActive(0);
       measureScrollRange();
       window.scrollTo({ top: pageTop(pages[0]), behavior: "auto" });
