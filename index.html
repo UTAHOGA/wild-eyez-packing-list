@@ -255,6 +255,7 @@
       let introHoldTimer = 0;
       let phase = "intro";
       let introTargetTop = 0;
+      let initialHoldTop = 0;
       let slowStartTop = 0;
       let endScrollTop = 0;
       let slowPixelsPerSecond = 7.5;
@@ -269,7 +270,8 @@
         const firstTop = pageTop(first);
         const firstHeight = first?.getBoundingClientRect().height || 0;
         const docMax = Math.max(0, document.documentElement.scrollHeight - window.innerHeight - 20);
-        introTargetTop = Math.max(0, firstTop + firstHeight - window.innerHeight - 10);
+        initialHoldTop = Math.max(0, firstTop);
+        introTargetTop = Math.max(0, firstTop + 96);
         slowStartTop = introTargetTop;
         endScrollTop = docMax;
         const crawlSeconds = Math.max(1, (Number.isFinite(audio.duration) ? audio.duration : 0) - 20);
@@ -300,9 +302,8 @@
         }
         const current = window.scrollY;
         if (phase === "intro") {
-          const next = current + (introTargetTop - current) * 0.12;
-          window.scrollTo({ top: next, behavior: "auto" });
-          if (Math.abs(introTargetTop - next) < 3) {
+          window.scrollTo({ top: introTargetTop, behavior: "auto" });
+          if (Math.abs(window.scrollY - introTargetTop) < 3) {
             phase = "wait";
             following = false;
             return;
@@ -343,7 +344,7 @@
       audio.addEventListener("loadedmetadata", () => {
         measureScrollRange();
         updateActive(0);
-        window.scrollTo({ top: pageTop(pages[0]), behavior: "auto" });
+        window.scrollTo({ top: initialHoldTop, behavior: "auto" });
         showPrompt();
         if (introHoldTimer) clearTimeout(introHoldTimer);
         phase = "intro";
@@ -358,7 +359,7 @@
         if (introHoldTimer) clearTimeout(introHoldTimer);
         hidePrompt();
         phase = audio.currentTime > 0 ? "wait" : "intro";
-        window.scrollTo({ top: introTargetTop, behavior: "auto" });
+        window.scrollTo({ top: audio.currentTime > 0 ? introTargetTop : initialHoldTop, behavior: "auto" });
         kickstart();
       });
       audio.addEventListener("timeupdate", () => {
@@ -375,7 +376,7 @@
         updateActive(pageForTime(audio.currentTime));
         phase = audio.currentTime > 0 ? "wait" : "intro";
         window.scrollTo({
-          top: phase === "wait" ? introTargetTop : pageTop(pages[0]),
+          top: phase === "wait" ? introTargetTop : initialHoldTop,
           behavior: "auto"
         });
       });
@@ -387,7 +388,7 @@
 
       updateActive(0);
       measureScrollRange();
-      window.scrollTo({ top: pageTop(pages[0]), behavior: "auto" });
+      window.scrollTo({ top: initialHoldTop, behavior: "auto" });
     })();
   </script>
 </body>
