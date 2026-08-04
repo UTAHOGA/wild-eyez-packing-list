@@ -5,7 +5,7 @@ This is a tiny standalone site for the Wild Eyez client packing list.
 ## What it includes
 
 - `index.html` - a simple page with an embedded PDF preview
-- `wild_eyez_packing_list.pdf` - the packing list itself
+- `WILD EYEZ PACKING AND PREPARATION GUIDE.pdf` - the packing list itself
 
 ## How to host
 
@@ -23,6 +23,7 @@ Embed the hosted `index.html` page in an iframe. The page already includes:
 - a download button in the desktop top bar
 - a simplified mobile view that prioritizes the PDF preview
 - audio synced to the page sections for guided reading
+- PDF buttons that point to the Drive-hosted guide file
 
 Recommended Wix page setup:
 
