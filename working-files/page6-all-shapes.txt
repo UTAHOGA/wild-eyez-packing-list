@@ -1,7 +1,0 @@
-﻿#5 Type=6 L=0.0 T=0.0 W=611.9 H=776.6 Fill=-2147483648 Line=16777215 LW=-2.147484E+09 Vis=0 Text=
-  .1 Type=13 L=0.0 T=0.0 W=611.9 H=776.6 Fill=16777215 Line=16777215 LW=-2.147484E+09 Vis=0 Text=
-  .2 Type=13 L=2.5 T=2.1 W=515.3 H=95.7 Fill=16777215 Line=16777215 LW=-2.147484E+09 Vis=0 Text=
-  .3 Type=5 L=2.5 T=21.3 W=512.0 H=73.4 Fill=15399167 Line=16777215 LW=-2.147484E+09 Vis=0 Text=
-  .4 Type=5 L=2.3 T=21.2 W=517.6 H=75.6 Fill=3904195 Line=16777215 LW=-2.147484E+09 Vis=0 Text=
-#49 Type=13 L=53.2 T=11.3 W=520.0 H=112.0 Fill=16777215 Line=16777215 LW=-2.147484E+09 Vis=0 Text=
-#50 Type=17 L=47.5 T=141.8 W=517.3 H=73.7 Fill=16777215 Line=16777215 LW=-2.147484E+09 Vis=0 Text=AMMUNITION STANDARD Lead ammunition is preferred. Copper ammunition is not preferred. I highly sugge

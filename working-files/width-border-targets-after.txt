@@ -1,8 +1,0 @@
-﻿#50 Type=17 Page=6 L=47.5 T=141.8 W=517.3 H=73.7 Fill=16777215 Line=16777215 LW=-2.147484E+09 Vis=0 Text=AMMUNITION STANDARD Lead ammunition is preferred. Copper ammunition is not preferred. I highly suggest .30 caliber or eq
-#52 Type=17 Page=2 L=47.5 T=7.4 W=517.3 H=83.2 Fill=16777215 Line=16777215 LW=-2.147484E+09 Vis=0 Text=HOW TO USE THIS GUIDE Read the explanations first so you understand how the hunt operates and why each category matters.
-#58 Type=6 Page=3 L=47.5 T=5.1 W=517.3 H=88.5 Fill=-2147483648 Line=16777215 LW=-2.147484E+09 Vis=0 Text=
-#58.5 Type=17 Page=3 L=2.5 T=22.6 W=513.2 H=87.3 Fill=16777215 Line=16777215 LW=-2.147484E+09 Vis=0 Text=PROFESSIONAL POINTER When conditions allow, plan to sleep or fully rest during the middle of the day. If midday hunting 
-#60 Type=6 Page=4 L=47.5 T=122.9 W=517.3 H=75.8 Fill=-2147483648 Line=16777215 LW=-2.147484E+09 Vis=0 Text=
-#60.2 Type=17 Page=4 L=2.4 T=9.1 W=517.3 H=75.8 Fill=16777215 Line=16777215 LW=-2.147484E+09 Vis=0 Text=BE READY WHEN THE OPPORTUNITY CHANGES A careful stalk may give us time to study the animal, build a rest, and set up vid
-#63 Type=6 Page=4 L=47.5 T=12.0 W=517.3 H=76.7 Fill=-2147483648 Line=16777215 LW=-2.147484E+09 Vis=0 Text=
-#63.3 Type=17 Page=4 L=2.6 T=30.4 W=511.9 H=74.8 Fill=16777215 Line=16777215 LW=-2.147484E+09 Vis=0 Text=PRO TIP - PROTECT YOUR FEET Protect your feet before the hunt starts. Break in your boots before opening day, test your 

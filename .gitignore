@@ -1,0 +1,38 @@
+# Local QA/render output
+_qa*/
+_preview*/
+_compare*/
+_render*/
+
+# Local scratch helpers and generated review assets
+working-files/
+*.tmp.docx
+*_backup*.docx
+*_backup*.pdf
+*_before_*.docx
+*_before_*.pdf
+*_CHECK_*.pdf
+*CHECK*.pdf
+*_TEST*.docx
+*_TEST*.pdf
+*_test*.docx
+*_test*.pdf
+
+# Microsoft Word lock/temp files
+~$*
+
+# Duplicate local export names; canonical guide files stay tracked.
+WILD EYEZ PACKING AND PREPARATION GUIDE 2pdf*.docx
+WILD EYEZ PACKING AND PREPARATION GUIDE 2pdf*.pdf
+WILD EYEZ PACKING AND PREPARATION GUIDE_*.docx
+WILD EYEZ PACKING AND PREPARATION GUIDE_*.pdf
+WILD EYEZ BACKUP*.pdf
+WILD EYEZ REGEN*.pdf
+WILD EYEZ RESTORED*.pdf
+WILD EYEZ TYPOGRAPHY*.pdf
+WILD EYEZ USEREDIT*.pdf
+WILD EYEZ WIDTH*.pdf
+assets/pages/WILD EYEZ PACKING AND PREPARATION GUIDE 2pdf_Page_*.jpg
+
+# Local ElevenLabs working copies; keep final audio/text decisions in canonical files.
+ELEVENLABS_SCRIPT_FINAL_*.txt
