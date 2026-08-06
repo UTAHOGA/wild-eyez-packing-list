@@ -4,6 +4,8 @@ _qa_export_temp_*/
 _preview*/
 _compare*/
 _render*/
+.codex_pptx_build/
+.codex_video_build/
 _docx_checkbox_backup_*/
 _docx_backup_before_remove_clipped_see_*/
 _docx_backup_before_remove_see_hyperlink_*/
@@ -40,6 +42,8 @@ WILD EYEZ TYPOGRAPHY*.pdf
 WILD EYEZ USEREDIT*.pdf
 WILD EYEZ WIDTH*.pdf
 assets/pages/WILD EYEZ PACKING AND PREPARATION GUIDE 2pdf_Page_*.jpg
+assets/pages/*.psd
+assets/pages/*.png
 
 # Local ElevenLabs working copies; keep final audio/text decisions in canonical files.
 ELEVENLABS_SCRIPT_FINAL_*.txt
@@ -64,6 +68,13 @@ WILD EYEZ PACKING AND PREPARATION GUIDE6.docx
 WILD EYEZ PACKING AND PREPARATION GUIDE6.pdf
 WILD EYEZ EQUIPMENT AND PREPARATION PACK AUDIO.mp3
 WILD EYEZ EQUIPMENT AND PREPARATION PACK SCRIPT.txt
+WILD EYEZ EQUIPMENT PREPARATION PACKET ADOBE PRESENTATION.pptx
+WILD EYEZ PACKING AND PREPARATION GUIDE_PRESENTATION_WITH_NOTES.pptx
+WILD EYEZ PACKING GUIDE_TIMED_AUDIO_PRESENTATION.pptx
+WILD EYEZ PACKING GUIDE_READ_ALONG_VIDEO*.mp4
+equpt audio.mp4
+assets/audio/*.mp4
+assets/audio/AUDIO_ADOBE_UNDER_16MB_*.mp3
 *.picasa.ini
 .picasa.ini
 .picasaoriginals/
