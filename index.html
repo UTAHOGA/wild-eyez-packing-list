@@ -13,6 +13,8 @@
       --accent2:#ff9a3d;
       --line:#dcc9b1;
       --shadow:0 18px 40px rgba(0,0,0,.25);
+      --topo: url("assets/backgrounds/dark-brown-topo.jpg?v=20260806f");
+      --warm-topo: url("assets/backgrounds/white-topo.jpg?v=20260806f");
     }
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
@@ -22,7 +24,7 @@
       color:var(--ink);
       background:
         linear-gradient(rgba(28,19,12,.92), rgba(28,19,12,.95)),
-        url("assets/backgrounds/dark-brown-topo.jpg?v=20260806e") center top / 820px auto repeat;
+        var(--topo) center top / 820px auto repeat;
       background-attachment:fixed;
     }
     body::before{
@@ -36,7 +38,7 @@
       pointer-events:none;
       background:
         linear-gradient(180deg, rgba(28,19,12,1), rgba(28,19,12,.97) 72%, rgba(28,19,12,0)),
-        url("assets/backgrounds/dark-brown-topo.jpg?v=20260806e") center top / 820px auto repeat;
+        var(--topo) center top / 820px auto repeat;
       box-shadow:0 18px 34px rgba(0,0,0,.24);
     }
     a{color:inherit}
@@ -55,15 +57,109 @@
       border-radius:18px;
       background:
         linear-gradient(180deg, rgba(52,32,18,.98), rgba(25,16,10,.98)),
-        url("assets/backgrounds/white-topo.jpg?v=20260806e") center top / 760px auto repeat;
+        var(--warm-topo) center top / 760px auto repeat;
       background-blend-mode:multiply;
       box-shadow:var(--shadow);
     }
     .title{
       color:#fff1df;
-      font:900 12px/1 Arial,sans-serif;
+      font:900 12px/1.1 Arial,sans-serif;
       letter-spacing:.12em;
       text-transform:uppercase;
+    }
+    .hero{
+      margin:18px 0 12px;
+      padding:18px 18px 16px;
+      border:1px solid rgba(220,201,177,.8);
+      border-radius:22px;
+      background:
+        linear-gradient(180deg, rgba(255,248,239,.98), rgba(247,237,224,.96));
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:-2px auto auto -2px;
+      width:120px;
+      height:120px;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(255,153,61,.22), rgba(255,153,61,0) 70%);
+      pointer-events:none;
+    }
+    .eyebrow{
+      margin:0 0 8px;
+      color:#7d5632;
+      font:800 11px/1 Arial,sans-serif;
+      text-transform:uppercase;
+      letter-spacing:.16em;
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns:minmax(0,1.6fr) minmax(220px,.9fr);
+      gap:14px;
+      align-items:start;
+    }
+    .hero h1{
+      margin:0;
+      color:#281c12;
+      font:900 clamp(30px, 5vw, 56px)/.95 Georgia,"Times New Roman",serif;
+      letter-spacing:-.04em;
+    }
+    .hero p{
+      margin:10px 0 0;
+      max-width:62ch;
+      color:#564432;
+      font:500 15px/1.6 Georgia,"Times New Roman",serif;
+    }
+    .meta-card{
+      padding:14px 14px 12px;
+      border-radius:18px;
+      background:
+        linear-gradient(180deg, rgba(52,32,18,.98), rgba(25,16,10,.98)),
+        var(--warm-topo) center top / 760px auto repeat;
+      color:#fff2e2;
+      box-shadow:0 16px 28px rgba(0,0,0,.18);
+    }
+    .meta-label{
+      margin:0 0 6px;
+      color:#ffd8ad;
+      font:800 10px/1 Arial,sans-serif;
+      text-transform:uppercase;
+      letter-spacing:.16em;
+    }
+    .meta-value{
+      margin:0;
+      font:700 14px/1.45 Arial,sans-serif;
+      color:#fff7ee;
+    }
+    .page-jumps{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:14px;
+    }
+    .jump{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:32px;
+      padding:0 12px;
+      border-radius:999px;
+      border:1px solid rgba(125,86,50,.2);
+      background:rgba(255,255,255,.8);
+      color:#3b2c1f;
+      text-decoration:none;
+      font:800 11px/1 Arial,sans-serif;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      transition:transform 140ms ease, box-shadow 140ms ease, border-color 140ms ease;
+    }
+    .jump:hover,.jump:focus-visible{
+      transform:translateY(-2px);
+      border-color:rgba(255,119,32,.5);
+      box-shadow:0 10px 20px rgba(0,0,0,.12);
     }
     .controls{
       display:flex;
@@ -160,7 +256,7 @@
     }
     .wrap{
       width:min(960px, calc(100% - 24px));
-      margin:14px auto 32px;
+      margin:12px auto 32px;
     }
     .page{
       position:relative;
@@ -188,6 +284,9 @@
       text-transform:uppercase;
       color:#332710;
     }
+    .page-head span:last-child{
+      text-align:right;
+    }
     .page-body{
       background:#fff;
     }
@@ -204,6 +303,13 @@
         top:8px;
         padding:10px;
       }
+      .hero{
+        padding:16px 14px 14px;
+        border-radius:18px;
+      }
+      .hero-grid{
+        grid-template-columns:1fr;
+      }
       .wrap{width:min(100%, calc(100% - 16px)); margin-top:10px}
       .home{min-height:34px; padding:0 14px; font-size:11px}
       .page-head{padding:10px 12px}
@@ -218,7 +324,7 @@
       <a class="btn home" href="https://www.wildeyez.net" target="_blank" rel="noopener noreferrer">Wild Eyez Home</a>
     </div>
     <div class="player">
-      <audio id="guideAudio" controls preload="metadata" src="WILD EYEZ PACKING AND PREPARATION GUIDE AUDIO.mp3?v=20260806e"></audio>
+      <audio id="guideAudio" controls preload="metadata" src="assets/audio/AUDIO.mp3?v=20260806g"></audio>
     </div>
     <div class="prompt" id="audioPrompt">Press play or wait for autoplay.</div>
     <div class="follow-status" id="followStatus">
@@ -228,41 +334,64 @@
   </header>
 
   <main class="wrap" id="pages">
-    <section class="page" data-time="0">
+    <section class="hero">
+      <div class="hero-grid">
+        <div>
+          <p class="eyebrow">Wild Eyez Packing Guide</p>
+          <h1>Read along with the guide while the audio keeps pace.</h1>
+          <p>
+            This version is set up like a guided reader. Use the audio bar at the top, scroll naturally, and jump to any section below if you want to revisit a specific part of the packing list.
+          </p>
+          <div class="page-jumps">
+            <a class="jump" href="#page-1">Page 1</a>
+            <a class="jump" href="#page-4">Gear</a>
+            <a class="jump" href="#page-7">Firearms</a>
+            <a class="jump" href="#page-9">Finish</a>
+          </div>
+        </div>
+        <aside class="meta-card" aria-label="Guide summary">
+          <p class="meta-label">What’s included</p>
+          <p class="meta-value">9 page guide</p>
+          <p class="meta-value">Synced audio narration</p>
+          <p class="meta-value">Easy jump links</p>
+        </aside>
+      </div>
+    </section>
+    <section class="page" id="page-1" data-time="0">
       <div class="page-head"><span>Page 1</span><span>Introduction / How To Use</span></div>
-      <div class="page-body"><img src="assets/pages/WILD EYEZ PACKING AND PREPARATION GUIDE6_Page_1.jpg?v=20260806e" alt="Wild Eyez PDF page 1"></div>
+      <div class="page-body"><img src="assets/pages/WILD EYEZ PACKING AND PREPARATION GUIDE6_Page_1.jpg?v=20260806f" alt="Wild Eyez PDF page 1"></div>
     </section>
-    <section class="page" data-time="37">
+    <section class="page" id="page-2" data-time="37">
       <div class="page-head"><span>Page 2</span><span>Welcome / Field Standard / Safety First</span></div>
-      <div class="page-body"><img src="assets/pages/WILD EYEZ PACKING AND PREPARATION GUIDE6_Page_2.jpg?v=20260806e" alt="Wild Eyez PDF page 2"></div>
+      <div class="page-body"><img src="assets/pages/WILD EYEZ PACKING AND PREPARATION GUIDE6_Page_2.jpg?v=20260806f" alt="Wild Eyez PDF page 2"></div>
     </section>
-    <section class="page" data-time="187">
+    <section class="page" id="page-3" data-time="187">
       <div class="page-head"><span>Page 3</span><span>What To Expect</span></div>
-      <div class="page-body"><img src="assets/pages/WILD EYEZ PACKING AND PREPARATION GUIDE6_Page_3.jpg?v=20260806e" alt="Wild Eyez PDF page 3"></div>
+      <div class="page-body"><img src="assets/pages/WILD EYEZ PACKING AND PREPARATION GUIDE6_Page_3.jpg?v=20260806f" alt="Wild Eyez PDF page 3"></div>
     </section>
-    <section class="page" data-time="368">
+    <section class="page" id="page-4" data-time="368">
       <div class="page-head"><span>Page 4</span><span>Clothing & Footwear</span></div>
-      <div class="page-body"><img src="assets/pages/WILD EYEZ PACKING AND PREPARATION GUIDE6_Page_4.jpg?v=20260806e" alt="Wild Eyez PDF page 4"></div>
+      <div class="page-body"><img src="assets/pages/WILD EYEZ PACKING AND PREPARATION GUIDE6_Page_4.jpg?v=20260806f" alt="Wild Eyez PDF page 4"></div>
     </section>
-    <section class="page" data-time="472">
+    <section class="page" id="page-5" data-time="472">
       <div class="page-head"><span>Page 5</span><span>Clothing Checklist / Field Gear</span></div>
-      <div class="page-body"><img src="assets/pages/WILD EYEZ PACKING AND PREPARATION GUIDE6_Page_5.jpg?v=20260806e" alt="Wild Eyez PDF page 5"></div>
+      <div class="page-body"><img src="assets/pages/WILD EYEZ PACKING AND PREPARATION GUIDE6_Page_5.jpg?v=20260806f" alt="Wild Eyez PDF page 5"></div>
     </section>
-    <section class="page" data-time="545">
+    <section class="page" id="page-6" data-time="545">
       <div class="page-head"><span>Page 6</span><span>Field Gear Checklist</span></div>
-      <div class="page-body"><img src="assets/pages/WILD EYEZ PACKING AND PREPARATION GUIDE6_Page_6.jpg?v=20260806e" alt="Wild Eyez PDF page 6"></div>
+      <div class="page-body"><img src="assets/pages/WILD EYEZ PACKING AND PREPARATION GUIDE6_Page_6.jpg?v=20260806f" alt="Wild Eyez PDF page 6"></div>
     </section>
-    <section class="page" data-time="572">
+    <section class="page" id="page-7" data-time="572">
       <div class="page-head"><span>Page 7</span><span>Firearms & Ammunition</span></div>
-      <div class="page-body"><img src="assets/pages/WILD EYEZ PACKING AND PREPARATION GUIDE6_Page_7.jpg?v=20260806e" alt="Wild Eyez PDF page 7"></div>
+      <div class="page-body"><img src="assets/pages/WILD EYEZ PACKING AND PREPARATION GUIDE6_Page_7.jpg?v=20260806f" alt="Wild Eyez PDF page 7"></div>
     </section>
-    <section class="page" data-time="695">
+    <section class="page" id="page-8" data-time="695">
       <div class="page-head"><span>Page 8</span><span>Preseason Preparation / Final Reminders</span></div>
-      <div class="page-body"><img src="assets/pages/WILD EYEZ PACKING AND PREPARATION GUIDE6_Page_8.jpg?v=20260806e" alt="Wild Eyez PDF page 8"></div>
+      <div class="page-body"><img src="assets/pages/WILD EYEZ PACKING AND PREPARATION GUIDE6_Page_8.jpg?v=20260806f" alt="Wild Eyez PDF page 8"></div>
     </section>
-    <section class="page" data-time="804">
+    <section class="page" id="page-9" data-time="804">
       <div class="page-head"><span>Page 9</span><span>Closing</span></div>
-      <div class="page-body"><img src="assets/pages/WILD EYEZ PACKING AND PREPARATION GUIDE6_Page_9.jpg?v=20260806e" alt="Wild Eyez PDF page 9"></div>
+      <div class="page-body"><img src="assets/pages/WILD EYEZ PACKING AND PREPARATION GUIDE6_Page_9.jpg?v=20260806f" alt="Wild Eyez PDF page 9"></div>
     </section>
   </main>
 
@@ -430,6 +559,17 @@
       window.addEventListener("keydown", (event) => {
         const keys = ["ArrowDown", "ArrowUp", "PageDown", "PageUp", "Home", "End", " "];
         if (keys.includes(event.key)) pauseFollowForManualScroll();
+      });
+      document.querySelectorAll(".jump").forEach((link) => {
+        link.addEventListener("click", () => {
+          window.requestAnimationFrame(() => {
+            const id = link.getAttribute("href")?.slice(1);
+            const target = id ? document.getElementById(id) : null;
+            if (target) {
+              target.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+          });
+        });
       });
 
       measureScrollRange();
