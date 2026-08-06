@@ -85,7 +85,7 @@
     }
     .hero-grid{
       display:grid;
-      grid-template-columns:minmax(0,1.6fr) minmax(220px,.9fr);
+      grid-template-columns:1fr;
       gap:14px;
       align-items:start;
     }
@@ -102,6 +102,7 @@
       font:500 15px/1.6 Georgia,"Times New Roman",serif;
     }
     .meta-card{
+      display:none;
       padding:14px 14px 12px;
       border-radius:18px;
       background:
@@ -337,6 +338,8 @@
       let autoplayTimer = 0;
       let pageAnchors = [];
       let programmaticScrollUntil = 0;
+
+      if (!audio) return;
 
       function pageTop(page){
         const barH = bar?.getBoundingClientRect().height || 0;
