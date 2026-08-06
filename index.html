@@ -25,6 +25,20 @@
         url("assets/backgrounds/dark-brown-topo.jpg?v=20260806e") center top / 820px auto repeat;
       background-attachment:fixed;
     }
+    body::before{
+      content:"";
+      position:fixed;
+      top:0;
+      left:0;
+      right:0;
+      height:146px;
+      z-index:15;
+      pointer-events:none;
+      background:
+        linear-gradient(180deg, rgba(28,19,12,1), rgba(28,19,12,.97) 72%, rgba(28,19,12,0)),
+        url("assets/backgrounds/dark-brown-topo.jpg?v=20260806e") center top / 820px auto repeat;
+      box-shadow:0 18px 34px rgba(0,0,0,.24);
+    }
     a{color:inherit}
     .bar{
       position:sticky;
@@ -183,6 +197,7 @@
       height:auto;
     }
     @media (max-width: 700px){
+      body::before{height:168px}
       .bar{
         width:min(100%, calc(100% - 16px));
         margin:6px auto 0;
