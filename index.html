@@ -252,18 +252,10 @@
 </head>
 <body>
   <header class="bar">
-    <div class="title">Guided Audio Reading</div>
+    <div class="title">Guided Video Reading</div>
     <div class="controls">
       <a class="btn primary" href="https://drive.google.com/file/d/18fHtcDO4hu5IMwyJX3eJC5rAJrJm6dc6/view?usp=sharing" target="_blank" rel="noopener noreferrer">Open PDF</a>
       <a class="btn home" href="https://www.wildeyez.net" target="_blank" rel="noopener noreferrer">Wild Eyez Home</a>
-    </div>
-    <div class="player">
-      <audio id="guideAudio" controls preload="metadata" src="assets/audio/AUDIO.mp3?v=20260806g"></audio>
-    </div>
-    <div class="prompt" id="audioPrompt">Press play or wait for autoplay.</div>
-    <div class="follow-status" id="followStatus">
-      <span>Manual scroll active. Audio is still playing.</span>
-      <button class="resume-follow" id="resumeFollow" type="button">Resume Follow</button>
     </div>
   </header>
 
@@ -272,25 +264,26 @@
       <div class="hero-grid">
         <div>
           <p class="eyebrow">Wild Eyez Packing Guide</p>
-          <h1>Read along with the guide while the audio keeps pace.</h1>
+          <h1>Watch the guided read-along presentation.</h1>
           <p>
-            This version is set up like a guided reader. Use the audio bar at the top, scroll naturally, and jump to any section below if you want to revisit a specific part of the packing list.
+            This version locks the document movement and narration together in one video, so the guided reading plays the same way on desktop, mobile, Wix, and GitHub Pages.
           </p>
-          <div class="page-jumps">
-            <a class="jump" href="#page-1">Page 1</a>
-            <a class="jump" href="#page-4">Gear</a>
-            <a class="jump" href="#page-7">Firearms</a>
-            <a class="jump" href="#page-9">Finish</a>
-          </div>
         </div>
         <aside class="meta-card" aria-label="Guide summary">
           <p class="meta-label">What’s included</p>
           <p class="meta-value">9 page guide</p>
-          <p class="meta-value">Synced audio narration</p>
-          <p class="meta-value">Easy jump links</p>
+          <p class="meta-value">Locked narration and scroll</p>
+          <p class="meta-value">Manual PDF review below</p>
         </aside>
       </div>
+      <div class="video-card">
+        <video controls preload="metadata" playsinline poster="assets/pages/WILD EYEZ PACKING AND PREPARATION GUIDE6_Page_1.jpg?v=20260806f">
+          <source src="assets/video/wild-eyez-packing-guide-read-along.mp4?v=20260806a" type="video/mp4">
+          Your browser does not support the guided video. Please use the Open PDF button above.
+        </video>
+      </div>
     </section>
+    <div class="review-note">Manual review pages are below. Use these when you want to pause, inspect the checklist details, or open the PDF in a separate tab.</div>
     <section class="page" id="page-1" data-time="0">
       <div class="page-head"><span>Page 1</span><span>Introduction / How To Use</span></div>
       <div class="page-body"><img src="assets/pages/WILD EYEZ PACKING AND PREPARATION GUIDE6_Page_1.jpg?v=20260806f" alt="Wild Eyez PDF page 1"></div>
