@@ -79,6 +79,34 @@
       letter-spacing:.04em;
     }
     .prompt.show{display:block}
+    .follow-status{
+      display:none;
+      width:100%;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin-top:6px;
+      padding:8px 10px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,.16);
+      background:rgba(0,0,0,.18);
+      color:#fff4e6;
+      font:700 12px/1.35 Arial,sans-serif;
+      letter-spacing:.04em;
+    }
+    .follow-status.show{display:flex}
+    .resume-follow{
+      min-height:28px;
+      padding:0 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,119,32,.7);
+      background:linear-gradient(180deg,var(--accent2),var(--accent));
+      color:#fff8ef;
+      font:900 11px/1 Arial,sans-serif;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      cursor:pointer;
+    }
     .btn{
       display:inline-flex;
       align-items:center;
@@ -171,13 +199,17 @@
   <header class="bar">
     <div class="title">Guided Audio Reading</div>
     <div class="controls">
-      <a class="btn primary" href="https://drive.google.com/uc?export=download&id=18fHtcDO4hu5IMwyJX3eJC5rAJrJm6dc6" target="_blank" rel="noopener noreferrer">Download PDF</a>
+      <a class="btn primary" href="https://drive.google.com/file/d/18fHtcDO4hu5IMwyJX3eJC5rAJrJm6dc6/view?usp=sharing" target="_blank" rel="noopener noreferrer">Open PDF</a>
       <a class="btn home" href="https://www.wildeyez.net" target="_blank" rel="noopener noreferrer">Wild Eyez Home</a>
     </div>
     <div class="player">
       <audio id="guideAudio" controls preload="metadata" src="WILD EYEZ PACKING AND PREPARATION GUIDE AUDIO.mp3?v=20260806e"></audio>
     </div>
     <div class="prompt" id="audioPrompt">Press play or wait for autoplay.</div>
+    <div class="follow-status" id="followStatus">
+      <span>Manual scroll active. Audio is still playing.</span>
+      <button class="resume-follow" id="resumeFollow" type="button">Resume Follow</button>
+    </div>
   </header>
 
   <main class="wrap" id="pages">
@@ -226,11 +258,14 @@
       const title = document.querySelector(".title");
       const bar = document.querySelector(".bar");
       const prompt = document.getElementById("audioPrompt");
+      const followStatus = document.getElementById("followStatus");
+      const resumeFollow = document.getElementById("resumeFollow");
       let active = -1;
       let following = false;
       let raf = 0;
       let autoplayTimer = 0;
       let pageAnchors = [];
+      let programmaticScrollUntil = 0;
 
       function pageTop(page){
         const barH = bar?.getBoundingClientRect().height || 0;
@@ -287,6 +322,7 @@
           following = false;
           return;
         }
+        programmaticScrollUntil = performance.now() + 180;
         window.scrollTo({ top: scrollTopForTime(audio.currentTime || 0), behavior: "auto" });
         raf = requestAnimationFrame(scrollLoop);
       }
@@ -294,11 +330,13 @@
       function kickstart(){
         if (following) return;
         following = true;
+        hideFollowStatus();
         raf = requestAnimationFrame(scrollLoop);
       }
 
       function syncScrollToAudio(){
         measureScrollRange();
+        programmaticScrollUntil = performance.now() + 240;
         window.scrollTo({ top: scrollTopForTime(audio.currentTime || 0), behavior: "auto" });
       }
 
@@ -319,8 +357,30 @@
         prompt?.classList.remove("show");
       }
 
+      function showFollowStatus(){
+        followStatus?.classList.add("show");
+      }
+
+      function hideFollowStatus(){
+        followStatus?.classList.remove("show");
+      }
+
+      function pauseFollowForManualScroll(){
+        if (!following || audio.paused || performance.now() < programmaticScrollUntil) return;
+        if (raf) cancelAnimationFrame(raf);
+        following = false;
+        showFollowStatus();
+      }
+
+      function resumeAudioFollow(){
+        hideFollowStatus();
+        syncScrollToAudio();
+        kickstart();
+      }
+
       audio.addEventListener("loadedmetadata", () => {
         measureScrollRange();
+        programmaticScrollUntil = performance.now() + 240;
         window.scrollTo({ top: scrollTopForTime(0), behavior: "auto" });
         showPrompt();
         if (autoplayTimer) clearTimeout(autoplayTimer);
@@ -339,6 +399,7 @@
         if (following) kickstart();
       });
       audio.addEventListener("seeked", () => {
+        hideFollowStatus();
         syncScrollToAudio();
         kickstart();
       });
@@ -346,9 +407,18 @@
         if (raf) cancelAnimationFrame(raf);
         following = false;
         if (autoplayTimer) clearTimeout(autoplayTimer);
+        hideFollowStatus();
+      });
+      resumeFollow?.addEventListener("click", resumeAudioFollow);
+      window.addEventListener("wheel", pauseFollowForManualScroll, { passive: true });
+      window.addEventListener("touchmove", pauseFollowForManualScroll, { passive: true });
+      window.addEventListener("keydown", (event) => {
+        const keys = ["ArrowDown", "ArrowUp", "PageDown", "PageUp", "Home", "End", " "];
+        if (keys.includes(event.key)) pauseFollowForManualScroll();
       });
 
       measureScrollRange();
+      programmaticScrollUntil = performance.now() + 240;
       window.scrollTo({ top: scrollTopForTime(0), behavior: "auto" });
     })();
   </script>
