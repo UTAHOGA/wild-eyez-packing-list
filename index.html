@@ -13,8 +13,8 @@
       --accent2:#ff9a3d;
       --line:#dcc9b1;
       --shadow:0 18px 40px rgba(0,0,0,.25);
-      --topo: url("assets/backgrounds/dark-brown-topo.jpg?v=20260806f");
-      --warm-topo: url("assets/backgrounds/white-topo.jpg?v=20260806f");
+      --topo: url("assets/backgrounds/dark-brown-topo.jpg?v=20260806h");
+      --warm-topo: url("assets/backgrounds/white-topo.jpg?v=20260806h");
     }
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
@@ -26,20 +26,6 @@
         linear-gradient(rgba(28,19,12,.92), rgba(28,19,12,.95)),
         var(--topo) center top / 820px auto repeat;
       background-attachment:fixed;
-    }
-    body::before{
-      content:"";
-      position:fixed;
-      top:0;
-      left:0;
-      right:0;
-      height:146px;
-      z-index:15;
-      pointer-events:none;
-      background:
-        linear-gradient(180deg, rgba(28,19,12,1), rgba(28,19,12,.97) 72%, rgba(28,19,12,0)),
-        var(--topo) center top / 820px auto repeat;
-      box-shadow:0 18px 34px rgba(0,0,0,.24);
     }
     a{color:inherit}
     .bar{
@@ -57,9 +43,11 @@
       border-radius:18px;
       background:
         linear-gradient(180deg, rgba(52,32,18,.98), rgba(25,16,10,.98)),
-        var(--warm-topo) center top / 760px auto repeat;
+        var(--topo) center top / 820px auto repeat;
       background-blend-mode:multiply;
-      box-shadow:var(--shadow);
+      box-shadow:
+        0 -90px 0 90px rgba(28,19,12,.98),
+        var(--shadow);
     }
     .title{
       color:#fff1df;
@@ -162,12 +150,16 @@
       box-shadow:0 10px 20px rgba(0,0,0,.12);
     }
     .controls{
+      position:relative;
+      z-index:2;
       display:flex;
       flex-wrap:wrap;
       gap:6px;
       align-items:center;
     }
     .player{
+      position:relative;
+      z-index:2;
       width:100%;
       margin-top:6px;
     }
@@ -178,6 +170,8 @@
       color-scheme:dark;
     }
     .prompt{
+      position:relative;
+      z-index:2;
       display:none;
       margin-top:6px;
       padding:8px 10px;
@@ -190,6 +184,8 @@
     }
     .prompt.show{display:block}
     .follow-status{
+      position:relative;
+      z-index:2;
       display:none;
       width:100%;
       align-items:center;
@@ -296,7 +292,6 @@
       height:auto;
     }
     @media (max-width: 700px){
-      body::before{height:168px}
       .bar{
         width:min(100%, calc(100% - 16px));
         margin:6px auto 0;
