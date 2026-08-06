@@ -1,11 +1,18 @@
 # Local QA/render output
 _qa*/
+_qa_export_temp_*/
 _preview*/
 _compare*/
 _render*/
+_docx_checkbox_backup_*/
+_docx_backup_before_remove_clipped_see_*/
+_docx_backup_before_remove_see_hyperlink_*/
+_guide_publish_backup_*/
+project-notes/
 
 # Local scratch helpers and generated review assets
 working-files/
+Previous Designs/
 *.tmp.docx
 *_backup*.docx
 *_backup*.pdf
@@ -36,3 +43,31 @@ assets/pages/WILD EYEZ PACKING AND PREPARATION GUIDE 2pdf_Page_*.jpg
 
 # Local ElevenLabs working copies; keep final audio/text decisions in canonical files.
 ELEVENLABS_SCRIPT_FINAL_*.txt
+ELEVENLABS_*.txt
+AUDIO 2.mp3
+AUDIO POSSIBLY FINAL.mp3
+AUDIO_SCRIPT_*.txt
+CHECKLIST AUDIO.mp3
+ElevenLabs_Untitled_project.mp3
+WILD_EYEZ_ELEVENLABS_PRONUNCIATION_ALIAS.pls
+Untitled_*.mp3
+MAIN AUDIO PACKING LIST.mp3
+MAIN AUDIO PACKING LIST.docx
+MAIN AUDIO PACKING LIST.pdf
+AUDIO.mp3
+audio 3.mp3
+audio mp3.mp3
+WILD EYEZ PACKING AND PREPARATION GUIDE 3.pdf
+WILD EYEZ PACKING AND PREPARATION GUIDE a.docx
+WILD EYEZ PACKING AND PREPARATION GUIDE a.pdf
+WILD EYEZ PACKING AND PREPARATION GUIDE6.docx
+WILD EYEZ PACKING AND PREPARATION GUIDE6.pdf
+WILD EYEZ EQUIPMENT AND PREPARATION PACK AUDIO.mp3
+WILD EYEZ EQUIPMENT AND PREPARATION PACK SCRIPT.txt
+*.picasa.ini
+.picasa.ini
+.picasaoriginals/
+assets/pages/MAIN AUDIO PACKING LIST_Page_*.jpg
+assets/pages/MAIN PACKING LIST_Page_*.jpg
+assets/backgrounds/BACKGROUND Mountains PAGE.png
+assets/logos/utah.jpeg
