@@ -31,33 +31,18 @@
   <script>
     (() => {
       const audio = document.getElementById("guideAudio");
-      const audioWrap = document.getElementById("audio-guide");
+      const guideStart = document.getElementById("guide");
       const readGuide = document.querySelector('.hero-actions a[href="#guide"]');
-      let hasStarted = false;
 
-      if (!audio || !audioWrap || !readGuide) return;
+      if (!audio || !guideStart || !readGuide) return;
 
-      const startFromBeginning = () => {
-        audio.currentTime = 0;
-        hasStarted = true;
-      };
-
-      readGuide.addEventListener("click", (event) => {
-        event.preventDefault();
-        startFromBeginning();
-        audioWrap.scrollIntoView({ behavior: "smooth", block: "center" });
+      readGuide.addEventListener("click", () => {
         const playRequest = audio.play();
         if (playRequest) playRequest.catch(() => {});
       });
 
       audio.addEventListener("play", () => {
-        if (!hasStarted && audio.currentTime > 0) audio.currentTime = 0;
-        hasStarted = true;
-      });
-
-      audio.addEventListener("ended", () => {
-        hasStarted = false;
-        audio.currentTime = 0;
+        guideStart.scrollIntoView({ behavior: "smooth", block: "start" });
       });
     })();
   </script></body>
