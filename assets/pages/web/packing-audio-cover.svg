@@ -1,22 +1,32 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1000 1000" role="img" aria-labelledby="title desc">
   <title id="title">Wild Eyez Hunt Prep and Packing Guide</title>
-  <desc id="desc">Wild Eyez elk logo and hunt preparation guide title.</desc>
+  <desc id="desc">Leather-style Wild Eyez hunt preparation guide cover with elk logo.</desc>
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#4a2b18"/><stop offset=".62" stop-color="#21130c"/><stop offset="1" stop-color="#100906"/>
+    <linearGradient id="leather" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#5b321a"/><stop offset=".42" stop-color="#3c2113"/><stop offset="1" stop-color="#1d100a"/>
     </linearGradient>
-    <pattern id="topo" width="150" height="120" patternUnits="userSpaceOnUse">
-      <path d="M-20 76 C24 22 64 22 98 51 S160 84 180 34" fill="none" stroke="#f5d7b0" stroke-opacity=".08" stroke-width="2"/>
-      <path d="M-28 98 C20 45 64 43 104 70 S160 100 190 57" fill="none" stroke="#f5d7b0" stroke-opacity=".05" stroke-width="2"/>
+    <radialGradient id="warmth" cx="48%" cy="36%" r="72%">
+      <stop offset="0" stop-color="#c76722" stop-opacity=".28"/><stop offset="1" stop-color="#5d2b14" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grain" width="13" height="13" patternUnits="userSpaceOnUse">
+      <path d="M0 3 L13 1 M-4 10 L7 8 M7 13 L16 11" stroke="#f5d7b0" stroke-opacity=".035" stroke-width="1"/>
+    </pattern>
+    <pattern id="topo" width="180" height="140" patternUnits="userSpaceOnUse">
+      <path d="M-20 92 C25 28 72 24 110 60 S194 95 214 38" fill="none" stroke="#f5d7b0" stroke-opacity=".07" stroke-width="2"/>
+      <path d="M-34 116 C18 53 69 48 116 82 S190 116 226 65" fill="none" stroke="#f5d7b0" stroke-opacity=".04" stroke-width="2"/>
     </pattern>
   </defs>
-  <rect width="1000" height="1000" rx="34" fill="url(#bg)"/>
+  <rect width="1000" height="1000" rx="34" fill="url(#leather)"/>
+  <rect width="1000" height="1000" rx="34" fill="url(#warmth)"/>
+  <rect width="1000" height="1000" rx="34" fill="url(#grain)"/>
   <rect width="1000" height="1000" rx="34" fill="url(#topo)"/>
-  <path d="M72 72 H928" stroke="#f37021" stroke-width="5"/>
-  <text x="500" y="142" fill="#ffc083" font-family="Georgia, serif" font-size="25" font-weight="700" letter-spacing="6" text-anchor="middle">WILD EYEZ OUTFITTERS</text>
-  <image x="190" y="185" width="620" height="500" preserveAspectRatio="xMidYMid meet" xlink:href="../../logos/wild-eyez-elk-logo.png"/>
-  <path d="M150 745 H850" stroke="#f37021" stroke-width="3"/>
-  <text x="500" y="815" fill="#fff7ed" font-family="Georgia, serif" font-size="38" font-weight="700" text-anchor="middle">HUNT PREP AND</text>
-  <text x="500" y="865" fill="#fff7ed" font-family="Georgia, serif" font-size="38" font-weight="700" text-anchor="middle">PACKING GUIDE</text>
-  <text x="500" y="930" fill="#ffc083" font-family="Arial, sans-serif" font-size="16" font-weight="700" letter-spacing="3" text-anchor="middle">PREPARE WELL. HUNT CONFIDENTLY.</text>
+  <rect x="32" y="32" width="936" height="936" rx="24" fill="none" stroke="#e7b477" stroke-opacity=".52" stroke-width="3" stroke-dasharray="3 12"/>
+  <rect x="51" y="51" width="898" height="898" rx="17" fill="none" stroke="#160b07" stroke-opacity=".7" stroke-width="2"/>
+  <path d="M120 116 H880" stroke="#f37021" stroke-width="4"/>
+  <text x="500" y="174" fill="#ffc083" font-family="Georgia, serif" font-size="24" font-weight="700" letter-spacing="6" text-anchor="middle">WILD EYEZ OUTFITTERS</text>
+  <image x="205" y="202" width="590" height="455" preserveAspectRatio="xMidYMid meet" xlink:href="../../logos/wild-eyez-elk-logo.png"/>
+  <path d="M135 710 H865" stroke="#f37021" stroke-width="3"/>
+  <text x="500" y="778" fill="#fff7ed" font-family="Georgia, serif" font-size="39" font-weight="700" text-anchor="middle">HUNT PREP AND</text>
+  <text x="500" y="832" fill="#fff7ed" font-family="Georgia, serif" font-size="39" font-weight="700" text-anchor="middle">PACKING GUIDE</text>
+  <text x="500" y="900" fill="#ffc083" font-family="Arial, sans-serif" font-size="15" font-weight="700" letter-spacing="3" text-anchor="middle">PREPARE WELL. HUNT CONFIDENTLY.</text>
 </svg>
