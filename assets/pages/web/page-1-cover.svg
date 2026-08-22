@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1200 1600" role="img" aria-labelledby="title desc">
+  <title id="title">Wild Eyez Hunt Prep and Packing Guide</title>
+  <desc id="desc">Wild Eyez Outfitters hunt preparation and packing guide cover.</desc>
+  <defs>
+    <linearGradient id="ground" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#432817"/>
+      <stop offset="0.58" stop-color="#21130c"/>
+      <stop offset="1" stop-color="#120a06"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="34%" r="68%">
+      <stop offset="0" stop-color="#d66a23" stop-opacity=".22"/>
+      <stop offset="1" stop-color="#d66a23" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="topo" width="180" height="140" patternUnits="userSpaceOnUse">
+      <path d="M-20 92 C25 28 72 24 110 60 S194 95 214 38" fill="none" stroke="#f5d7b0" stroke-opacity=".07" stroke-width="2"/>
+      <path d="M-34 116 C18 53 69 48 116 82 S190 116 226 65" fill="none" stroke="#f5d7b0" stroke-opacity=".045" stroke-width="2"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="1600" fill="url(#ground)"/>
+  <rect width="1200" height="1600" fill="url(#glow)"/>
+  <rect width="1200" height="1600" fill="url(#topo)"/>
+  <path d="M0 90 H1200" stroke="#f37021" stroke-width="5"/>
+  <text x="600" y="180" fill="#ffc083" font-family="Georgia, serif" font-size="25" font-weight="700" letter-spacing="8" text-anchor="middle">WILD EYEZ OUTFITTERS</text>
+  <text x="600" y="235" fill="#e7c4a0" font-family="Arial, sans-serif" font-size="16" font-weight="700" letter-spacing="5" text-anchor="middle">PREPARE WELL. HUNT CONFIDENTLY.</text>
+  <image x="175" y="350" width="850" height="700" preserveAspectRatio="xMidYMid meet" xlink:href="../../logos/wild-eyez-elk-logo.png"/>
+  <path d="M170 1130 H1030" stroke="#f37021" stroke-width="3"/>
+  <text x="600" y="1220" fill="#fff7ed" font-family="Georgia, serif" font-size="62" font-weight="700" text-anchor="middle">WILD EYEZ</text>
+  <text x="600" y="1300" fill="#fff7ed" font-family="Georgia, serif" font-size="50" font-weight="700" text-anchor="middle">HUNT PREP AND</text>
+  <text x="600" y="1370" fill="#fff7ed" font-family="Georgia, serif" font-size="50" font-weight="700" text-anchor="middle">PACKING GUIDE</text>
+  <text x="600" y="1490" fill="#ffc083" font-family="Arial, sans-serif" font-size="18" font-weight="700" letter-spacing="4" text-anchor="middle">UTAH BIG GAME FIELD GUIDE</text>
+</svg>
