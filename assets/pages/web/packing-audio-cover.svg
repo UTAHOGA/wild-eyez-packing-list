@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1000 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Wild Eyez Hunt Prep and Packing Guide</title>
+  <desc id="desc">Wild Eyez elk logo and hunt preparation guide title.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#4a2b18"/><stop offset=".62" stop-color="#21130c"/><stop offset="1" stop-color="#100906"/>
+    </linearGradient>
+    <pattern id="topo" width="150" height="120" patternUnits="userSpaceOnUse">
+      <path d="M-20 76 C24 22 64 22 98 51 S160 84 180 34" fill="none" stroke="#f5d7b0" stroke-opacity=".08" stroke-width="2"/>
+      <path d="M-28 98 C20 45 64 43 104 70 S160 100 190 57" fill="none" stroke="#f5d7b0" stroke-opacity=".05" stroke-width="2"/>
+    </pattern>
+  </defs>
+  <rect width="1000" height="1000" rx="34" fill="url(#bg)"/>
+  <rect width="1000" height="1000" rx="34" fill="url(#topo)"/>
+  <path d="M72 72 H928" stroke="#f37021" stroke-width="5"/>
+  <text x="500" y="142" fill="#ffc083" font-family="Georgia, serif" font-size="25" font-weight="700" letter-spacing="6" text-anchor="middle">WILD EYEZ OUTFITTERS</text>
+  <image x="190" y="185" width="620" height="500" preserveAspectRatio="xMidYMid meet" xlink:href="../../logos/wild-eyez-elk-logo.png"/>
+  <path d="M150 745 H850" stroke="#f37021" stroke-width="3"/>
+  <text x="500" y="815" fill="#fff7ed" font-family="Georgia, serif" font-size="38" font-weight="700" text-anchor="middle">HUNT PREP AND</text>
+  <text x="500" y="865" fill="#fff7ed" font-family="Georgia, serif" font-size="38" font-weight="700" text-anchor="middle">PACKING GUIDE</text>
+  <text x="500" y="930" fill="#ffc083" font-family="Arial, sans-serif" font-size="16" font-weight="700" letter-spacing="3" text-anchor="middle">PREPARE WELL. HUNT CONFIDENTLY.</text>
+</svg>
