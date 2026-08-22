@@ -28,5 +28,37 @@
       <aside class="closing"><div><h2>READY FOR YOUR WESTERN HUNTING ADVENTURE?</h2><p>Open the complete PDF for download and keep it available while you pack and travel.</p></div><a class="btn primary" href="WILD%20EYEZ%20PACKING%20AND%20PREPARATION%20GUIDE.pdf?v=20260820b" target="_blank" rel="noopener noreferrer">Open Full PDF for Download</a></aside>
     </div></section></main>
   <footer class="footer"><div>Wild Eyez Outfitters &middot; Western big game packing &amp; preparation guide</div></footer>
-</body>
+  <script>
+    (() => {
+      const audio = document.getElementById("guideAudio");
+      const audioWrap = document.getElementById("audio-guide");
+      const readGuide = document.querySelector('.hero-actions a[href="#guide"]');
+      let hasStarted = false;
+
+      if (!audio || !audioWrap || !readGuide) return;
+
+      const startFromBeginning = () => {
+        audio.currentTime = 0;
+        hasStarted = true;
+      };
+
+      readGuide.addEventListener("click", (event) => {
+        event.preventDefault();
+        startFromBeginning();
+        audioWrap.scrollIntoView({ behavior: "smooth", block: "center" });
+        const playRequest = audio.play();
+        if (playRequest) playRequest.catch(() => {});
+      });
+
+      audio.addEventListener("play", () => {
+        if (!hasStarted && audio.currentTime > 0) audio.currentTime = 0;
+        hasStarted = true;
+      });
+
+      audio.addEventListener("ended", () => {
+        hasStarted = false;
+        audio.currentTime = 0;
+      });
+    })();
+  </script></body>
 </html>
